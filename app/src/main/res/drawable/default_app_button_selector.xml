@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--<selector xmlns:android="http://schemas.android.com/apk/res/android">-->
+
+<!--<item android:state_enabled="true">-->
+<!--<shape>-->
+<!--    <solid android:color="@color/base_color_3"/>-->
+<!--    <corners android:radius="@dimen/second_margin"/>-->
+<!--    <stroke android:color="@color/black" android:width="1dp"/>-->
+<!--</shape>-->
+<!--</item>-->
+
+<!--<item android:state_pressed="true">-->
+<!--<shape>-->
+<!--    <solid android:color="@color/base_color_3_disabled"/>-->
+<!--    <corners android:radius="@dimen/second_margin"/>-->
+<!--    <stroke android:color="@color/black" android:width="1dp"/>-->
+<!--</shape>-->
+<!--</item>-->
+
+<!--<item android:state_enabled="false">-->
+<!--<shape>-->
+<!--    <solid android:color="@color/base_color_3_disabled"/>-->
+<!--    <corners android:radius="@dimen/second_margin"/>-->
+<!--    <stroke android:color="@color/black" android:width="1dp"/>-->
+<!--</shape>-->
+<!--</item>-->
+
+<!--</selector>-->
+
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+    <!--When Button is not enabled -->
+    <item android:state_enabled="false" android:color="@color/base_color_3">
+        <shape>
+            <corners android:radius="@dimen/third_margin"/>
+        </shape>
+    </item>
+    <!--When Button is in pressed state -->
+    <item android:state_pressed="true" android:color="@color/base_color_3_disabled">
+        <shape>
+            <corners android:radius="@dimen/third_margin" />
+        </shape>
+    </item>
+    <!--When Button is in selected state -->
+    <item android:state_selected="true" android:color="@color/base_color_3_disabled"
+        android:elevation="0dp">
+        <shape>
+            <corners android:radius="@dimen/third_margin" />
+        </shape>
+    </item>
+    <!--Default Background Color -->
+
+    <item android:color="@color/base_color_3"  />
+
+
+</selector>

@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <!--  Non focused states
+     -->
+    <item android:color="@color/base_color_3" android:state_enabled="true" android:state_focused="false" android:state_pressed="false" android:state_selected="false">
+        <shape android:shape="rectangle">
+
+            <corners android:radius="@dimen/fourth_margin" />
+
+            <solid android:color="@color/base_color_3" />
+
+        </shape>
+    </item>
+    <!--When Button is in pressed state -->
+
+
+    <!--When Button is in pressed state -->
+    <item android:color="@color/base_color_3" android:elevation="0dp" android:state_enabled="true" android:state_pressed="false" android:state_selected="true" android:state_focused="false">
+        <shape android:shape="rectangle">
+
+            <corners android:radius="@dimen/fourth_margin" />
+
+            <solid android:color="@color/base_color_3" />
+
+        </shape>
+    </item>
+
+
+    <!--  <item android:state_pressed="true"  android:color="@color/base_color_3" android:elevation="0dp">
+          <shape android:shape="rectangle" >
+
+              <corners
+                  android:bottomLeftRadius="30dp"
+                  android:bottomRightRadius="30dp"
+                  android:radius="60dp"
+                  android:topLeftRadius="30dp"
+                  android:topRightRadius="30dp" />
+
+              <solid android:color="@color/base_color_3" />
+
+          </shape>
+      </item>-->
+
+    <!--When Button is in selected state -->
+    <item android:color="@color/base_color_3_disabled" android:elevation="0dp" android:state_enabled="true" android:state_pressed="true">
+        <shape android:shape="rectangle">
+
+            <corners android:radius="@dimen/fourth_margin" />
+
+            <solid android:color="@color/base_color_3_disabled" />
+
+        </shape>
+    </item>
+
+    <!--Default Background Color -->
+    <item android:color="@color/base_color_3" android:elevation="0dp" android:state_enabled="true" android:state_focused="true">
+        <shape android:shape="rectangle">
+
+            <corners android:radius="@dimen/fourth_margin" />
+
+            <solid android:color="@color/base_color_3" />
+
+        </shape>
+    </item>
+    <!--Default Background Color -->
+    <item android:color="@color/disabled_button" android:elevation="0dp" android:state_enabled="false">
+        <shape android:shape="rectangle">
+
+            <corners android:radius="@dimen/fourth_margin" />
+
+            <solid android:color="@color/disabled_button" />
+
+        </shape>
+    </item>
+</selector>
