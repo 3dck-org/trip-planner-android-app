@@ -14,4 +14,8 @@ object Constants {
     const val CLIENT_ID = "HbPJN18dvU1XDoZTcFs4Rv0FX2UcylnRZv1VTPjrT0A"
     const val SECRET = "3oxXyFaGro3V1Ihg35z5zIv51AUTQ2EpikBEX-XnQdw"
 
+    //SHARED PREFERENCES
+    const val TOKEN = "TOKEN"
+    const val REFRESH_TOKEN = "REFRESH_TOKEN"
+
 }

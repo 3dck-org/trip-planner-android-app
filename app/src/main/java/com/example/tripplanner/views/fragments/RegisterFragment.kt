@@ -64,7 +64,7 @@ class RegisterFragment : Fragment() {
     private fun setConfirmationButton(): Unit =
         binding.confirmButton.setOnClickListener { registerOnClick() }
 
-    private fun registerOnClick(): Unit = binding.confirmButton.setOnClickListener{
+    private fun registerOnClick(): Unit = binding.confirmButton.setOnClickListener {
         registrationViewModel.register(
             email = binding.emailEditText.text.toString(),
             password = binding.passwordEditText.text.toString(),

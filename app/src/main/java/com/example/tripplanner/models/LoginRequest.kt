@@ -6,5 +6,5 @@ data class LoginRequest(
     val email: String,
     val grant_type: String,
     val password: String,
-    val refresh_token: String
+    val refresh_token: String?
 )

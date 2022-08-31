@@ -32,9 +32,9 @@ class LoginViewModel @Inject constructor(val repository: LoginRepository) : View
                     client_id = Constants.CLIENT_ID,
                     client_secret = Constants.SECRET,
                     email = email,
-                    grant_type = "user",
+                    grant_type = "password",
                     password = password,
-                    refresh_token = ""
+                    refresh_token = null
                 )
             ).collect { _response.emit(it) }
         }
