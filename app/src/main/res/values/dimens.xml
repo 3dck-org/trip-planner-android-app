@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <dimen name="half_first_margin">4dp</dimen>
     <dimen name="first_margin">8dp</dimen>
     <dimen name="second_margin">16dp</dimen>
     <dimen name="third_margin">24dp</dimen>
@@ -9,6 +10,6 @@
 
     <dimen name="box_corner_radius_edit_text">16dp</dimen>
 
-    <dimen name="title_text_size">14dp</dimen>
-    <dimen name="text_size">12dp</dimen>
+    <dimen name="title_text_size">16dp</dimen>
+    <dimen name="default_text_size">12dp</dimen>
 </resources>

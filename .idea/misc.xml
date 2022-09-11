@@ -4,12 +4,23 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="../../../../layout/custom_preview.xml" value="0.18884892086330934" />
+        <entry key="app/src/main/res/drawable/bottom_navigation_shape.xml" value="0.187" />
         <entry key="app/src/main/res/drawable/default_app_button_selector.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/default_app_round_button.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/ic_offered_trips.xml" value="0.188" />
+        <entry key="app/src/main/res/drawable/offered_trip_card_shape.xml" value="0.187" />
+        <entry key="app/src/main/res/layout/activity_menu.xml" value="0.346129549601097" />
+        <entry key="app/src/main/res/layout/activity_splash.xml" value="0.3868438720703125" />
         <entry key="app/src/main/res/layout/activity_start.xml" value="0.37492002559181065" />
+        <entry key="app/src/main/res/layout/fragment_history_trips.xml" value="0.35507246376811596" />
         <entry key="app/src/main/res/layout/fragment_login.xml" value="0.32657345081773226" />
+        <entry key="app/src/main/res/layout/fragment_map.xml" value="0.35507246376811596" />
         <entry key="app/src/main/res/layout/fragment_register.xml" value="0.35507246376811596" />
+        <entry key="app/src/main/res/layout/fragment_settings.xml" value="0.35507246376811596" />
         <entry key="app/src/main/res/layout/fragment_start.xml" value="0.6094944880558893" />
+        <entry key="app/src/main/res/layout/fragment_trips.xml" value="0.35507246376811596" />
+        <entry key="app/src/main/res/layout/offered_trip_item.xml" value="0.6235632183908046" />
+        <entry key="app/src/main/res/menu/base_menu.xml" value="0.17864583333333334" />
       </map>
     </option>
   </component>

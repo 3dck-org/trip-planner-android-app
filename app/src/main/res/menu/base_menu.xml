@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/tripsFragment"
+        android:icon="@drawable/ic_offered_trips"
+        android:title="" />
+    <item
+        android:id="@+id/mapFragment"
+        android:icon="@drawable/ic_map"
+        android:title="" />
+    <item
+        android:id="@+id/historyTripsFragment"
+        android:icon="@drawable/ic_trips_history"
+        android:title="" />
+    <item
+        android:id="@+id/settingsFragment"
+        android:icon="@drawable/ic_settings"
+        android:title="" />
+
+</menu>

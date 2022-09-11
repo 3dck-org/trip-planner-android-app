@@ -1,5 +1,6 @@
 package com.example.tripplanner.views.fragments
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -13,8 +14,10 @@ import com.example.tripplanner.databinding.FragmentLoginBinding
 import com.example.tripplanner.extensions.emailLoginValidation
 import com.example.tripplanner.extensions.passwordValidation
 import com.example.tripplanner.models.Resource
+import com.example.tripplanner.repositories.BaseRepository
 import com.example.tripplanner.sharedpreferences.EncryptedSharedPreferences
 import com.example.tripplanner.viewmodels.LoginViewModel
+import com.example.tripplanner.views.activities.MenuActivity
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
 import javax.inject.Inject
@@ -82,6 +85,9 @@ class LoginFragment : Fragment() {
                     is Resource.Success -> {
                         Timber.d("Success:")
                         sharedPref.addPreference(Constants.TOKEN, it.data.access_token)
+                        BaseRepository.addToken(it.data.access_token)
+                        val intent = Intent(activity, MenuActivity::class.java)
+                        startActivity(intent)
                     }
                 }
             }

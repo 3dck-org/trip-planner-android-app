@@ -29,4 +29,27 @@
         <item name="boxStrokeErrorColor">@color/error_color</item>
         <item name="boxStrokeWidth">1dp</item>
     </style>
+
+    <style name="ProgressBarTheme" parent="ThemeOverlay.AppCompat.Light">
+        <item name="colorAccent">@color/base_color_3</item>
+        <item name="colorPrimary">@color/base_color_3</item>
+    </style>
+
+    <style name="MenuTheme">
+        <item name="elevation">@dimen/first_margin</item>
+        <item name="background">@drawable/bottom_navigation_shape</item>
+    </style>
+
+    <style name="TitleTextViewStyle">
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">@dimen/title_text_size</item>
+        <item name="fontFamily">@font/chesnagrotesk_medium</item>
+    </style>
+
+    <style name="DefaultTextViewStyle">
+        <item name="android:textSize">@dimen/default_text_size</item>
+        <item name="android:textStyle">normal</item>
+        <item name="fontFamily">@font/chesnagrotesk_medium</item>
+    </style>
 </resources>

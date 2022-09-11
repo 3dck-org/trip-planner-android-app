@@ -1,6 +1,8 @@
 package com.example.tripplanner.extensions
 
+import android.view.View
 import android.widget.Button
+import android.widget.ProgressBar
 import androidx.core.util.PatternsCompat
 import com.example.tripplanner.constants.Constants.passwordPattern
 import com.google.android.material.textfield.TextInputLayout
@@ -63,3 +65,12 @@ fun Button.enable() {
 fun Button.disable() {
     this.isEnabled = false
 }
+
+fun ProgressBar.hide(){
+    this.visibility = View.GONE
+}
+
+fun ProgressBar.show(){
+    this.visibility = View.VISIBLE
+}
+

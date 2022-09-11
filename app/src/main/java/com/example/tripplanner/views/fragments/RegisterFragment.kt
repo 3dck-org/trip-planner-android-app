@@ -1,5 +1,6 @@
 package com.example.tripplanner.views.fragments
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -8,20 +9,27 @@ import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import com.example.tripplanner.constants.Constants
 import com.example.tripplanner.databinding.FragmentRegisterBinding
 import com.example.tripplanner.extensions.emailLoginValidation
 import com.example.tripplanner.extensions.fieldIsNotEmptyValidation
 import com.example.tripplanner.extensions.passwordValidation
 import com.example.tripplanner.models.Resource
+import com.example.tripplanner.repositories.BaseRepository
+import com.example.tripplanner.sharedpreferences.EncryptedSharedPreferences
 import com.example.tripplanner.viewmodels.RegistrationViewModel
+import com.example.tripplanner.views.activities.MenuActivity
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class RegisterFragment : Fragment() {
 
     private lateinit var binding: FragmentRegisterBinding
     private val registrationViewModel: RegistrationViewModel by viewModels()
+    @Inject
+    lateinit var sharedPref: EncryptedSharedPreferences
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -86,6 +94,10 @@ class RegisterFragment : Fragment() {
                     }
                     is Resource.Success -> {
                         Timber.d("Success")
+                        sharedPref.addPreference(Constants.TOKEN, it.data.access_token)
+                        BaseRepository.addToken(it.data.access_token)
+                        val intent = Intent(activity, MenuActivity::class.java)
+                        startActivity(intent)
                     }
                 }
             }

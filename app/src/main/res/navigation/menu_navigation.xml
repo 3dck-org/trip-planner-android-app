@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/menu_navigation"
+    app:startDestination="@id/tripsFragment">
+
+    <fragment
+        android:id="@+id/tripsFragment"
+        android:name="com.example.tripplanner.views.fragments.menufragments.TripsFragment"
+        android:label="fragment_trips"
+        tools:layout="@layout/fragment_trips" />
+    <fragment
+        android:id="@+id/historyTripsFragment"
+        android:name="com.example.tripplanner.views.fragments.menufragments.HistoryTripsFragment"
+        android:label="fragment_history_trips"
+        tools:layout="@layout/fragment_history_trips" />
+    <fragment
+        android:id="@+id/mapFragment"
+        android:name="com.example.tripplanner.views.fragments.menufragments.MapFragment"
+        android:label="fragment_map"
+        tools:layout="@layout/fragment_map" />
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.example.tripplanner.views.fragments.menufragments.SettingsFragment"
+        android:label="fragment_settings"
+        tools:layout="@layout/fragment_settings" />
+</navigation>
