@@ -2,7 +2,9 @@
 <resources>
     <dimen name="half_first_margin">4dp</dimen>
     <dimen name="first_margin">8dp</dimen>
+    <dimen name="half_second_margin">12dp</dimen>
     <dimen name="second_margin">16dp</dimen>
+    <dimen name="half_third_margin">20dp</dimen>
     <dimen name="third_margin">24dp</dimen>
     <dimen name="fourth_margin">32dp</dimen>
     <dimen name="fifth_margin">48dp</dimen>

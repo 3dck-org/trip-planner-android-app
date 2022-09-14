@@ -1,9 +1,6 @@
 package com.example.tripplanner
 
-import com.example.tripplanner.models.LoginRequest
-import com.example.tripplanner.models.RegistrationRequest
-import com.example.tripplanner.models.OauthResponse
-import com.example.tripplanner.models.TripsResponse
+import com.example.tripplanner.models.*
 import kotlinx.coroutines.Deferred
 import retrofit2.Response
 import retrofit2.http.*
@@ -19,4 +16,7 @@ interface TripPlannerAPI {
     @GET("api/v1/trips")
     fun getTrips(@HeaderMap mapOfHeaders: Map<String, String>): Deferred<Response<TripsResponse>>
 
+    @POST("api/v1/journeys")
+    fun subscribeOnTrip(@HeaderMap mapOfHeaders: Map<String, String>, @Body subscribeOnTripRequest:
+        SubscribeOnTripRequest) : Deferred<Response<SubscribeOnTripResponse>>
 }

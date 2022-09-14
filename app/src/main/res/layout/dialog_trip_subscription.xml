@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/trip_dialog_cv"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:minWidth="300dp"
+    android:padding="@dimen/first_margin"
+    app:cardCornerRadius="@dimen/first_margin"
+    app:cardElevation="@dimen/first_margin">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:minWidth="300dp">
+
+        <TextView
+            android:id="@+id/trip_title_tv"
+            style="@style/TextViewTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/half_second_margin"
+            android:textSize="@dimen/half_third_margin"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:text="@string/trip_details_title" />
+
+        <TextView
+            android:id="@+id/trip_name_tv"
+            style="@style/text_style"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/second_margin"
+            android:layout_marginTop="@dimen/second_margin"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/trip_title_tv"
+            tools:text="Polish traditions" />
+
+        <TextView
+            android:id="@+id/trip_duration_tv"
+            style="@style/text_style"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/second_margin"
+            android:layout_marginTop="@dimen/first_margin"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/trip_name_tv"
+            tools:text="Duration: 20" />
+
+        <TextView
+            android:id="@+id/trip_length_tv"
+            style="@style/text_style"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/second_margin"
+            android:layout_marginTop="@dimen/first_margin"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/trip_duration_tv"
+            tools:text="Length: 20" />
+
+        <TextView
+            android:id="@+id/trip_description_tv"
+            style="@style/text_style"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/second_margin"
+            android:layout_marginTop="@dimen/first_margin"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/trip_length_tv"
+            tools:text="Duration: 20" />
+
+        <Button
+            android:id="@+id/sign_in_btn"
+            style="@style/DefaultButtonStyle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/second_margin"
+            android:layout_marginVertical="@dimen/second_margin"
+            android:background="@drawable/default_app_round_button"
+            android:fontFamily="@font/chesnagrotesk_medium"
+            android:text="Start the journey"
+            android:textAlignment="center"
+            android:textSize="14sp"
+            app:elevation="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/trip_description_tv" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.cardview.widget.CardView>

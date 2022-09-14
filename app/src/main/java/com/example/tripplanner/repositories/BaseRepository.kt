@@ -3,9 +3,12 @@ package com.example.tripplanner.repositories
 import com.example.tripplanner.models.*
 import com.google.gson.Gson
 import kotlinx.coroutines.Deferred
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.withContext
 import retrofit2.Response
+import timber.log.Timber
 
 open class BaseRepository {
 

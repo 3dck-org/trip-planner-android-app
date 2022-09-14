@@ -12,10 +12,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/second_margin"
-        android:layout_marginVertical="@dimen/first_margin"
+        android:layout_marginVertical="@dimen/half_second_margin"
         android:background="@drawable/offered_trip_card_shape"
         app:cardCornerRadius="@dimen/first_margin"
-        app:cardElevation="2dp"
+        app:cardElevation="4dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -28,10 +28,10 @@
 
             <ImageView
                 android:id="@+id/user_iv"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
+                android:layout_width="64dp"
+                android:layout_height="64dp"
                 android:layout_marginVertical="@dimen/second_margin"
-                android:layout_marginStart="12dp"
+                android:layout_marginStart="@dimen/half_second_margin"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -82,6 +82,16 @@
                 app:layout_constraintTop_toBottomOf="@id/trip_length_tv"
                 tools:text="My first trip" />
 
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/select_btn"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:enabled="true"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:background="@drawable/ic_select_trip"
+                android:layout_marginEnd="@dimen/half_second_margin"/>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 </androidx.constraintlayout.widget.ConstraintLayout>

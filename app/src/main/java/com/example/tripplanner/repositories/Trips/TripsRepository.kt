@@ -12,5 +12,4 @@ class TripsRepository @Inject constructor(private val api: TripPlannerAPI) :
 
     override suspend fun getTrips(): Flow<Resource<TripsResponse>> =
         callOrError(api.getTrips(mapOfHeaders))
-
 }

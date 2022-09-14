@@ -11,6 +11,7 @@
     <string name="name">Name</string>
     <string name="please_provide_basic_information_nabout_yourself_and_password_that_s_nconsist_of_8_signs_1_special_sign_nand_1_big_letter">Please, provide basic information\nabout yourself and password that\'s\nconsist of 8 signs, 1 special sign\nand 1 big letter</string>
     <string name="let_s_start_your_nregistration_process">Let\'s start your\nregistration process</string>
+    <string name="trip_details_title">Trip details</string>
 
 
 </resources>

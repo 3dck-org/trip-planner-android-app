@@ -54,5 +54,4 @@ object AppModule {
     fun provideSharedPref(@ApplicationContext appContext: Context): EncryptedSharedPreferences {
         return EncryptedSharedPreferences(appContext)
     }
-
 }

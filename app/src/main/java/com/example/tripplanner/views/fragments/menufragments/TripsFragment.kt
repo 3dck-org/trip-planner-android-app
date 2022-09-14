@@ -18,6 +18,7 @@ import com.example.tripplanner.extensions.show
 import com.example.tripplanner.models.Resource
 import com.example.tripplanner.models.TripsResponseItem
 import com.example.tripplanner.viewmodels.OfferedTripsViewModel
+import com.example.tripplanner.views.dialogs.TripSubscriptionDialog
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
 
@@ -78,6 +79,6 @@ class TripsFragment : Fragment() {
     }
 
     fun showSubscriptionOption(trip : TripsResponseItem){
-
+        activity?.let { TripSubscriptionDialog(trip).show(it.supportFragmentManager,"Tag") }
     }
 }
