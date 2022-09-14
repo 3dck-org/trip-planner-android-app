@@ -9,9 +9,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.tripplanner.R
 import com.example.tripplanner.adapters.OfferedTripsAdapter
-import com.example.tripplanner.databinding.FragmentSettingsBinding
 import com.example.tripplanner.databinding.FragmentTripsBinding
 import com.example.tripplanner.extensions.hide
 import com.example.tripplanner.extensions.show
