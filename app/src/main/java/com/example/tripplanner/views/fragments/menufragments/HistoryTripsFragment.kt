@@ -6,12 +6,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.example.tripplanner.databinding.FragmentHistoryTripsBinding
+import com.example.tripplanner.databinding.FragmentTemporaryClosedBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class HistoryTripsFragment : Fragment() {
 
-    private lateinit var binding: FragmentHistoryTripsBinding
+    private lateinit var binding: FragmentTemporaryClosedBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -22,7 +23,7 @@ class HistoryTripsFragment : Fragment() {
     }
 
     private fun initBinding() {
-        binding = FragmentHistoryTripsBinding.inflate(layoutInflater)
+        binding = FragmentTemporaryClosedBinding.inflate(layoutInflater)
     }
 
 }

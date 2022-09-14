@@ -18,13 +18,14 @@ import com.example.tripplanner.models.TripsResponseItem
 import com.example.tripplanner.viewmodels.OfferedTripsViewModel
 import com.example.tripplanner.views.dialogs.TripSubscriptionDialog
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.Dispatchers
 import timber.log.Timber
 
 @AndroidEntryPoint
 class TripsFragment : Fragment() {
 
-    private lateinit var binding : FragmentTripsBinding
-    private var offeredTripsAdapter : OfferedTripsAdapter? = null
+    private lateinit var binding: FragmentTripsBinding
+    private var offeredTripsAdapter: OfferedTripsAdapter? = null
     private val tripsViewModel: OfferedTripsViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -33,6 +34,14 @@ class TripsFragment : Fragment() {
         initRecyclerView()
         listenForTrips()
         getTrips()
+        refreshOnDragUp()
+    }
+
+    private fun refreshOnDragUp() {
+        binding.swipeContainer.setOnRefreshListener {
+            listenForTrips()
+            getTrips()
+        }
     }
 
     override fun onCreateView(
@@ -47,6 +56,9 @@ class TripsFragment : Fragment() {
     private fun listenForTrips() {
         lifecycleScope.launchWhenResumed {
             tripsViewModel.response.collect {
+                with(Dispatchers.Main) {
+                    binding.swipeContainer.isRefreshing = false
+                }
                 when (it) {
                     is Resource.Error -> {
                         Timber.d("Error: ${it.errorData}")
@@ -72,11 +84,11 @@ class TripsFragment : Fragment() {
         binding.recyclerView.adapter = offeredTripsAdapter
     }
 
-    private fun initViewBinding(){
+    private fun initViewBinding() {
         binding = FragmentTripsBinding.inflate(layoutInflater)
     }
 
-    fun showSubscriptionOption(trip : TripsResponseItem){
-        activity?.let { TripSubscriptionDialog(trip).show(it.supportFragmentManager,"Tag") }
+    fun showSubscriptionOption(trip: TripsResponseItem) {
+        activity?.let { TripSubscriptionDialog(trip).show(it.supportFragmentManager, "Tag") }
     }
 }

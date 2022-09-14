@@ -9,6 +9,8 @@
     <dimen name="fourth_margin">32dp</dimen>
     <dimen name="fifth_margin">48dp</dimen>
     <dimen name="sixth_margin">64dp</dimen>
+    <dimen name="eights_margin">96dp</dimen>
+    <dimen name="nines_margin">128dp</dimen>
 
     <dimen name="box_corner_radius_edit_text">16dp</dimen>
 
