@@ -1,16 +1,19 @@
 package com.example.tripplanner.repositories
 
-import com.example.tripplanner.models.*
+import com.example.tripplanner.TripPlannerAPI
+import com.example.tripplanner.models.Error
+import com.example.tripplanner.models.ErrorData
+import com.example.tripplanner.models.RegistrationRequest
+import com.example.tripplanner.models.Resource
+import com.example.tripplanner.sharedpreferences.EncryptedSharedPreferences
 import com.google.gson.Gson
 import kotlinx.coroutines.Deferred
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
-import kotlinx.coroutines.withContext
 import retrofit2.Response
-import timber.log.Timber
+import javax.inject.Inject
 
-open class BaseRepository {
+open class BaseRepository  {
 
     companion object {
         val mapOfHeaders = mutableMapOf<String, String>(
@@ -28,11 +31,8 @@ open class BaseRepository {
         }
 
         fun refreshToken(refreshToken: String) {
-            mapOfHeaders["Authorization"] = "Bearer $refreshToken"
-        }
-
-        fun removeToken() {
             mapOfHeaders.remove("Authorization")
+            mapOfHeaders["Authorization"] = "Bearer $refreshToken"
         }
     }
 
@@ -44,15 +44,18 @@ open class BaseRepository {
                     if (body != null) {
                         emit(Resource.Success<T>(body))
                     } else {
-                        resp.errorBody()?.let {
-                            emit(
-                                Resource.Error<T>(
-                                    Gson().fromJson(
-                                        it.string(),
-                                        ErrorData::class.java
+                        if (resp.code() == 401) {
+                        } else {
+                            resp.errorBody()?.let {
+                                emit(
+                                    Resource.Error<T>(
+                                        Gson().fromJson(
+                                            it.string(),
+                                            ErrorData::class.java
+                                        )
                                     )
                                 )
-                            )
+                            }
                         }
                     }
 

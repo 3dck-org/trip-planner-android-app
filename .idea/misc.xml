@@ -8,6 +8,8 @@
         <entry key="app/src/main/res/drawable/default_app_button_selector.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/default_app_round_button.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/ic_offered_trips.xml" value="0.188" />
+        <entry key="app/src/main/res/drawable/ic_select_trip.xml" value="0.1395" />
+        <entry key="app/src/main/res/drawable/ic_selected_trip.xml" value="0.1395" />
         <entry key="app/src/main/res/drawable/offered_trip_card_shape.xml" value="0.187" />
         <entry key="app/src/main/res/drawable/trip_dialog_shape.xml" value="0.1565" />
         <entry key="app/src/main/res/drawable/trip_subscription_dialog.xml" value="0.187" />
@@ -22,8 +24,9 @@
         <entry key="app/src/main/res/layout/fragment_settings.xml" value="0.35507246376811596" />
         <entry key="app/src/main/res/layout/fragment_start.xml" value="0.6094944880558893" />
         <entry key="app/src/main/res/layout/fragment_temporary_closed.xml" value="0.5310150146484376" />
+        <entry key="app/src/main/res/layout/fragment_trip_map.xml" value="0.12291666666666666" />
         <entry key="app/src/main/res/layout/fragment_trips.xml" value="0.33516998291015626" />
-        <entry key="app/src/main/res/layout/offered_trip_item.xml" value="0.532258064516129" />
+        <entry key="app/src/main/res/layout/offered_trip_item.xml" value="0.27199074074074076" />
         <entry key="app/src/main/res/menu/base_menu.xml" value="0.17864583333333334" />
       </map>
     </option>

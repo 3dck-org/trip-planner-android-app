@@ -16,6 +16,9 @@ interface TripPlannerAPI {
     @GET("api/v1/trips")
     fun getTrips(@HeaderMap mapOfHeaders: Map<String, String>): Deferred<Response<TripsResponse>>
 
+    @GET("api/v1/journeys")
+    fun getUsersTrips(@HeaderMap mapOfHeaders: Map<String, String>): Deferred<Response<JourneysResponse>>
+
     @POST("api/v1/journeys")
     fun subscribeOnTrip(@HeaderMap mapOfHeaders: Map<String, String>, @Body subscribeOnTripRequest:
         SubscribeOnTripRequest) : Deferred<Response<SubscribeOnTripResponse>>

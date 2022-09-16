@@ -42,4 +42,7 @@ class SplashActivity : AppCompatActivity() {
         }
     }
 
+    private fun createFakeToken(){
+
+    }
 }

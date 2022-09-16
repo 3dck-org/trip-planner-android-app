@@ -5,6 +5,7 @@ data class TripsResponseItem(
     val description: String,
     val distance: String,
     val duration: Int,
+    val image_url: String,
     val id: Int,
     val name: String,
     val updated_at: String,

@@ -8,7 +8,8 @@
     android:divider="@color/base_color_3">
 
 
-    <androidx.cardview.widget.CardView
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/trip_item_cv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/second_margin"
@@ -92,6 +93,18 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 android:background="@drawable/ic_select_trip"
                 android:layout_marginEnd="@dimen/half_second_margin"/>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/selected_btn"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:enabled="true"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:background="@drawable/ic_selected_trip"
+                android:layout_marginEnd="@dimen/half_second_margin"/>
         </androidx.constraintlayout.widget.ConstraintLayout>
-    </androidx.cardview.widget.CardView>
+    </com.google.android.material.card.MaterialCardView>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -17,7 +17,7 @@
         tools:layout="@layout/fragment_history_trips" />
     <fragment
         android:id="@+id/mapFragment"
-        android:name="com.example.tripplanner.views.fragments.menufragments.MapFragment"
+        android:name="com.example.tripplanner.views.fragments.menufragments.TripMapFragment"
         android:label="fragment_map"
         tools:layout="@layout/fragment_map" />
     <fragment
