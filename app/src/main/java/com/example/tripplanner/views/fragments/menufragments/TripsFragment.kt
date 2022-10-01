@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.tripplanner.adapters.OfferedTripsAdapter
 import com.example.tripplanner.databinding.FragmentTripsBinding
+import com.example.tripplanner.databinding.OfferedTripItemBinding
 import com.example.tripplanner.extensions.hide
 import com.example.tripplanner.extensions.show
 import com.example.tripplanner.models.Resource

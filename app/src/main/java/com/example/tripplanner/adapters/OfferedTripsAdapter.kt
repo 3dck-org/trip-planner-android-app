@@ -4,7 +4,6 @@ import android.content.res.Resources
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.content.ContextCompat
@@ -25,11 +24,17 @@ class OfferedTripsAdapter(
     val showSubscriptionOption: (trip: TripsResponseItem) -> Unit
 ) : RecyclerView.Adapter<OfferedTripsAdapter.OfferedTripsViewHolder>() {
 
+    private lateinit var binding: OfferedTripItemBinding
     private val listOfTrips: MutableList<TripsResponseItem> = mutableListOf()
     private var activeTripId: Int = -1
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): OfferedTripsViewHolder {
-        return OfferedTripsViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.offered_trip_item, parent, false))
+        provideDataBinding(parent)
+        return OfferedTripsViewHolder(binding)
+    }
+
+    private fun provideDataBinding(parent: ViewGroup){
+        binding = OfferedTripItemBinding.inflate(LayoutInflater.from(parent.context),parent,false)
     }
 
     override fun getItemCount(): Int = listOfTrips.size
@@ -38,6 +43,7 @@ class OfferedTripsAdapter(
         holder: OfferedTripsAdapter.OfferedTripsViewHolder,
         position: Int
     ) {
+        provideDataBinding(holder.binding.root)
         holder.init(listOfTrips[position], activeTripId) {
             Timber.d(" 3: ${listOfTrips}")
             Timber.d(" 3: ${activeTripId}")
@@ -48,11 +54,8 @@ class OfferedTripsAdapter(
 
     fun addDataToAdapter(list: MutableList<TripsResponseItem>, activeTripId: Int = -1) {
         this.listOfTrips.clear()
-        notifyDataSetChanged()
         this.listOfTrips.addAll(list.sortedByDescending { it -> it.id == activeTripId })
-        notifyDataSetChanged()
         this.activeTripId = -1
-        notifyDataSetChanged()
         this.activeTripId = activeTripId
         Timber.d(" 2: ${list.sortedByDescending { it -> it.id == activeTripId }}")
         Timber.d(" 2: ${this.activeTripId}")
@@ -64,51 +67,32 @@ class OfferedTripsAdapter(
         notifyDataSetChanged()
     }
 
-    inner class OfferedTripsViewHolder(val view: View) :
-        RecyclerView.ViewHolder(view) {
-
-        var tripTitleTv : TextView?=null
-        var tripDurationTv : TextView?=null
-        var tripLengthTv : TextView?=null
-        var tripCategoryTv : TextView?=null
-        var tripItemCv : MaterialCardView?=null
-        var userIv : ImageView?=null
-        var selectBtn : Button?=null
-        var selectedBtn : Button?=null
-
-
-        init {
-            tripTitleTv = view.findViewById<TextView>(R.id.trip_title_tv)
-            tripDurationTv = view.findViewById<TextView>(R.id.trip_duration_tv)
-            tripLengthTv = view.findViewById<TextView>(R.id.trip_length_tv)
-            tripCategoryTv = view.findViewById<TextView>(R.id.trip_category_tv)
-            tripItemCv = view.findViewById<MaterialCardView>(R.id.trip_item_cv)
-            userIv = view.findViewById<ImageView>(R.id.user_iv)
-            selectBtn = view.findViewById<Button>(R.id.select_btn)
-            selectedBtn = view.findViewById<Button>(R.id.selected_btn)
-        }
+    inner class OfferedTripsViewHolder(val binding: OfferedTripItemBinding) :
+        RecyclerView.ViewHolder(binding.root) {
 
         fun init(
             trip: TripsResponseItem,
             activeTripId: Int,
             select: (trip: TripsResponseItem) -> Unit
         ) {
-            tripTitleTv?.text = trip.name
-            tripDurationTv?.text = "Duration: ${trip.duration}"
-            tripLengthTv?.text = "Length: ${trip.distance}"
-            tripCategoryTv?.text = "Category: ${trip.description}"
+            binding.tripTitleTv.text = trip.name
+            binding.tripDurationTv.text = "Duration: ${trip.duration}"
+            binding.tripLengthTv.text = "Length: ${trip.distance}"
+            binding.tripCategoryTv.text = "Category: ${trip.description}"
+            with(binding) {
                 if (trip.id != activeTripId) {
                     Timber.d("*****1 ${activeTripId}")
-                    selectBtn?.makeVisible()
-                    selectedBtn?.makeGone()
-                    tripItemCv?.strokeWidth = 0
+                    selectBtn.makeVisible()
+                    selectedBtn.makeGone()
+                    tripItemCv.strokeWidth = 0
                     selectTripsOnClick(trip, select)
                 } else {
                     Timber.d("*****2 ${activeTripId}")
-                    selectBtn?.makeGone()
-                    selectedBtn?.makeVisible()
-                    tripItemCv?.strokeWidth = 2
-                    tripItemCv?.strokeColor = ContextCompat.getColor(view.context, R.color.base_color_3)
+                    selectBtn.makeGone()
+                    selectedBtn.makeVisible()
+                    tripItemCv.strokeWidth = 2
+                    tripItemCv.strokeColor = ContextCompat.getColor(binding.root.context, R.color.base_color_3)
+                }
             }
             getImageFromURL(trip.image_url)
         }
@@ -117,20 +101,18 @@ class OfferedTripsAdapter(
             trip: TripsResponseItem,
             select: (trip: TripsResponseItem) -> Unit
         ) {
-            selectBtn?.setOnClickListener {
+            binding.selectBtn.setOnClickListener {
                 select.invoke(trip)
             }
         }
 
         private fun getImageFromURL(imageUrl: String) {
-            userIv?.let {
-                Glide.with(view)
-                    .load(imageUrl)
-                    .centerCrop()
-                    .error(R.drawable.ic_godlen_city)
-                    .apply(RequestOptions().transform(CenterCrop(), RoundedCorners(16)))
-                    .into(it)
-            }
+            Glide.with(binding.root)
+                .load(imageUrl)
+                .centerCrop()
+                .error(R.drawable.ic_godlen_city)
+                .apply(RequestOptions().transform(CenterCrop(), RoundedCorners(16)))
+                .into(binding.userIv)
         }
     }
 }
