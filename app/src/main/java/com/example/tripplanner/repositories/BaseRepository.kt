@@ -1,29 +1,21 @@
 package com.example.tripplanner.repositories
 
-import com.example.tripplanner.TripPlannerAPI
 import com.example.tripplanner.models.Error
 import com.example.tripplanner.models.ErrorData
-import com.example.tripplanner.models.RegistrationRequest
 import com.example.tripplanner.models.Resource
-import com.example.tripplanner.sharedpreferences.EncryptedSharedPreferences
 import com.google.gson.Gson
 import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import retrofit2.Response
-import javax.inject.Inject
 
-open class BaseRepository  {
+open class BaseRepository {
 
     companion object {
         val mapOfHeaders = mutableMapOf<String, String>(
             Pair("X-SK-API-KEY", "test"),
             Pair("X-SK-API-SECRET", "1234"),
             Pair("Accept-Language", "en"),
-            Pair(
-                "user-agent",
-                "SafeKiddo Parental Control(1.1.0-dev; Android 11; https://dev-2-api.safekiddo.net/);"
-            )
         )
 
         fun addToken(token: String) {
@@ -45,6 +37,7 @@ open class BaseRepository  {
                         emit(Resource.Success<T>(body))
                     } else {
                         if (resp.code() == 401) {
+                            callOrError(funs)
                         } else {
                             resp.errorBody()?.let {
                                 emit(

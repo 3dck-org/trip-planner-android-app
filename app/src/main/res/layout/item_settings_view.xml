@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:clickable="false"
+    android:layout_height="wrap_content">
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/setting_mb"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginHorizontal="@dimen/second_margin"
+        android:layout_marginTop="@dimen/first_margin"
+        android:layout_marginBottom="@dimen/half_second_margin"
+        android:background="@drawable/default_app_button_selector"
+        android:backgroundTint="@color/white"
+        android:fontFamily="@font/roboto_regular"
+        android:textAlignment="textStart"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:textSize="14sp"
+        app:icon="@drawable/ic_setting_right_arrow"
+        app:iconGravity="end"
+        app:iconSize="@dimen/second_margin"
+        app:iconTint="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Settings" />
+</androidx.constraintlayout.widget.ConstraintLayout>

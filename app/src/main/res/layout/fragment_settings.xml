@@ -1,14 +1,101 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".views.fragments.menufragments.SettingsFragment">
 
-    <!-- TODO: Update blank fragment layout -->
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:id="@+id/theme_setting_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="@dimen/third_margin"
+        android:fontFamily="@font/roboto_medium"
+        android:text="@string/theme"
+        android:textColor="@color/base_color_3"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+    <TextView
+        android:id="@+id/theme_setting_description_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="@dimen/third_margin"
+        android:fontFamily="@font/roboto_light"
+        android:text="@string/theme_setting_description"
+        android:textColor="@color/base_color_3"
+        android:textSize="10sp"
+        app:layout_constraintStart_toEndOf="@id/theme_setting_tv"
+        app:layout_constraintBottom_toBottomOf="@id/theme_setting_tv"
+        tools:ignore="SmallSp" />
 
-</FrameLayout>
+    <androidx.constraintlayout.motion.widget.MotionLayout
+        android:id="@+id/theme_motion_layout"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="@dimen/half_third_margin"
+        app:layoutDescription="@xml/fragment_settings_scene"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/theme_setting_tv">
+
+        <androidx.constraintlayout.utils.widget.ImageFilterView
+            android:id="@+id/sun_iv"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_marginVertical="@dimen/second_margin"
+            android:src="@drawable/ic_sun"
+            app:altSrc="@drawable/ic_moon"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:overlay="false"
+            tools:layout_editor_absoluteX="8dp" />
+    </androidx.constraintlayout.motion.widget.MotionLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="3dp"
+        android:layout_marginBottom="4dp"
+        android:alpha="0.3"
+        android:background="@drawable/custom_elevation_bottom"
+        app:layout_constraintBottom_toTopOf="@id/libraries_setting" />
+
+    <com.example.tripplanner.views.custom_views.SettingsItemView
+        android:id="@+id/libraries_setting"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/second_margin"
+        android:layout_marginTop="@dimen/third_margin"
+        android:clickable="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/theme_motion_layout"
+        app:si_text="Libraries" />
+
+    <com.example.tripplanner.views.custom_views.SettingsItemView
+        android:id="@+id/accont_details_setting"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/second_margin"
+        android:clickable="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/libraries_setting"
+        app:si_text="Account details" />
+
+    <com.example.tripplanner.views.custom_views.SettingsItemView
+        android:id="@+id/logout_setting"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/second_margin"
+        android:clickable="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/accont_details_setting"
+        app:si_text="Logout" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

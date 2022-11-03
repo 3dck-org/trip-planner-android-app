@@ -80,7 +80,7 @@
             android:layout_marginHorizontal="@dimen/second_margin"
             android:layout_marginVertical="@dimen/second_margin"
             android:background="@drawable/default_app_round_button"
-            android:fontFamily="@font/chesnagrotesk_medium"
+            android:fontFamily="@font/roboto_medium"
             android:text="Start the journey"
             android:textAlignment="center"
             android:textSize="14sp"

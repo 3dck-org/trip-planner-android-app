@@ -38,7 +38,7 @@
             android:textStyle="bold"
             android:textSize="16sp"
             android:layout_gravity="center"
-            android:fontFamily="@font/roboto_mono_regular"
+            android:fontFamily="@font/roboto_medium"
             />
 
         </androidx.appcompat.widget.Toolbar>
