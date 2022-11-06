@@ -1,4 +1,4 @@
-package com.example.tripplanner.repositories.SubscribeOnTrip
+package com.example.tripplanner.repositories.trip_subscription
 
 import com.example.tripplanner.models.Resource
 import com.example.tripplanner.models.SubscribeOnTripRequest

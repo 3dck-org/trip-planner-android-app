@@ -1,4 +1,4 @@
-package com.example.tripplanner.repositories.Trips
+package com.example.tripplanner.repositories.trips_info
 
 import com.example.tripplanner.TripPlannerAPI
 import com.example.tripplanner.models.Resource

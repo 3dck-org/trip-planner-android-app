@@ -1,4 +1,4 @@
-package com.example.tripplanner.repositories.Registration
+package com.example.tripplanner.repositories.registration
 
 import com.example.tripplanner.TripPlannerAPI
 import com.example.tripplanner.models.OauthResponse

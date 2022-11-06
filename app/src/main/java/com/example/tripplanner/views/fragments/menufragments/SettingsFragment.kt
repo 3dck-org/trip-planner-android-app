@@ -15,6 +15,7 @@ import com.example.tripplanner.constants.Constants
 import com.example.tripplanner.databinding.FragmentSettingsBinding
 import com.example.tripplanner.sharedpreferences.EncryptedSharedPreferences
 import com.example.tripplanner.views.activities.SplashActivity
+import com.example.tripplanner.views.activities.UserActivity
 import com.google.android.material.button.MaterialButton
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
@@ -39,6 +40,7 @@ class SettingsFragment : Fragment() {
 
     private fun handleSettingsClick(){
         binding.logoutSetting.findViewById<MaterialButton>(R.id.setting_mb).setOnClickListener { logoutSettingClick() }
+        binding.accontDetailsSetting.findViewById<MaterialButton>(R.id.setting_mb).setOnClickListener { accountDetailsSettingClick() }
     }
 
     private fun handleMotionLayoutTransition() {
@@ -98,7 +100,10 @@ class SettingsFragment : Fragment() {
             remove(Constants.TOKEN)
             remove(Constants.REFRESH_TOKEN)
         }
-        Timber.d("******")
         startActivity(Intent(activity, SplashActivity::class.java))
+    }
+
+    private fun accountDetailsSettingClick(){
+        startActivity(Intent(activity, UserActivity::class.java))
     }
 }

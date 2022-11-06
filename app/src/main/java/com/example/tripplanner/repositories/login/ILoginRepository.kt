@@ -1,4 +1,4 @@
-package com.example.tripplanner.repositories.Login
+package com.example.tripplanner.repositories.login
 
 import com.example.tripplanner.models.LoginRequest
 import com.example.tripplanner.models.OauthResponse

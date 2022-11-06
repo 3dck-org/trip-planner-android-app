@@ -36,18 +36,19 @@
     <androidx.constraintlayout.motion.widget.MotionLayout
         android:id="@+id/theme_motion_layout"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/half_third_margin"
+        android:background="@drawable/trip_dialog_shape"
         app:layoutDescription="@xml/fragment_settings_scene"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginHorizontal="@dimen/half_first_margin"
         app:layout_constraintTop_toBottomOf="@id/theme_setting_tv">
 
         <androidx.constraintlayout.utils.widget.ImageFilterView
             android:id="@+id/sun_iv"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:layout_marginVertical="@dimen/second_margin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:src="@drawable/ic_sun"
             app:altSrc="@drawable/ic_moon"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -58,7 +59,7 @@
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="3dp"
+        android:layout_height="6dp"
         android:layout_marginBottom="4dp"
         android:alpha="0.3"
         android:background="@drawable/custom_elevation_bottom"

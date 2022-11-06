@@ -6,7 +6,7 @@ import com.example.tripplanner.constants.Constants
 import com.example.tripplanner.models.LoginRequest
 import com.example.tripplanner.models.OauthResponse
 import com.example.tripplanner.models.Resource
-import com.example.tripplanner.repositories.Login.LoginRepository
+import com.example.tripplanner.repositories.login.LoginRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow

@@ -6,6 +6,7 @@
         <entry key="../../../../layout/custom_preview.xml" value="0.18884892086330934" />
         <entry key="app/src/main/res/drawable/bottom_navigation_shape.xml" value="0.187" />
         <entry key="app/src/main/res/drawable/custom_elevation.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/custom_elevation_bottom.xml" value="0.195" />
         <entry key="app/src/main/res/drawable/custom_elevation_upper.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/default_app_button_selector.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/default_app_round_button.xml" value="0.1" />
@@ -16,6 +17,7 @@
         <entry key="app/src/main/res/drawable/ic_select_trip.xml" value="0.1395" />
         <entry key="app/src/main/res/drawable/ic_selected_trip.xml" value="0.1395" />
         <entry key="app/src/main/res/drawable/ic_setting_right_arrow.xml" value="0.1465" />
+        <entry key="app/src/main/res/drawable/ic_sun.xml" value="0.195" />
         <entry key="app/src/main/res/drawable/ic_trip_planner.xml" value="0.2165" />
         <entry key="app/src/main/res/drawable/ic_trips_history.xml" value="0.2165" />
         <entry key="app/src/main/res/drawable/offered_trip_card_shape.xml" value="0.187" />
@@ -25,16 +27,18 @@
         <entry key="app/src/main/res/layout/activity_menu.xml" value="0.346129549601097" />
         <entry key="app/src/main/res/layout/activity_splash.xml" value="0.3868438720703125" />
         <entry key="app/src/main/res/layout/activity_start.xml" value="0.37492002559181065" />
+        <entry key="app/src/main/res/layout/activity_user.xml" value="0.5683070528334466" />
         <entry key="app/src/main/res/layout/dialog_trip_subscription.xml" value="0.4424503155199801" />
         <entry key="app/src/main/res/layout/fragment_history_trips.xml" value="0.35507246376811596" />
         <entry key="app/src/main/res/layout/fragment_login.xml" value="0.32657345081773226" />
         <entry key="app/src/main/res/layout/fragment_map.xml" value="0.35507246376811596" />
         <entry key="app/src/main/res/layout/fragment_register.xml" value="0.35507246376811596" />
-        <entry key="app/src/main/res/layout/fragment_settings.xml" value="0.39955357142857145" />
+        <entry key="app/src/main/res/layout/fragment_settings.xml" value="0.5460711503987054" />
         <entry key="app/src/main/res/layout/fragment_start.xml" value="0.6094944880558893" />
         <entry key="app/src/main/res/layout/fragment_temporary_closed.xml" value="0.35294117647058826" />
         <entry key="app/src/main/res/layout/fragment_trip_map.xml" value="0.12291666666666666" />
         <entry key="app/src/main/res/layout/fragment_trips.xml" value="0.33516998291015626" />
+        <entry key="app/src/main/res/layout/fragment_user.xml" value="0.1828774062816616" />
         <entry key="app/src/main/res/layout/item_settings_view.xml" value="0.30338983050847457" />
         <entry key="app/src/main/res/layout/offered_trip_item.xml" value="0.335" />
         <entry key="app/src/main/res/menu/base_menu.xml" value="0.17864583333333334" />

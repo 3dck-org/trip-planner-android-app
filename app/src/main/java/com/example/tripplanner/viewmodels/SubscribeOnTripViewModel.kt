@@ -5,7 +5,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.tripplanner.models.Resource
 import com.example.tripplanner.models.SubscribeOnTripRequest
 import com.example.tripplanner.models.SubscribeOnTripResponse
-import com.example.tripplanner.repositories.SubscribeOnTrip.SubscribeOnTripRepository
+import com.example.tripplanner.repositories.trip_subscription.SubscribeOnTripRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow

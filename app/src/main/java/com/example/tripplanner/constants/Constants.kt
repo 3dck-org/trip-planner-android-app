@@ -13,9 +13,9 @@ object Constants {
     const val BASE_URL = "https://api-trip-planner.herokuapp.com"
     const val CLIENT_ID = "HbPJN18dvU1XDoZTcFs4Rv0FX2UcylnRZv1VTPjrT0A"
     const val SECRET = "3oxXyFaGro3V1Ihg35z5zIv51AUTQ2EpikBEX-XnQdw"
-
+    
     //SHARED PREFERENCES
     const val TOKEN = "TOKEN"
     const val REFRESH_TOKEN = "REFRESH_TOKEN"
-
+    const val KID_CHOISE_PROFILE_UUID_KEY = "KID_CHOISE_PROFILE_UUID_KEY"
 }
