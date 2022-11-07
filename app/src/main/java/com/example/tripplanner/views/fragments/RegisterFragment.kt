@@ -28,6 +28,7 @@ class RegisterFragment : Fragment() {
 
     private lateinit var binding: FragmentRegisterBinding
     private val registrationViewModel: RegistrationViewModel by viewModels()
+
     @Inject
     lateinit var sharedPref: EncryptedSharedPreferences
 
@@ -38,7 +39,6 @@ class RegisterFragment : Fragment() {
         initBinding()
         activateConfirmationButton()
         setConfirmationButton()
-        registerOnClick()
         return binding.root
     }
 
@@ -51,26 +51,41 @@ class RegisterFragment : Fragment() {
         binding = FragmentRegisterBinding.inflate(layoutInflater)
     }
 
-
     private fun activateConfirmationButton() {
         with(binding) {
             emailEditText.doAfterTextChanged {
-                confirmButton.isEnabled = checkProvidedContent()
+                turnOffErrors()
             }
             passwordEditText.doAfterTextChanged {
-                confirmButton.isEnabled = checkProvidedContent()
+                turnOffErrors()
             }
             nameEditText.doAfterTextChanged {
-                confirmButton.isEnabled = checkProvidedContent()
+                turnOffErrors()
             }
             surnnameEditText.doAfterTextChanged {
-                confirmButton.isEnabled = checkProvidedContent()
+                turnOffErrors()
+            }
+            loginEditText.doAfterTextChanged {
+                turnOffErrors()
             }
         }
     }
 
-    private fun setConfirmationButton(): Unit =
-        binding.confirmButton.setOnClickListener { registerOnClick() }
+    private fun turnOffErrors() {
+        with(binding) {
+            emailLayout.error = null
+            passwordLayout.error = null
+            nameLayout.error = null
+            surnameLayout.error = null
+            loginLayout.error = null
+        }
+    }
+
+    private fun setConfirmationButton() =
+        binding.confirmButton.setOnClickListener {
+            if (checkProvidedContent())
+                registerOnClick()
+        }
 
     private fun registerOnClick(): Unit = binding.confirmButton.setOnClickListener {
         registrationViewModel.register(
@@ -104,13 +119,13 @@ class RegisterFragment : Fragment() {
         }
     }
 
-    private fun checkProvidedContent(): Boolean {
-        return binding.emailLayout.emailLoginValidation(binding.emailEditText.text.toString()) &&
-                binding.passwordLayout.passwordValidation(binding.passwordEditText.text.toString()) && binding.nameLayout.fieldIsNotEmptyValidation(
-            binding.nameEditText.text.toString()
-        ) && binding.surnameLayout.fieldIsNotEmptyValidation(
-            binding.surnnameEditText.text.toString()
-        )
-    }
-
+    private fun checkProvidedContent(): Boolean =
+        with(binding) {
+            emailLayout.emailLoginValidation(emailEditText.text.toString())
+                .and(passwordLayout.passwordValidation(passwordEditText.text.toString()))
+                .and(nameLayout.fieldIsNotEmptyValidation(nameEditText.text.toString()))
+                .and(surnameLayout.fieldIsNotEmptyValidation(surnnameEditText.text.toString()))
+                .and(loginLayout.fieldIsNotEmptyValidation(loginEditText.text.toString()))
+        }
 }
+

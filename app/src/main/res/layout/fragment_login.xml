@@ -32,7 +32,7 @@
             android:layout_marginStart="@dimen/fourth_margin"
             android:layout_marginTop="@dimen/second_margin"
             android:lineSpacingExtra="@dimen/first_margin"
-            android:text="Please, enter your email and password to login:"
+            android:text="@string/login_description_tv"
             android:textAlignment="textStart"
             android:textColor="@color/base_color_3"
             android:textSize="16sp"
@@ -85,7 +85,6 @@
                 android:inputType="textPassword" />
         </com.google.android.material.textfield.TextInputLayout>
 
-
         <Button
             android:id="@+id/sign_in_btn"
             style="@style/DefaultButtonStyle"
@@ -93,16 +92,15 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/fourth_margin"
             android:background="@drawable/default_app_round_button"
-            android:enabled="false"
             android:fontFamily="@font/roboto_medium"
-            android:text="Sign in"
+            android:text="@string/login"
             android:textAlignment="center"
+            android:textAllCaps="true"
             android:textSize="14sp"
             app:elevation="8dp"
             app:layout_constraintEnd_toEndOf="@id/password_layout"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@id/password_layout"
             app:layout_constraintTop_toBottomOf="@id/password_layout" />
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

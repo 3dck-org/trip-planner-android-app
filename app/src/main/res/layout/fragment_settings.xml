@@ -58,23 +58,26 @@
     </androidx.constraintlayout.motion.widget.MotionLayout>
 
     <View
+        android:id="@+id/elevation_line_v"
         android:layout_width="match_parent"
         android:layout_height="6dp"
         android:layout_marginBottom="4dp"
         android:alpha="0.3"
+        android:layout_marginTop="@dimen/third_margin"
         android:background="@drawable/custom_elevation_bottom"
-        app:layout_constraintBottom_toTopOf="@id/libraries_setting" />
+        app:layout_constraintTop_toBottomOf="@+id/theme_motion_layout"
+        />
 
     <com.example.tripplanner.views.custom_views.SettingsItemView
         android:id="@+id/libraries_setting"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/second_margin"
-        android:layout_marginTop="@dimen/third_margin"
+        android:layout_marginTop="@dimen/first_margin"
         android:clickable="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/theme_motion_layout"
+        app:layout_constraintTop_toBottomOf="@id/elevation_line_v"
         app:si_text="Libraries" />
 
     <com.example.tripplanner.views.custom_views.SettingsItemView

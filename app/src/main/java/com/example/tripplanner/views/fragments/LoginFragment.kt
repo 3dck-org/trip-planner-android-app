@@ -27,6 +27,7 @@ class LoginFragment : Fragment() {
 
     private lateinit var binding: FragmentLoginBinding
     private val loginViewModel: LoginViewModel by viewModels()
+
     @Inject
     lateinit var sharedPref: EncryptedSharedPreferences
 
@@ -35,7 +36,7 @@ class LoginFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         initBinding()
-        activateConfirmationButton()
+        activateConfirmationButtonOnFocuse()
         return binding.root
     }
 
@@ -46,26 +47,33 @@ class LoginFragment : Fragment() {
     }
 
     private fun loginOnClick(): Unit = binding.signInBtn.setOnClickListener {
-        loginViewModel.login(
-            binding.emailEditText.text.toString(),
-            binding.passwordEditText.text.toString()
-        )
+        if (isProvidedDataCorrect()) {
+            loginViewModel.login(
+                binding.emailEditText.text.toString(),
+                binding.passwordEditText.text.toString()
+            )
+        }
     }
 
-    private fun activateConfirmationButton() {
+    private fun activateConfirmationButtonOnFocuse() {
         with(binding) {
             emailEditText.doAfterTextChanged {
-                signInBtn.isEnabled = checkProvidedContent()
+                emailLayout.error = null
+                passwordLayout.error = null
             }
             passwordEditText.doAfterTextChanged {
-                signInBtn.isEnabled = checkProvidedContent()
+                emailLayout.error = null
+                passwordLayout.error = null
             }
         }
     }
 
-    private fun checkProvidedContent(): Boolean {
-        return binding.emailLayout.emailLoginValidation(binding.emailEditText.text.toString()) &&
-                binding.passwordLayout.passwordValidation(binding.passwordEditText.text.toString())
+    private fun isProvidedDataCorrect(): Boolean {
+        val isPasswordValid =
+            binding.passwordLayout.passwordValidation(binding.passwordEditText.text.toString())
+        val isEmailValid =
+            binding.emailLayout.emailLoginValidation(binding.emailEditText.text.toString())
+        return isPasswordValid && isEmailValid
     }
 
     private fun initBinding() {
@@ -83,15 +91,15 @@ class LoginFragment : Fragment() {
                         Timber.d("Progress")
                     }
                     is Resource.Success -> {
-                        Timber.d("Success:")
-                        sharedPref.addPreference(Constants.TOKEN, it.data.access_token)
+                        with(sharedPref) {
+                            addPreference(Constants.TOKEN, it.data.access_token)
+                            addPreference(Constants.REFRESH_TOKEN, it.data.refresh_token)
+                        }
                         BaseRepository.addToken(it.data.access_token)
-                        val intent = Intent(activity, MenuActivity::class.java)
-                        startActivity(intent)
+                        startActivity(Intent(activity, MenuActivity::class.java))
                     }
                 }
             }
         }
     }
-
 }

@@ -18,4 +18,5 @@
     <string name="theme_setting_description">(Please, drag the icon to change application theme)</string>
     <string name="moje_dane">Account information:</string>
     <string name="change_password_btn">Change password</string>
+    <string name="login_description_tv">Please, enter your email and password to login:</string>
 </resources>

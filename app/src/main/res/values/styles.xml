@@ -52,4 +52,8 @@
         <item name="android:textStyle">normal</item>
         <item name="fontFamily">@font/chesnagrotesk_medium</item>
     </style>
+
+    <style name="CustomAlertDialog" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <item name="android:windowBackground">@drawable/trip_dialog</item>
+    </style>
 </resources>

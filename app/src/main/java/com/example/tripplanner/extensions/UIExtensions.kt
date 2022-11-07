@@ -66,19 +66,19 @@ fun Button.disable() {
     this.isEnabled = false
 }
 
-fun View.makeGone(){
+fun View.makeGone() {
     this.visibility = View.GONE
 }
 
-fun View.makeVisible(){
+fun View.makeVisible() {
     this.visibility = View.VISIBLE
 }
 
-fun ProgressBar.hide(){
+fun ProgressBar.hide() {
     this.visibility = View.GONE
 }
 
-fun ProgressBar.show(){
+fun ProgressBar.show() {
     this.visibility = View.VISIBLE
 }
 

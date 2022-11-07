@@ -45,8 +45,6 @@ class OfferedTripsAdapter(
     ) {
         provideDataBinding(holder.binding.root)
         holder.init(listOfTrips[position], activeTripId) {
-            Timber.d(" 3: ${listOfTrips}")
-            Timber.d(" 3: ${activeTripId}")
             showSubscriptionOption.invoke(it)
             notifyDataSetChanged()
         }
@@ -57,13 +55,6 @@ class OfferedTripsAdapter(
         this.listOfTrips.addAll(list.sortedByDescending { it -> it.id == activeTripId })
         this.activeTripId = -1
         this.activeTripId = activeTripId
-        Timber.d(" 2: ${list.sortedByDescending { it -> it.id == activeTripId }}")
-        Timber.d(" 2: ${this.activeTripId}")
-        notifyDataSetChanged()
-    }
-
-    fun removeDataFromAdapter() {
-        this.listOfTrips.clear()
         notifyDataSetChanged()
     }
 
@@ -81,13 +72,11 @@ class OfferedTripsAdapter(
             binding.tripCategoryTv.text = "Category: ${trip.description}"
             with(binding) {
                 if (trip.id != activeTripId) {
-                    Timber.d("*****1 ${activeTripId}")
                     selectBtn.makeVisible()
                     selectedBtn.makeGone()
                     tripItemCv.strokeWidth = 0
                     selectTripsOnClick(trip, select)
                 } else {
-                    Timber.d("*****2 ${activeTripId}")
                     selectBtn.makeGone()
                     selectedBtn.makeVisible()
                     tripItemCv.strokeWidth = 2

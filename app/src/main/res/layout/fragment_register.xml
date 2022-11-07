@@ -153,7 +153,6 @@
             android:layout_marginVertical="@dimen/fourth_margin"
             android:background="@drawable/default_app_round_button"
             android:elevation="8dp"
-            android:enabled="false"
             android:fontFamily="@font/roboto_medium"
             android:text="@string/sign_up"
             android:textAlignment="center"
