@@ -1,7 +1,6 @@
 package com.example.tripplanner.views.fragments.menufragments
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,9 +9,8 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.tripplanner.adapters.OfferedTripsAdapter
+import com.example.tripplanner.adapters.TripsAdapter
 import com.example.tripplanner.databinding.FragmentTripsBinding
-import com.example.tripplanner.databinding.OfferedTripItemBinding
 import com.example.tripplanner.extensions.hide
 import com.example.tripplanner.extensions.show
 import com.example.tripplanner.models.Resource
@@ -30,7 +28,7 @@ import java.time.LocalDateTime
 class TripsFragment : Fragment() {
 
     private lateinit var binding: FragmentTripsBinding
-    private var offeredTripsAdapter: OfferedTripsAdapter? = null
+    private var offeredTripsAdapter: TripsAdapter? = null
     private val tripsViewModel: OfferedTripsViewModel by viewModels()
     private val journeysViewModel: JourneysViewModel by viewModels()
     private var activeJourneyId: Int = -1
@@ -104,7 +102,7 @@ class TripsFragment : Fragment() {
     }
 
     private fun initRecyclerView() {
-        offeredTripsAdapter = OfferedTripsAdapter(::showSubscriptionOption)
+        offeredTripsAdapter = TripsAdapter(::showSubscriptionOption)
         val llm = LinearLayoutManager(activity?.baseContext)
         llm.orientation = RecyclerView.VERTICAL
         binding.recyclerView.adapter = offeredTripsAdapter
