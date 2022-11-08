@@ -19,4 +19,5 @@
     <string name="moje_dane">Account information:</string>
     <string name="change_password_btn">Change password</string>
     <string name="login_description_tv">Please, enter your email and password to login:</string>
+    <string name="dialog_text_btn">Start the journey</string>
 </resources>

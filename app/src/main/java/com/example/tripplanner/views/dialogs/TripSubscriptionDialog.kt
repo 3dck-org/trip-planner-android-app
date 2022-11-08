@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatDialogFragment
 import com.example.tripplanner.R
 import com.example.tripplanner.databinding.DialogTripSubscriptionBinding
 import com.example.tripplanner.models.TripsResponseItem
+import com.google.android.material.button.MaterialButton
 
 class TripSubscriptionDialog(
     val trip: TripsResponseItem,
@@ -31,7 +32,7 @@ class TripSubscriptionDialog(
         return builder.create()
     }
 
-    private fun setCorners(){
+    private fun setCorners() {
         dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
     }
 
@@ -39,12 +40,20 @@ class TripSubscriptionDialog(
         with(binding) {
             tripNameTv.text = "Trip: ${trip.name}"
             tripDescriptionTv.text = "Description: ${trip.description}"
-            tripDurationTv.text = "Duration: ${trip.duration}"
-            tripLengthTv.text = "Length: ${trip.distance}"
+            tripDurationTv.text = "Duration: ${trip.duration} min"
+            tripLengthTv.text = "Length: ${trip.distance}km"
+            tripLikeBtn.changeIconTint(trip.isFavourite)
             signInBtn.setOnClickListener {
                 unitSubscribe.invoke()
             }
         }
+    }
+
+    private fun MaterialButton.changeIconTint(isTripLiked: Boolean = false) {
+        if (isTripLiked)
+            this.setIconResource(R.drawable.ic_like_filled)
+        else
+            this.setIconResource(R.drawable.ic_like)
     }
 
     private fun initViewBinding() {

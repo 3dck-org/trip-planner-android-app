@@ -12,6 +12,7 @@
     <color name="error_color">#D72631</color>
     <color name="base_color_1">#408ec6</color>
     <color name="base_color_2">#7a2048</color>
+    <color name="like_color">#A3233D</color>
     <color name="base_color_3">#1e2761</color>
     <color name="base_color_3_disabled">#3C499C</color>
     <color name="disabled_button">#676A7C</color>
