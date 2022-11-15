@@ -1,17 +1,15 @@
 package com.example.tripplanner.models
 
-import com.google.gson.annotations.SerializedName
-
-data class TripsResponseItem(
+data class TripsInfo(
     val created_at: String,
     val description: String,
     val distance: String,
-    @SerializedName("favorite")
-    var isFavourite: Boolean,
     val duration: Int,
-    val image_url: String,
+    val favorite: Boolean,
     val id: Int,
+    val image_url: String,
     val name: String,
+    val trip_place_infos: List<TripPlaceInfo>,
     val updated_at: String,
     val user_id: String
 )

@@ -1,6 +1,5 @@
 package com.example.tripplanner.adapters
 
-import android.graphics.drawable.Icon
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
@@ -11,12 +10,12 @@ import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.request.RequestOptions
 import com.example.tripplanner.R
 import com.example.tripplanner.databinding.OfferedTripItemBinding
-import com.example.tripplanner.extensions.makeGone
-import com.example.tripplanner.extensions.makeVisible
+import com.example.tripplanner.models.Trips
 import com.example.tripplanner.models.TripsResponseItem
+import timber.log.Timber
 
 class TripsAdapter(
-    private val showSubscriptionOption: (trip: TripsResponseItem) -> Unit
+    private val showSubscriptionOption: (trip: Trips) -> Unit
 ) : RecyclerView.Adapter<TripsAdapter.TripsViewHolder>() {
 
     private lateinit var binding: OfferedTripItemBinding
@@ -28,8 +27,8 @@ class TripsAdapter(
         return TripsViewHolder(binding)
     }
 
-    private fun provideDataBinding(parent: ViewGroup){
-        binding = OfferedTripItemBinding.inflate(LayoutInflater.from(parent.context),parent,false)
+    private fun provideDataBinding(parent: ViewGroup) {
+        binding = OfferedTripItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
     }
 
     override fun getItemCount(): Int = listOfTrips.size
@@ -40,14 +39,27 @@ class TripsAdapter(
     ) {
         provideDataBinding(holder.binding.root)
         holder.init(listOfTrips[position], activeTripId) {
-            showSubscriptionOption.invoke(it)
+            val trip = Trips(
+                TripsResponseItem(created_at = it.created_at,
+                    it.description,
+                    it.distance,
+                    it.isFavourite,
+                    it.duration,
+                    it.image_url,
+                    it.id,
+                    it.name,
+                    it.updated_at,
+                    it.user_id)
+            )
+            Timber.d("***2 $trip")
+            showSubscriptionOption.invoke(trip)
             notifyDataSetChanged()
         }
     }
 
     fun addDataToAdapter(list: MutableList<TripsResponseItem>, activeTripId: Int = -1) {
         this.listOfTrips.clear()
-        this.listOfTrips.addAll(list.sortedByDescending { trip -> trip.id == activeTripId })
+        this.listOfTrips.addAll(list.sortedByDescending { trip -> trip.isFavourite }.sortedByDescending { trip -> trip.id == activeTripId })
         this.activeTripId = -1
         this.activeTripId = activeTripId
         notifyDataSetChanged()
@@ -73,13 +85,14 @@ class TripsAdapter(
                 } else {
                     tripItemCv.strokeWidth = 2
                     changeItemTripBtn()
-                    tripItemCv.strokeColor = ContextCompat.getColor(binding.root.context, R.color.base_color_3)
+                    tripItemCv.strokeColor =
+                        ContextCompat.getColor(binding.root.context, R.color.base_color_3)
                 }
             }
             getImageFromURL(trip.image_url)
         }
 
-        private fun changeItemTripBtn(isSelectedBtn: Boolean = false){
+        private fun changeItemTripBtn(isSelectedBtn: Boolean = false) {
             if (isSelectedBtn)
                 binding.tripBtn.setIconResource(R.drawable.ic_right_arrow)
             else

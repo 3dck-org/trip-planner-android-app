@@ -14,6 +14,7 @@ import com.example.tripplanner.databinding.FragmentTripsBinding
 import com.example.tripplanner.extensions.hide
 import com.example.tripplanner.extensions.show
 import com.example.tripplanner.models.Resource
+import com.example.tripplanner.models.Trips
 import com.example.tripplanner.models.TripsResponseItem
 import com.example.tripplanner.viewmodels.JourneysViewModel
 import com.example.tripplanner.viewmodels.OfferedTripsViewModel
@@ -22,7 +23,6 @@ import com.example.tripplanner.views.dialogs.TripSubscriptionDialog
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
 import timber.log.Timber
-import java.time.LocalDateTime
 
 @AndroidEntryPoint
 class TripsFragment : Fragment() {
@@ -46,8 +46,9 @@ class TripsFragment : Fragment() {
     ): View {
         initViewBinding()
         initRecyclerView()
-        listenForTrips()
-        listenForJourneys()
+        collectSubscriptionResponse()
+        collectForTrips()
+        collectForJourneys()
         getJourneys()
         refreshOnDragUp()
         return binding.root
@@ -57,7 +58,7 @@ class TripsFragment : Fragment() {
 
     private fun getJourneys() = journeysViewModel.getJourneys()
 
-    private fun listenForTrips() {
+    private fun collectForTrips() {
         lifecycleScope.launchWhenResumed {
             tripsViewModel.response.collect {
                 with(Dispatchers.Main) {
@@ -73,7 +74,6 @@ class TripsFragment : Fragment() {
                     is Resource.Success -> {
                         Timber.d("Success: ${it.data}")
                         binding.progressBar.hide()
-                        Timber.d("!!!! ${activeJourneyId} ${it.data}")
                         offeredTripsAdapter?.addDataToAdapter(it.data, activeJourneyId)
                     }
                 }
@@ -81,7 +81,7 @@ class TripsFragment : Fragment() {
         }
     }
 
-    private fun listenForJourneys() {
+    private fun collectForJourneys() {
         lifecycleScope.launchWhenResumed {
             journeysViewModel.response.collect {
                 when (it) {
@@ -132,11 +132,13 @@ class TripsFragment : Fragment() {
         }
     }
 
-    fun showSubscriptionOption(trip: TripsResponseItem) {
-        activity?.let {
-            TripSubscriptionDialog(trip, ::collectSubscriptionResponse) {
-                subscriptionViewModel.subscribeOnTrip(trip.id, LocalDateTime.now().toString())
-            }.show(it.supportFragmentManager, "Tag")
-        }
+
+    private fun showSubscriptionOption(trip: Trips) {
+        TripSubscriptionDialog(::getJourneys).setTrip(trip).show(childFragmentManager, "TAG")
     }
+}
+
+private fun TripSubscriptionDialog.setTrip(trip: Trips): TripSubscriptionDialog {
+    this.currentTrip = trip
+    return this
 }

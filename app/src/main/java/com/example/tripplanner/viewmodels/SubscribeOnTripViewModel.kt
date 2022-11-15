@@ -14,8 +14,9 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class SubscribeOnTripViewModel @Inject constructor(val repository: SubscribeOnTripRepository)
-    : ViewModel() {
+class SubscribeOnTripViewModel @Inject constructor(
+    val repository: SubscribeOnTripRepository
+) : ViewModel() {
 
     private val _response =
         MutableStateFlow<Resource<SubscribeOnTripResponse>>(Resource.Progress())

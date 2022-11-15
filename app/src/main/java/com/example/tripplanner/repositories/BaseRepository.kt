@@ -61,10 +61,11 @@ open class BaseRepository {
                         Error(
                             1,
                             e.message.toString(),
-                            e.localizedMessage,
+                            e.localizedMessage ?: "",
                             "unknown",
-                            "unknown"
-                        )
+                            "unknown",
+                        ),
+                        listOf()
                     )
                 )
             )

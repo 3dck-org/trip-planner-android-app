@@ -39,5 +39,4 @@ class LoginViewModel @Inject constructor(val repository: LoginRepository) : View
             ).collect { _response.emit(it) }
         }
     }
-
 }

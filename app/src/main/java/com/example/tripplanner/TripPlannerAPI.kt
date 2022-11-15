@@ -3,10 +3,7 @@ package com.example.tripplanner
 import com.example.tripplanner.models.*
 import kotlinx.coroutines.Deferred
 import retrofit2.Response
-import retrofit2.http.Body
-import retrofit2.http.GET
-import retrofit2.http.HeaderMap
-import retrofit2.http.POST
+import retrofit2.http.*
 
 interface TripPlannerAPI {
 
@@ -30,4 +27,11 @@ interface TripPlannerAPI {
 
     @GET("api/v1/current_user")
     fun getUsersDetails(@HeaderMap mapOfHeaders: Map<String, String>): Deferred<Response<UserDetails>>
+
+    @PUT("/api/v1/trips/{id}")
+    fun modifyTripToFavourites(
+        @HeaderMap mapOfHeaders: Map<String, String>,
+        @Path("id") tripId: Int,
+        @Body trip: Trips
+    ): Deferred<Response<TripsResponseItem>>
 }

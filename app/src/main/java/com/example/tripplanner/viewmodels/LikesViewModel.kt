@@ -2,11 +2,10 @@ package com.example.tripplanner.viewmodels
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.tripplanner.models.IsRequestSuccessfull
 import com.example.tripplanner.models.Resource
-import com.example.tripplanner.models.TripsResponse
+import com.example.tripplanner.models.Trips
+import com.example.tripplanner.models.TripsResponseItem
 import com.example.tripplanner.repositories.likes.PutLikeRepository
-import com.example.tripplanner.repositories.trips_info.TripsRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -15,18 +14,19 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class OfferedTripsViewModel @Inject constructor(
-    val tripsRepository: TripsRepository
+class LikesViewModel @Inject constructor(
+    val likeRepository: PutLikeRepository
 ) : ViewModel() {
 
-    private val _response =
-        MutableStateFlow<Resource<TripsResponse>>(Resource.Progress())
-    val response: StateFlow<Resource<TripsResponse>>
-        get() = _response
+    private val _responseFavourite =
+        MutableStateFlow<Resource<TripsResponseItem>>(Resource.Progress())
+    val responseFavourite: StateFlow<Resource<TripsResponseItem>>
+        get() = _responseFavourite
 
-    fun getTrips() {
+    fun modifyFavoriteTrip(trip: Trips) {
         viewModelScope.launch(Dispatchers.IO) {
-            tripsRepository.getTrips().collect { _response.emit(it) }
+            likeRepository.modifyFavoriteTrip(trip.trip.id, trip)
+                .collect { _responseFavourite.emit(it) }
         }
     }
 }
