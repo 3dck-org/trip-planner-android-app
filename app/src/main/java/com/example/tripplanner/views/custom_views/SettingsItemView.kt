@@ -11,6 +11,7 @@ class SettingsItemView(context: Context, attrs: AttributeSet) : ConstraintLayout
 
     private var binding: ItemSettingsViewBinding
     private var currText: String? = null
+    private var isAva: Boolean = false
 
     init {
         val attributes = context
@@ -18,7 +19,10 @@ class SettingsItemView(context: Context, attrs: AttributeSet) : ConstraintLayout
             .obtainStyledAttributes(attrs, R.styleable.SettingsItemView, 0, 0)
         binding = ItemSettingsViewBinding.inflate(LayoutInflater.from(context), this, true)
         currText = attributes.getString(R.styleable.SettingsItemView_si_text)
+        isAva = attributes.getBoolean(R.styleable.SettingsItemView_is_available, false) == true
         if (currText != null)
             binding.settingMb.text = currText
+        binding.settingMb.isEnabled = isAva
+
     }
 }

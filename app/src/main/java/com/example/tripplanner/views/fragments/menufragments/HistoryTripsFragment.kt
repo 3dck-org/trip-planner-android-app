@@ -12,7 +12,7 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class HistoryTripsFragment : Fragment() {
 
-    private lateinit var binding: FragmentHistoryTripsBinding
+    private lateinit var binding: FragmentTemporaryClosedBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -23,7 +23,7 @@ class HistoryTripsFragment : Fragment() {
     }
 
     private fun initBinding() {
-        binding = FragmentHistoryTripsBinding.inflate(layoutInflater)
+        binding = FragmentTemporaryClosedBinding.inflate(layoutInflater)
     }
 
 }

@@ -35,12 +35,13 @@
         <entry key="app/src/main/res/layout/activity_splash.xml" value="0.3868438720703125" />
         <entry key="app/src/main/res/layout/activity_start.xml" value="0.37492002559181065" />
         <entry key="app/src/main/res/layout/activity_user.xml" value="0.5683070528334466" />
+        <entry key="app/src/main/res/layout/change_users_avatar.xml" value="0.26927083333333335" />
         <entry key="app/src/main/res/layout/dialog_trip_subscription.xml" value="0.7718121723063941" />
         <entry key="app/src/main/res/layout/fragment_history_trips.xml" value="0.35507246376811596" />
         <entry key="app/src/main/res/layout/fragment_login.xml" value="0.32657345081773226" />
         <entry key="app/src/main/res/layout/fragment_map.xml" value="0.35507246376811596" />
         <entry key="app/src/main/res/layout/fragment_register.xml" value="0.35507246376811596" />
-        <entry key="app/src/main/res/layout/fragment_settings.xml" value="0.44567219152854515" />
+        <entry key="app/src/main/res/layout/fragment_settings.xml" value="0.4146919431279621" />
         <entry key="app/src/main/res/layout/fragment_start.xml" value="0.3378693864152238" />
         <entry key="app/src/main/res/layout/fragment_temporary_closed.xml" value="0.35294117647058826" />
         <entry key="app/src/main/res/layout/fragment_trip_details.xml" value="0.20625" />
@@ -48,7 +49,7 @@
         <entry key="app/src/main/res/layout/fragment_trips.xml" value="0.33516998291015626" />
         <entry key="app/src/main/res/layout/fragment_user.xml" value="0.1828774062816616" />
         <entry key="app/src/main/res/layout/item_settings_view.xml" value="0.30338983050847457" />
-        <entry key="app/src/main/res/layout/offered_trip_item.xml" value="0.7184986595174263" />
+        <entry key="app/src/main/res/layout/offered_trip_item.xml" value="0.3972027972027972" />
         <entry key="app/src/main/res/layout/trip_dialog.xml" value="0.12604166666666666" />
         <entry key="app/src/main/res/menu/base_menu.xml" value="0.17864583333333334" />
         <entry key="app/src/main/res/mipmap-anydpi-v26/ic_app.xml" value="0.1115" />

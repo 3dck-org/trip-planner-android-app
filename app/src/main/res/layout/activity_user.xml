@@ -17,6 +17,29 @@
         app:layout_constraintBottom_toBottomOf="parent"
         android:theme="@style/ProgressBarTheme" />
 
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/avatar_cv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/title_tv"
+        app:layout_constraintStart_toStartOf="parent"
+        app:cardCornerRadius="@dimen/first_margin"
+        app:cardElevation="6dp"
+        app:strokeColor="@color/base_color_3"
+        app:strokeWidth="0.5dp"
+        android:background="@drawable/offered_trip_card_shape"
+        android:clickable="true"
+        android:layout_marginTop="@dimen/half_third_margin"
+        app:layout_constraintEnd_toStartOf="@id/title_tv"
+        >
+    <ImageView
+        android:id="@+id/avatar_iv"
+        android:layout_width="72dp"
+        android:layout_height="72dp"
+        android:layout_margin="6dp"
+        />
+    </com.google.android.material.card.MaterialCardView>
+
     <TextView
         android:id="@+id/title_tv"
         android:layout_width="wrap_content"
@@ -36,13 +59,13 @@
         android:id="@+id/name_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/half_second_margin"
+        android:layout_marginTop="@dimen/first_margin"
         android:fontFamily="@font/roboto_bold"
         android:textColor="@color/base_color_3"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/title_tv"
+        app:layout_constraintTop_toTopOf="@id/avatar_cv"
         tools:text="Pavel Zlacheuski" />
 
     <TextView

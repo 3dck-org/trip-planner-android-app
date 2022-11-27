@@ -5,11 +5,13 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import com.example.tripplanner.databinding.ActivityUserBinding
+import com.example.tripplanner.extensions.getImageFromURL
 import com.example.tripplanner.extensions.makeGone
 import com.example.tripplanner.extensions.makeVisible
 import com.example.tripplanner.models.Resource
 import com.example.tripplanner.models.UserDetails
 import com.example.tripplanner.viewmodels.UserDetailsViewModel
+import com.example.tripplanner.views.custom_views.ChangeAvatarDialogFragment
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -24,6 +26,12 @@ class UserActivity : AppCompatActivity() {
 
     private fun initBinding() {
         binding = ActivityUserBinding.inflate(layoutInflater)
+    }
+
+    private fun onAvatarClickEvent(){
+        binding.avatarCv.setOnClickListener {
+            ChangeAvatarDialogFragment().show(supportFragmentManager,"TAG")
+        }
     }
 
     private fun collectUserDetailsData() {
@@ -54,6 +62,7 @@ class UserActivity : AppCompatActivity() {
             nameTv.text = userDetails.name + " " + userDetails.surname
             loginTv.text = "(" + userDetails.login + ")"
             emailTv.text = userDetails.email
+            getImageFromURL(userDetails.image_url, applicationContext, binding.avatarIv)
         }
     }
 
@@ -63,5 +72,6 @@ class UserActivity : AppCompatActivity() {
         setContentView(binding.root)
         collectUserDetailsData()
         viewModel.getUserDetails()
+        onAvatarClickEvent()
     }
 }

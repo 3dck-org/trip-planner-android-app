@@ -20,4 +20,7 @@
     <string name="change_password_btn">Change password</string>
     <string name="login_description_tv">Please, enter your email and password to login:</string>
     <string name="dialog_text_btn">Start the journey</string>
+    <string name="avatar_url">Please, provide image url:</string>
+    <string name="avatar_url_hint">Avatar url</string>
+    <string name="update_avatar_btn_text">Update avatar</string>
 </resources>

@@ -18,6 +18,7 @@
         android:backgroundTint="@color/white"
         android:fontFamily="@font/roboto_regular"
         android:textAlignment="textStart"
+        android:enabled="true"
         android:textAllCaps="false"
         android:textColor="@color/white"
         android:textSize="14sp"

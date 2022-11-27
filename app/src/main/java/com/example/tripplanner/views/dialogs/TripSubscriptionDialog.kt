@@ -62,7 +62,6 @@ class TripSubscriptionDialog(val func: () -> Unit) : DialogFragment() {
             tripLikeBtn.changeIconTint(trip.isFavourite)
             signInBtn.setOnClickListener {
                 /// TODO: transaction fragment to next screen
-
             }
             tripLikeBtn.setOnClickListener {
                 currentTrip?.let { curTrip ->

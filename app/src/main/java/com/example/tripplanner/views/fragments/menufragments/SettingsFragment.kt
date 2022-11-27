@@ -36,7 +36,6 @@ class SettingsFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         initBinding()
-        log(" ***** ${settingsViewModel.userContainer.currentUser}")
         handleMotionLayoutTransition()
         handleSettingsClick()
         return binding.root
