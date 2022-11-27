@@ -2,7 +2,9 @@ package com.example.tripplanner
 
 import android.content.Context
 import com.example.tripplanner.constants.Constants.BASE_URL
+import com.example.tripplanner.extensions.ExternalUserData
 import com.example.tripplanner.sharedpreferences.EncryptedSharedPreferences
+import com.example.tripplanner.sharedpreferences.UserContainer
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import dagger.Module
 import dagger.Provides
@@ -53,5 +55,11 @@ object AppModule {
     @Provides
     fun provideSharedPref(@ApplicationContext appContext: Context): EncryptedSharedPreferences {
         return EncryptedSharedPreferences(appContext)
+    }
+
+    @Singleton
+    @Provides
+    fun provideKidContainer(@ApplicationContext context: Context): UserContainer {
+        return UserContainer(provideSharedPref(context))
     }
 }

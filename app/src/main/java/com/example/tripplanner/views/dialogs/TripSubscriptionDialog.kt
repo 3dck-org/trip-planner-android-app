@@ -17,18 +17,15 @@ import com.example.tripplanner.models.Resource
 import com.example.tripplanner.models.Trips
 import com.example.tripplanner.models.TripsResponseItem
 import com.example.tripplanner.viewmodels.LikesViewModel
-import com.example.tripplanner.viewmodels.SubscribeOnTripViewModel
 import com.google.android.material.button.MaterialButton
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
-import java.time.LocalDateTime
 
 @AndroidEntryPoint
 class TripSubscriptionDialog(val func: () -> Unit) : DialogFragment() {
 
     var currentTrip: Trips? = null
 
-    private val subscribeSharedViewModel: SubscribeOnTripViewModel by viewModels()
     private val likesSharedViewModel: LikesViewModel by viewModels()
 
     private lateinit var binding: DialogTripSubscriptionBinding
@@ -64,10 +61,8 @@ class TripSubscriptionDialog(val func: () -> Unit) : DialogFragment() {
             tripLengthTv.text = "Length: ${trip.distance}km"
             tripLikeBtn.changeIconTint(trip.isFavourite)
             signInBtn.setOnClickListener {
-                subscribeSharedViewModel.subscribeOnTrip(
-                    trip.id,
-                    LocalDateTime.now().toString()
-                )
+                /// TODO: transaction fragment to next screen
+
             }
             tripLikeBtn.setOnClickListener {
                 currentTrip?.let { curTrip ->

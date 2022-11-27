@@ -17,5 +17,5 @@ object Constants {
     //SHARED PREFERENCES
     const val TOKEN = "TOKEN"
     const val REFRESH_TOKEN = "REFRESH_TOKEN"
-    const val KID_CHOISE_PROFILE_UUID_KEY = "KID_CHOISE_PROFILE_UUID_KEY"
+    const val USER_ID = "USER_ID"
 }

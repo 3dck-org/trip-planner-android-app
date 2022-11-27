@@ -43,6 +43,7 @@
         <entry key="app/src/main/res/layout/fragment_settings.xml" value="0.44567219152854515" />
         <entry key="app/src/main/res/layout/fragment_start.xml" value="0.3378693864152238" />
         <entry key="app/src/main/res/layout/fragment_temporary_closed.xml" value="0.35294117647058826" />
+        <entry key="app/src/main/res/layout/fragment_trip_details.xml" value="0.20625" />
         <entry key="app/src/main/res/layout/fragment_trip_map.xml" value="0.12291666666666666" />
         <entry key="app/src/main/res/layout/fragment_trips.xml" value="0.33516998291015626" />
         <entry key="app/src/main/res/layout/fragment_user.xml" value="0.1828774062816616" />

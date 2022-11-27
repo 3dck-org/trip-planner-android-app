@@ -111,6 +111,7 @@ class RegisterFragment : Fragment() {
                         Timber.d("Success")
                         sharedPref.addPreference(Constants.TOKEN, it.data.access_token)
                         BaseRepository.addToken(it.data.access_token)
+                        registrationViewModel.getUserDetails()
                         val intent = Intent(activity, MenuActivity::class.java)
                         startActivity(intent)
                     }

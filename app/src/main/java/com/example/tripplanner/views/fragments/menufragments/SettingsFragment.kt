@@ -10,15 +10,17 @@ import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import com.example.tripplanner.R
 import com.example.tripplanner.constants.Constants
 import com.example.tripplanner.databinding.FragmentSettingsBinding
+import com.example.tripplanner.extensions.log
 import com.example.tripplanner.sharedpreferences.EncryptedSharedPreferences
+import com.example.tripplanner.viewmodels.SettingsViewModel
 import com.example.tripplanner.views.activities.SplashActivity
 import com.example.tripplanner.views.activities.UserActivity
 import com.google.android.material.button.MaterialButton
 import dagger.hilt.android.AndroidEntryPoint
-import timber.log.Timber
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -27,20 +29,24 @@ class SettingsFragment : Fragment() {
     @Inject
     lateinit var sharedPref: EncryptedSharedPreferences
     private lateinit var binding: FragmentSettingsBinding
+    private val settingsViewModel: SettingsViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         initBinding()
+        log(" ***** ${settingsViewModel.userContainer.currentUser}")
         handleMotionLayoutTransition()
         handleSettingsClick()
         return binding.root
     }
 
-    private fun handleSettingsClick(){
-        binding.logoutSetting.findViewById<MaterialButton>(R.id.setting_mb).setOnClickListener { logoutSettingClick() }
-        binding.accontDetailsSetting.findViewById<MaterialButton>(R.id.setting_mb).setOnClickListener { accountDetailsSettingClick() }
+    private fun handleSettingsClick() {
+        binding.logoutSetting.findViewById<MaterialButton>(R.id.setting_mb)
+            .setOnClickListener { logoutSettingClick() }
+        binding.accontDetailsSetting.findViewById<MaterialButton>(R.id.setting_mb)
+            .setOnClickListener { accountDetailsSettingClick() }
     }
 
     private fun handleMotionLayoutTransition() {
@@ -103,7 +109,7 @@ class SettingsFragment : Fragment() {
         startActivity(Intent(activity, SplashActivity::class.java))
     }
 
-    private fun accountDetailsSettingClick(){
+    private fun accountDetailsSettingClick() {
         startActivity(Intent(activity, UserActivity::class.java))
     }
 }

@@ -4,6 +4,7 @@ import com.example.tripplanner.TripPlannerAPI
 import com.example.tripplanner.models.LoginRequest
 import com.example.tripplanner.models.OauthResponse
 import com.example.tripplanner.models.Resource
+import com.example.tripplanner.models.UserDetails
 import com.example.tripplanner.repositories.BaseRepository
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
@@ -13,4 +14,7 @@ class LoginRepository @Inject constructor(private val api: TripPlannerAPI) :
 
     override suspend fun login(request: LoginRequest): Flow<Resource<OauthResponse>> =
         callOrError(api.login(request))
+
+    override suspend fun getUserDetails(): Flow<Resource<UserDetails>> =
+        callOrError(api.getUsersDetails(mapOfHeaders))
 }

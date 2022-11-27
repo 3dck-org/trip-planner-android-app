@@ -96,6 +96,7 @@ class LoginFragment : Fragment() {
                             addPreference(Constants.REFRESH_TOKEN, it.data.refresh_token)
                         }
                         BaseRepository.addToken(it.data.access_token)
+                        loginViewModel.getUserDetails()
                         startActivity(Intent(activity, MenuActivity::class.java))
                     }
                 }
