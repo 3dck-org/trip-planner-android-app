@@ -30,7 +30,7 @@ class UserActivity : AppCompatActivity() {
 
     private fun onAvatarClickEvent(){
         binding.avatarCv.setOnClickListener {
-            ChangeAvatarDialogFragment().show(supportFragmentManager,"TAG")
+            ChangeAvatarDialogFragment(binding.avatarIv).show(supportFragmentManager,"TAG")
         }
     }
 
@@ -48,7 +48,7 @@ class UserActivity : AppCompatActivity() {
                         binding.progressBar.makeVisible()
                     }
                     is Resource.Error -> {
-                        Timber.d(it.errorData.error.message)
+                        Timber.d("${it.errorData.error}")
                     }
                 }
             }

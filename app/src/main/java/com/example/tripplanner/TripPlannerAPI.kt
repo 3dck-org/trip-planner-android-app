@@ -34,4 +34,10 @@ interface TripPlannerAPI {
         @Path("id") tripId: Int,
         @Body trip: Trips
     ): Deferred<Response<TripsResponseItem>>
+
+    @PUT("/api/v1/update_current")
+    fun updateCurrentUser(
+        @HeaderMap mapOfHeaders: Map<String, String>,
+        @Body user: UserAvatarRequest
+    ): Deferred<Response<UserDetails>>
 }

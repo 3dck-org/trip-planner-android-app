@@ -27,7 +27,6 @@ class SplashViewModel @Inject constructor(
 
     fun getCurrentUser() = userContainer.currentUser
 
-
     fun initUserDetails() {
         viewModelScope.launch(Dispatchers.IO) {
             splashRepository.getUserDetails().collect {
