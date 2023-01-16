@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="@dimen/third_margin"
-        android:fontFamily="@font/roboto_medium"
+        android:fontFamily="@font/baloo_bold"
         android:text="@string/theme"
         android:textColor="@color/base_color_3"
         android:textSize="20sp"
@@ -25,7 +25,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="@dimen/third_margin"
-        android:fontFamily="@font/roboto_light"
+        android:fontFamily="@font/baloo_regular"
         android:text="@string/theme_setting_description"
         android:textColor="@color/base_color_3"
         android:textSize="10sp"
@@ -33,29 +33,17 @@
         app:layout_constraintBottom_toBottomOf="@id/theme_setting_tv"
         tools:ignore="SmallSp" />
 
-    <androidx.constraintlayout.motion.widget.MotionLayout
-        android:id="@+id/theme_motion_layout"
-        android:layout_width="match_parent"
+    <androidx.appcompat.widget.SwitchCompat
+        android:id="@+id/theme_switch"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/half_third_margin"
-        android:background="@drawable/trip_dialog_shape"
-        app:layoutDescription="@xml/fragment_settings_scene"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:thumb="@drawable/theme_switch_thumb"
+        app:track="@drawable/theme_switch_track"
         app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginHorizontal="@dimen/half_first_margin"
-        app:layout_constraintTop_toBottomOf="@id/theme_setting_tv">
-
-        <androidx.constraintlayout.utils.widget.ImageFilterView
-            android:id="@+id/sun_iv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_sun"
-            app:altSrc="@drawable/ic_moon"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:overlay="false"
-            tools:layout_editor_absoluteX="8dp" />
-    </androidx.constraintlayout.motion.widget.MotionLayout>
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/theme_setting_description_tv"
+        android:layout_marginTop="@dimen/fourth_margin"
+        />
 
     <View
         android:id="@+id/elevation_line_v"
@@ -65,7 +53,7 @@
         android:alpha="0.3"
         android:layout_marginTop="@dimen/third_margin"
         android:background="@drawable/custom_elevation_bottom"
-        app:layout_constraintTop_toBottomOf="@+id/theme_motion_layout"
+        app:layout_constraintTop_toBottomOf="@+id/theme_switch"
         />
 
     <com.example.tripplanner.views.custom_views.SettingsItemView

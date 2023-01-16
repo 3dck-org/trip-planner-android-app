@@ -7,7 +7,7 @@
     android:layout_height="wrap_content">
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/setting_mb"
+        android:id="@+id/option_material_button"
         style="@style/DefaultButtonStyle"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -16,7 +16,7 @@
         android:layout_marginBottom="@dimen/half_second_margin"
         android:background="@drawable/default_app_button_selector"
         android:backgroundTint="@color/white"
-        android:fontFamily="@font/roboto_regular"
+        android:fontFamily="@font/baloo_regular"
         android:textAlignment="textStart"
         android:textAllCaps="false"
         android:textColor="@color/white"

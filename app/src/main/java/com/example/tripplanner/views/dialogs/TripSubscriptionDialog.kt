@@ -24,7 +24,7 @@ import timber.log.Timber
 import java.time.LocalDateTime
 
 @AndroidEntryPoint
-class TripSubscriptionDialog(val func: () -> Unit) : DialogFragment() {
+class TripSubscriptionDialog(private val func: () -> Unit) : DialogFragment() {
 
     var currentTrip: Trips? = null
 
@@ -47,7 +47,7 @@ class TripSubscriptionDialog(val func: () -> Unit) : DialogFragment() {
         val builder = AlertDialog.Builder(context, R.style.CustomAlertDialog)
         setCorners()
         Timber.d("***1 ${currentTrip?.trip}")
-        currentTrip?.let { showTripInfo(it.trip) }
+        currentTrip?.let { bind(it.trip) }
         builder.setView(binding.root)
         return binding.root
     }
@@ -56,12 +56,12 @@ class TripSubscriptionDialog(val func: () -> Unit) : DialogFragment() {
         dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
     }
 
-    private fun showTripInfo(trip: TripsResponseItem) {
+    private fun bind(trip: TripsResponseItem) {
         with(binding) {
             tripNameTv.text = "Trip: ${trip.name}"
             tripDescriptionTv.text = "Description: ${trip.description}"
             tripDurationTv.text = "Duration: ${trip.duration} min"
-            tripLengthTv.text = "Length: ${trip.distance}km"
+            tripLengthTv.text = "Length: ${trip.distance} m"
             tripLikeBtn.changeIconTint(trip.isFavourite)
             signInBtn.setOnClickListener {
                 subscribeSharedViewModel.subscribeOnTrip(
@@ -73,7 +73,7 @@ class TripSubscriptionDialog(val func: () -> Unit) : DialogFragment() {
                 currentTrip?.let { curTrip ->
                     likesSharedViewModel.modifyFavoriteTrip(
                         curTrip.copy(
-                            curTrip.trip.copy(
+                            trip = curTrip.trip.copy(
                                 isFavourite = !curTrip.trip.isFavourite
                             )
                         )

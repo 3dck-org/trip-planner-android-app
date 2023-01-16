@@ -34,14 +34,14 @@ open class BaseRepository {
             funs.await().let { resp ->
                 resp.body().let { body ->
                     if (body != null) {
-                        emit(Resource.Success<T>(body))
+                        emit(Resource.Success(body))
                     } else {
                         if (resp.code() == 401) {
                             callOrError(funs)
                         } else {
                             resp.errorBody()?.let {
                                 emit(
-                                    Resource.Error<T>(
+                                    Resource.Error(
                                         Gson().fromJson(
                                             it.string(),
                                             ErrorData::class.java
@@ -56,7 +56,7 @@ open class BaseRepository {
             }
         } catch (e: Exception) {
             emit(
-                Resource.Error<T>(
+                Resource.Error(
                     ErrorData(
                         Error(
                             1,

@@ -6,7 +6,7 @@
     </style>
 
     <style name="TextViewTitle" parent="text_style">
-        <item name="fontFamily">@font/chesnagrotesk_medium</item>
+        <item name="fontFamily">@font/baloo_medium</item>
         <item name="android:textSize">@dimen/second_margin</item>
         <item name="android:layout_marginHorizontal">@dimen/fourth_margin</item>
         <item name="android:lineSpacingExtra">@dimen/first_margin</item>
@@ -44,13 +44,13 @@
         <item name="android:textStyle">bold</item>
         <item name="android:textColor">@color/black</item>
         <item name="android:textSize">@dimen/title_text_size</item>
-        <item name="fontFamily">@font/chesnagrotesk_medium</item>
+        <item name="fontFamily">@font/baloo_medium</item>
     </style>
 
     <style name="DefaultTextViewStyle">
         <item name="android:textSize">@dimen/default_text_size</item>
         <item name="android:textStyle">normal</item>
-        <item name="fontFamily">@font/chesnagrotesk_medium</item>
+        <item name="fontFamily">@font/baloo_medium</item>
     </style>
 
     <style name="CustomAlertDialog" parent="Theme.AppCompat.Light.Dialog.Alert">
