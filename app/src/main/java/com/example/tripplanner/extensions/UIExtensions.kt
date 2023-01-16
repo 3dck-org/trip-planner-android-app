@@ -82,3 +82,6 @@ fun ProgressBar.show() {
     this.visibility = View.VISIBLE
 }
 
+fun <T : View> T.changeState(){
+    this.visibility != this.visibility
+}
