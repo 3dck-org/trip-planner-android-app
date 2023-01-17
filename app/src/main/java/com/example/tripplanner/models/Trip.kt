@@ -1,11 +1,11 @@
 package com.example.tripplanner.models
 
-data class TripsInfo(
+data class Trip(
     val created_at: String,
     val description: String,
     val distance: String,
     val duration: Int,
-    val favorite: Boolean,
+    val favorite: String,
     val id: Int,
     val image_url: String,
     val name: String,

@@ -2,7 +2,7 @@ package com.example.tripplanner.constants
 
 object Constants {
 
-    const val MIN_PASS_LENGTH = 8
+    private const val MIN_PASS_LENGTH = 8
     const val passwordPattern = "^" +
             "(?=.*[a-z])" +
             "(?=.*[A-Z])" +
@@ -17,5 +17,5 @@ object Constants {
     //SHARED PREFERENCES
     const val TOKEN = "TOKEN"
     const val REFRESH_TOKEN = "REFRESH_TOKEN"
-    const val KID_CHOISE_PROFILE_UUID_KEY = "KID_CHOISE_PROFILE_UUID_KEY"
+    const val KID_CHOICE_PROFILE_UUID_KEY = "KID_CHOISE_PROFILE_UUID_KEY"
 }

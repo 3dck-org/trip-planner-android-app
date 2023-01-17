@@ -7,15 +7,15 @@
         android:title="" />
     <item
         android:id="@+id/mapFragment"
-        android:icon="@drawable/ic_map"
+        android:icon="@drawable/ic_menu_map"
         android:title="" />
     <item
         android:id="@+id/historyTripsFragment"
-        android:icon="@drawable/ic_trips_history"
+        android:icon="@drawable/ic_menu_current_trip"
         android:title="" />
     <item
         android:id="@+id/settingsFragment"
-        android:icon="@drawable/ic_settings"
+        android:icon="@drawable/ic_menu_settings"
         android:title="" />
 
 </menu>

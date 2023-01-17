@@ -36,7 +36,6 @@
     </style>
 
     <style name="MenuTheme">
-        <item name="elevation">@dimen/first_margin</item>
         <item name="background">@drawable/bottom_navigation_shape</item>
     </style>
 

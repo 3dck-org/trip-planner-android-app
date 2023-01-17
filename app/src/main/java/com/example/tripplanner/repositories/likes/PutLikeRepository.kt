@@ -15,5 +15,5 @@ class PutLikeRepository @Inject constructor(private val api: TripPlannerAPI) :
         tripId: Int,
         trip: Trips
     ): Flow<Resource<TripsResponseItem>> =
-        callOrError(api.modifyTripToFavourites(mapOfHeaders, trip.trip.id, trip))
+        callOrError(api.modifyTripToFavouritesAsync(mapOfHeaders, trip.trip.id, trip))
 }

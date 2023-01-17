@@ -12,11 +12,11 @@ class UserContainer(val sharedPref: EncryptedSharedPreferences) {
             ?: throw UninitializedPropertyAccessException("\"currKid\" was queried before being initialized")
         set(value) {
             _currentUser = value;
-            sharedPref.addPreference(Constants.KID_CHOISE_PROFILE_UUID_KEY, value.login)
+            sharedPref.addPreference(Constants.KID_CHOICE_PROFILE_UUID_KEY, value.login)
         }
 
 
     fun isInit() =
-        ((sharedPref.sharedPreferences.getString(Constants.KID_CHOISE_PROFILE_UUID_KEY, "")
+        ((sharedPref.sharedPreferences.getString(Constants.KID_CHOICE_PROFILE_UUID_KEY, "")
             ?: "").isNotEmpty() && _currentUser != null)
 }

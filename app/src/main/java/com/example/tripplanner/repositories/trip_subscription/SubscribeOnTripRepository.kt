@@ -13,5 +13,5 @@ class SubscribeOnTripRepository @Inject constructor(private val api: TripPlanner
 
     override suspend fun subscribeOnTrip(subscribeOnTripRequest: SubscribeOnTripRequest)
             : Flow<Resource<SubscribeOnTripResponse>> =
-        callOrError(api.subscribeOnTrip(mapOfHeaders, subscribeOnTripRequest))
+        callOrError(api.subscribeOnTripAsync(mapOfHeaders, subscribeOnTripRequest))
 }

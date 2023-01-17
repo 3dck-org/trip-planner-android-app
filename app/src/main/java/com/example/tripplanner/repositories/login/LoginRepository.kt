@@ -12,5 +12,5 @@ class LoginRepository @Inject constructor(private val api: TripPlannerAPI) :
     ILoginRepository, BaseRepository() {
 
     override suspend fun login(request: LoginRequest): Flow<Resource<OauthResponse>> =
-        callOrError(api.login(request))
+        callOrError(api.loginAsync(request))
 }

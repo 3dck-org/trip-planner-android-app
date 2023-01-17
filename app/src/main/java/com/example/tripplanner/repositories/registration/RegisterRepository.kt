@@ -12,5 +12,5 @@ class RegisterRepository @Inject constructor(private val api: TripPlannerAPI) :
     IRegistrationRepository, BaseRepository() {
 
     override suspend fun register(request: RegistrationRequest): Flow<Resource<OauthResponse>> =
-        callOrError(api.register(request))
+        callOrError(api.registerAsync(request))
 }

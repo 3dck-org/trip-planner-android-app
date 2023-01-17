@@ -28,7 +28,7 @@ class MenuActivity : AppCompatActivity() {
 
     private fun setupNavigationBottomBar(){
         val navigationController = findNavController(R.id.fragment)
+        binding.bottomNavigation.itemIconTintList = null
         binding.bottomNavigation.setupWithNavController(navigationController)
     }
-
 }
