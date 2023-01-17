@@ -20,4 +20,7 @@
     <string name="change_password_btn">Change password</string>
     <string name="login_description_tv">Please, enter your email and password to login:</string>
     <string name="dialog_text_btn">Start the journey</string>
+    <string name="empty_current_trip_description">Please, choose one from the list\nto start unbelievable journey</string>
+    <string name="empty_current_trip_title">Currently you don\'t have active trip</string>
+    <string name="current_trip_title">Trip details</string>
 </resources>
