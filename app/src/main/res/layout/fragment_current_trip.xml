@@ -8,4 +8,10 @@
     <include
         android:id="@+id/empty_layout"
         layout="@layout/current_trip_empty" />
+
+    <include
+        android:id="@+id/success_layout"
+        layout="@layout/current_trip_success"
+        android:visibility="gone"
+        />
 </FrameLayout>

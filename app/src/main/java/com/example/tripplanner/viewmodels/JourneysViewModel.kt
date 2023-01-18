@@ -5,7 +5,6 @@ import androidx.lifecycle.viewModelScope
 import com.example.tripplanner.models.JourneysResponse
 import com.example.tripplanner.models.Resource
 import com.example.tripplanner.repositories.journeys.JourneysRepository
-import com.example.tripplanner.repositories.trips_info.TripsRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -14,7 +13,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class JourneysViewModel @Inject constructor(val repository: JourneysRepository, val tripsRepository: TripsRepository) : ViewModel() {
+class JourneysViewModel @Inject constructor(val repository: JourneysRepository) : ViewModel() {
 
     private val _response =
         MutableStateFlow<Resource<JourneysResponse>>(Resource.Progress())

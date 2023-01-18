@@ -10,6 +10,7 @@ import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.request.RequestOptions
 import com.example.tripplanner.R
 import com.example.tripplanner.databinding.OfferedTripItemBinding
+import com.example.tripplanner.extensions.makeVisible
 import com.example.tripplanner.models.Trips
 import com.example.tripplanner.models.TripsResponseItem
 import timber.log.Timber
@@ -73,11 +74,14 @@ class TripsAdapter(
             activeTripId: Int,
             select: (trip: TripsResponseItem) -> Unit
         ) {
-            binding.tripTitleTv.text = trip.name
-            binding.tripDurationTv.text = "Duration: ${trip.duration} mins"
-            binding.tripLengthTv.text = "Length: ${trip.distance}km"
-            binding.tripCategoryTv.text = "Category: ${trip.description}"
+
             with(binding) {
+                if(trip.isFavourite)
+                    likeIv.makeVisible()
+                tripTitleTv.text = trip.name
+                tripDurationTv.text = "Duration: ${trip.duration} mins"
+                tripLengthTv.text = "Length: ${trip.distance}km"
+                tripCategoryTv.text = "Category: ${trip.description}"
                 if (trip.id != activeTripId) {
                     tripItemCv.strokeWidth = 0
                     changeItemTripBtn(true)

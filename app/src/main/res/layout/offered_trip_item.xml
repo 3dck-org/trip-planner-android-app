@@ -97,19 +97,32 @@
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/trip_btn"
+                style="@style/DefaultButtonStyle"
                 android:layout_width="48dp"
                 android:layout_height="48dp"
-                style="@style/DefaultButtonStyle"
                 android:layout_marginEnd="@dimen/half_second_margin"
                 android:background="@drawable/trip_item_btn_shape"
                 android:enabled="true"
                 app:icon="@drawable/ic_right_arrow"
-                app:iconPadding="0dp"
                 app:iconGravity="textTop"
+                app:iconPadding="0dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
+
+            <ImageView
+                android:id="@+id/like_iv"
+                android:layout_width="32dp"
+                android:layout_height="0dp"
+                android:layout_marginStart="24dp"
+                android:scaleY="1.15"
+                android:src="@drawable/ic_liked"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="@id/trip_title_tv"
+                app:layout_constraintStart_toEndOf="@id/trip_title_tv"
+                app:layout_constraintTop_toTopOf="@id/trip_title_tv"
+                tools:visibility="visible" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </com.google.android.material.card.MaterialCardView>
 </androidx.constraintlayout.widget.ConstraintLayout>
