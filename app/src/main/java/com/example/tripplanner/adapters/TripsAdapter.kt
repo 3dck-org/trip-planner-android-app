@@ -10,6 +10,7 @@ import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.request.RequestOptions
 import com.example.tripplanner.R
 import com.example.tripplanner.databinding.OfferedTripItemBinding
+import com.example.tripplanner.extensions.makeGone
 import com.example.tripplanner.extensions.makeVisible
 import com.example.tripplanner.models.Trips
 import com.example.tripplanner.models.TripsResponseItem
@@ -41,7 +42,8 @@ class TripsAdapter(
         provideDataBinding(holder.binding.root)
         holder.init(listOfTrips[position], activeTripId) {
             val trip = Trips(
-                TripsResponseItem(created_at = it.created_at,
+                TripsResponseItem(
+                    created_at = it.created_at,
                     it.description,
                     it.distance,
                     it.isFavourite,
@@ -50,7 +52,8 @@ class TripsAdapter(
                     it.id,
                     it.name,
                     it.updated_at,
-                    it.user_id)
+                    it.user_id
+                )
             )
             Timber.d("***2 $trip")
             showSubscriptionOption.invoke(trip)
@@ -60,7 +63,8 @@ class TripsAdapter(
 
     fun addDataToAdapter(list: MutableList<TripsResponseItem>, activeTripId: Int = -1) {
         this.listOfTrips.clear()
-        this.listOfTrips.addAll(list.sortedByDescending { trip -> trip.isFavourite }.sortedByDescending { trip -> trip.id == activeTripId })
+        this.listOfTrips.addAll(list.sortedByDescending { trip -> trip.isFavourite }
+            .sortedByDescending { trip -> trip.id == activeTripId })
         this.activeTripId = -1
         this.activeTripId = activeTripId
         notifyDataSetChanged()
@@ -76,8 +80,7 @@ class TripsAdapter(
         ) {
 
             with(binding) {
-                if(trip.isFavourite)
-                    likeIv.makeVisible()
+                bindLikedTrips(trip)
                 tripTitleTv.text = trip.name
                 tripDurationTv.text = "Duration: ${trip.duration} mins"
                 tripLengthTv.text = "Length: ${trip.distance}km"
@@ -94,6 +97,13 @@ class TripsAdapter(
                 }
             }
             getImageFromURL(trip.image_url)
+        }
+
+        private fun OfferedTripItemBinding.bindLikedTrips(trip: TripsResponseItem) {
+            if (trip.isFavourite)
+                likeIv.makeVisible()
+            else
+                likeIv.makeGone()
         }
 
         private fun changeItemTripBtn(isSelectedBtn: Boolean = false) {

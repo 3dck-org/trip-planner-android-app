@@ -87,15 +87,14 @@ class RegisterFragment : Fragment() {
                 registerOnClick()
         }
 
-    private fun registerOnClick(): Unit = binding.confirmButton.setOnClickListener {
-        registrationViewModel.register(
-            email = binding.emailEditText.text.toString(),
-            password = binding.passwordEditText.text.toString(),
-            name = binding.nameEditText.text.toString(),
-            surname = binding.surnnameEditText.text.toString(),
-            login = binding.loginEditText.text.toString()
-        )
-    }
+    private fun registerOnClick(): Unit = registrationViewModel.register(
+        email = binding.emailEditText.text.toString(),
+        password = binding.passwordEditText.text.toString(),
+        name = binding.nameEditText.text.toString(),
+        surname = binding.surnnameEditText.text.toString(),
+        login = binding.loginEditText.text.toString()
+    )
+
 
     private fun listenForOauth() {
         lifecycleScope.launchWhenResumed {
