@@ -17,7 +17,7 @@ import com.example.tripplanner.models.Resource
 import com.example.tripplanner.models.Trips
 import com.example.tripplanner.models.TripsResponseItem
 import com.example.tripplanner.viewmodels.LikesViewModel
-import com.example.tripplanner.viewmodels.SubscribeOnTripViewModel
+import com.example.tripplanner.viewmodels.TripsViewModel
 import com.google.android.material.button.MaterialButton
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
@@ -28,7 +28,7 @@ class TripSubscriptionDialog(private val func: () -> Unit) : DialogFragment() {
 
     var currentTrip: Trips? = null
 
-    private val subscribeSharedViewModel: SubscribeOnTripViewModel by viewModels()
+    private val tripViewModel: TripsViewModel by viewModels()
     private val likesSharedViewModel: LikesViewModel by viewModels()
 
     private lateinit var binding: DialogTripSubscriptionBinding
@@ -64,7 +64,7 @@ class TripSubscriptionDialog(private val func: () -> Unit) : DialogFragment() {
             tripLengthTv.text = "Length: ${trip.distance} m"
             tripLikeBtn.changeIconTint(trip.isFavourite)
             signInBtn.setOnClickListener {
-                subscribeSharedViewModel.subscribeOnTrip(
+                tripViewModel.subscribeOnTrip(
                     trip.id,
                     LocalDateTime.now().toString()
                 )
@@ -91,7 +91,7 @@ class TripSubscriptionDialog(private val func: () -> Unit) : DialogFragment() {
                         Timber.d("Error: ${it.errorData}")
                     }
                     is Resource.Progress -> {
-                        Timber.d("Progress: ${it.data}")
+                        Timber.d("Progress")
                     }
                     is Resource.Success -> {
                         Timber.d("Success subs: ${it.data}")

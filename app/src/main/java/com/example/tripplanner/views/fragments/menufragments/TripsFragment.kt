@@ -15,13 +15,11 @@ import com.example.tripplanner.extensions.hide
 import com.example.tripplanner.extensions.show
 import com.example.tripplanner.models.Resource
 import com.example.tripplanner.models.Trips
-import com.example.tripplanner.models.TripsResponseItem
-import com.example.tripplanner.viewmodels.JourneysViewModel
-import com.example.tripplanner.viewmodels.OfferedTripsViewModel
-import com.example.tripplanner.viewmodels.SubscribeOnTripViewModel
+import com.example.tripplanner.viewmodels.TripsViewModel
 import com.example.tripplanner.views.dialogs.TripSubscriptionDialog
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 import timber.log.Timber
 
 @AndroidEntryPoint
@@ -29,10 +27,8 @@ class TripsFragment : Fragment() {
 
     private lateinit var binding: FragmentTripsBinding
     private var offeredTripsAdapter: TripsAdapter? = null
-    private val tripsViewModel: OfferedTripsViewModel by viewModels()
-    private val journeysViewModel: JourneysViewModel by viewModels()
+    private val tripsViewModel: TripsViewModel by viewModels()
     private var activeJourneyId: Int = -1
-    private val subscriptionViewModel: SubscribeOnTripViewModel by viewModels()
 
     private fun refreshOnDragUp() {
         binding.swipeContainer.setOnRefreshListener {
@@ -56,12 +52,12 @@ class TripsFragment : Fragment() {
 
     private fun getTrips() = tripsViewModel.getTrips()
 
-    private fun getJourneys() = journeysViewModel.getJourneys()
+    private fun getJourneys() = tripsViewModel.getJourneys()
 
     private fun collectForTrips() {
         lifecycleScope.launchWhenResumed {
             tripsViewModel.response.collect {
-                with(Dispatchers.Main) {
+                withContext(Dispatchers.Main) {
                     binding.swipeContainer.isRefreshing = false
                 }
                 when (it) {
@@ -83,7 +79,7 @@ class TripsFragment : Fragment() {
 
     private fun collectForJourneys() {
         lifecycleScope.launchWhenResumed {
-            journeysViewModel.response.collect {
+            tripsViewModel.responseJourney.collect {
                 when (it) {
                     is Resource.Error -> {
                         Timber.d("Error: ${it.errorData}")
@@ -115,7 +111,7 @@ class TripsFragment : Fragment() {
 
     private fun collectSubscriptionResponse() {
         lifecycleScope.launchWhenResumed {
-            subscriptionViewModel.response.collect {
+            tripsViewModel.responseSubscribeOnTrip.collect {
                 when (it) {
                     is Resource.Error -> {
                         Timber.d("Error: ${it.errorData}")
