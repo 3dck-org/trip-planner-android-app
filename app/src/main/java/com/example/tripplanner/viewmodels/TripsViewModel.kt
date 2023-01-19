@@ -13,7 +13,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class TripsViewModel @Inject constructor(
-    val tripsRepository: TripsRepository
+    private val tripsRepository: TripsRepository
 ) : ViewModel() {
 
     private val _responseTrips =
@@ -44,7 +44,9 @@ class TripsViewModel @Inject constructor(
                     trip_id = tripId,
                     start_at = start_at
                 )
-            ).collect { _responseSubscribeOnTrip.emit(it) }
+            ).collect {
+                _responseSubscribeOnTrip.emit(it)
+            }
         }
     }
 

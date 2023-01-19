@@ -36,6 +36,7 @@ class TripSubscriptionDialog(private val func: () -> Unit) : DialogFragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         initViewBinding()
+        collectLikeResponse()
         collectSubscriptionResponse()
     }
 
@@ -83,7 +84,7 @@ class TripSubscriptionDialog(private val func: () -> Unit) : DialogFragment() {
         }
     }
 
-    private fun collectSubscriptionResponse() {
+    private fun collectLikeResponse() {
         lifecycleScope.launchWhenStarted {
             likesSharedViewModel.responseFavourite.collect {
                 when (it) {
@@ -97,6 +98,25 @@ class TripSubscriptionDialog(private val func: () -> Unit) : DialogFragment() {
                         Timber.d("Success subs: ${it.data}")
                         currentTrip = Trips(it.data)
                         currentTrip?.let { it1 -> binding.tripLikeBtn.changeIconTint(it1.trip.isFavourite) }
+                        func.invoke()
+                    }
+                }
+            }
+        }
+    }
+
+    private fun collectSubscriptionResponse() {
+        lifecycleScope.launchWhenResumed {
+            tripViewModel.responseSubscribeOnTrip.collect {
+                when (it) {
+                    is Resource.Error -> {
+                        Timber.d("Error: ${it.errorData}")
+                    }
+                    is Resource.Progress -> {
+                        Timber.d("Progress: ${it.data}")
+                    }
+                    is Resource.Success -> {
+                        Timber.d("Success: ${it.data}")
                         func.invoke()
                     }
                 }

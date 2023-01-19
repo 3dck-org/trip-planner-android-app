@@ -42,7 +42,6 @@ class TripsFragment : Fragment() {
     ): View {
         initViewBinding()
         initRecyclerView()
-        collectSubscriptionResponse()
         collectForTrips()
         collectForJourneys()
         getJourneys()
@@ -108,26 +107,6 @@ class TripsFragment : Fragment() {
     private fun initViewBinding() {
         binding = FragmentTripsBinding.inflate(layoutInflater)
     }
-
-    private fun collectSubscriptionResponse() {
-        lifecycleScope.launchWhenResumed {
-            tripsViewModel.responseSubscribeOnTrip.collect {
-                when (it) {
-                    is Resource.Error -> {
-                        Timber.d("Error: ${it.errorData}")
-                    }
-                    is Resource.Progress -> {
-                        Timber.d("Progress: ${it.data}")
-                    }
-                    is Resource.Success -> {
-                        Timber.d("Success: ${it.data}")
-                        getJourneys()
-                    }
-                }
-            }
-        }
-    }
-
 
     private fun showSubscriptionOption(trip: Trips) {
         TripSubscriptionDialog(::getJourneys).setTrip(trip).show(childFragmentManager, "TAG")

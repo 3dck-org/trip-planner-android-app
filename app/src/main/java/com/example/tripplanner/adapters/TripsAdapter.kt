@@ -78,7 +78,6 @@ class TripsAdapter(
             activeTripId: Int,
             select: (trip: TripsResponseItem) -> Unit
         ) {
-
             with(binding) {
                 bindLikedTrips(trip)
                 tripTitleTv.text = trip.name
@@ -90,6 +89,8 @@ class TripsAdapter(
                     changeItemTripBtn(true)
                     selectTripsOnClick(trip, select)
                 } else {
+                    tripItemCv.setOnClickListener {}
+                    tripBtn.setOnClickListener {}
                     tripItemCv.strokeWidth = 2
                     changeItemTripBtn()
                     tripItemCv.strokeColor =
