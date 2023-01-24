@@ -15,12 +15,14 @@ import com.example.tripplanner.extensions.hide
 import com.example.tripplanner.extensions.show
 import com.example.tripplanner.models.Resource
 import com.example.tripplanner.models.Trips
+import com.example.tripplanner.sharedpreferences.EncryptedSharedPreferences
 import com.example.tripplanner.viewmodels.TripsViewModel
 import com.example.tripplanner.views.dialogs.TripSubscriptionDialog
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import timber.log.Timber
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class TripsFragment : Fragment() {
@@ -29,6 +31,8 @@ class TripsFragment : Fragment() {
     private var offeredTripsAdapter: TripsAdapter? = null
     private val tripsViewModel: TripsViewModel by viewModels()
     private var activeJourneyId: Int = -1
+    @Inject
+    lateinit var sharedPref: EncryptedSharedPreferences
 
     private fun refreshOnDragUp() {
         binding.swipeContainer.setOnRefreshListener {

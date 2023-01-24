@@ -3,6 +3,7 @@ package com.example.tripplanner.extensions
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.ImageView
 import android.widget.ProgressBar
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.util.PatternsCompat
@@ -82,10 +83,6 @@ fun ProgressBar.hide() {
 
 fun ProgressBar.show() {
     this.visibility = View.VISIBLE
-}
-
-fun <T : ViewGroup> T.changeState() {
-    this.visibility != this.visibility
 }
 
 fun <T : ViewGroup> T.show() {

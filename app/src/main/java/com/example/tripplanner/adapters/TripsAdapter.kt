@@ -9,7 +9,7 @@ import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.request.RequestOptions
 import com.example.tripplanner.R
-import com.example.tripplanner.databinding.OfferedTripItemBinding
+import com.example.tripplanner.databinding.ItemTripBinding
 import com.example.tripplanner.extensions.makeGone
 import com.example.tripplanner.extensions.makeVisible
 import com.example.tripplanner.models.Trips
@@ -20,7 +20,7 @@ class TripsAdapter(
     private val showSubscriptionOption: (trip: Trips) -> Unit
 ) : RecyclerView.Adapter<TripsAdapter.TripsViewHolder>() {
 
-    private lateinit var binding: OfferedTripItemBinding
+    private lateinit var binding: ItemTripBinding
     private val listOfTrips: MutableList<TripsResponseItem> = mutableListOf()
     private var activeTripId: Int = -1
 
@@ -30,7 +30,7 @@ class TripsAdapter(
     }
 
     private fun provideDataBinding(parent: ViewGroup) {
-        binding = OfferedTripItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        binding = ItemTripBinding.inflate(LayoutInflater.from(parent.context), parent, false)
     }
 
     override fun getItemCount(): Int = listOfTrips.size
@@ -70,7 +70,7 @@ class TripsAdapter(
         notifyDataSetChanged()
     }
 
-    inner class TripsViewHolder(val binding: OfferedTripItemBinding) :
+    inner class TripsViewHolder(val binding: ItemTripBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
         fun init(
@@ -90,7 +90,7 @@ class TripsAdapter(
                     selectTripsOnClick(trip, select)
                 } else {
                     tripItemCv.setOnClickListener {}
-                    tripBtn.setOnClickListener {}
+                    btnTrip.setOnClickListener {}
                     tripItemCv.strokeWidth = 2
                     changeItemTripBtn()
                     tripItemCv.strokeColor =
@@ -100,7 +100,7 @@ class TripsAdapter(
             getImageFromURL(trip.image_url)
         }
 
-        private fun OfferedTripItemBinding.bindLikedTrips(trip: TripsResponseItem) {
+        private fun ItemTripBinding.bindLikedTrips(trip: TripsResponseItem) {
             if (trip.isFavourite)
                 likeIv.makeVisible()
             else
@@ -109,16 +109,16 @@ class TripsAdapter(
 
         private fun changeItemTripBtn(isSelectedBtn: Boolean = false) {
             if (isSelectedBtn)
-                binding.tripBtn.setIconResource(R.drawable.ic_right_arrow)
+                binding.btnTrip.setIconResource(R.drawable.ic_right_arrow)
             else
-                binding.tripBtn.setIconResource(R.drawable.ic_check)
+                binding.btnTrip.setIconResource(R.drawable.ic_check)
         }
 
         private fun selectTripsOnClick(
             trip: TripsResponseItem,
             select: (trip: TripsResponseItem) -> Unit
         ) {
-            binding.tripBtn.setOnClickListener {
+            binding.btnTrip.setOnClickListener {
                 select.invoke(trip)
             }
             binding.tripItemCv.setOnClickListener {

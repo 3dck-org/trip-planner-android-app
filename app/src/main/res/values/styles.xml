@@ -36,7 +36,7 @@
     </style>
 
     <style name="MenuTheme">
-        <item name="background">@drawable/bottom_navigation_shape</item>
+        <item name="background">@drawable/bg_bottom_navigation</item>
     </style>
 
     <style name="TitleTextViewStyle">

@@ -7,28 +7,39 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.example.tripplanner.adapters.PlaceAdapter
+import com.example.tripplanner.adapters.TripsAdapter
+import com.example.tripplanner.constants.Constants
 import com.example.tripplanner.databinding.FragmentCurrentTripBinding
 import com.example.tripplanner.extensions.hide
 import com.example.tripplanner.extensions.show
 import com.example.tripplanner.models.CurrentJourneyResponse
 import com.example.tripplanner.models.Resource
+import com.example.tripplanner.utils.GlideLoader
 import com.example.tripplanner.viewmodels.CurrentJourneyViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import timber.log.Timber
+import java.time.LocalDate
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 
 @AndroidEntryPoint
 class CurrentTripFragment : Fragment() {
 
     private lateinit var binding: FragmentCurrentTripBinding
     private val viewModel: CurrentJourneyViewModel by viewModels()
+    private var adapter: PlaceAdapter? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         initBinding()
+        initRecyclerView()
         collectCurrentJourney()
         getCurrentJourney()
         return binding.root
@@ -47,6 +58,9 @@ class CurrentTripFragment : Fragment() {
                     is Resource.Success -> {
                         Timber.d("***Success: ${it.data}")
                         setLayout(it.data)
+                        adapter?.apply {
+                            addData(it.data.trip.trip_place_infos)
+                        }
                     }
                     is Resource.Progress -> {
                         Timber.d("***Progress")
@@ -63,22 +77,47 @@ class CurrentTripFragment : Fragment() {
 
     private fun setLayout(journey: CurrentJourneyResponse?) {
         if (isCurrentJourneyEmpty(journey)) {
-            binding.emptyLayout.root.show()
-            binding.successLayout.root.hide()
+            binding.layoutEmpty.root.show()
+            binding.layoutSuccess.root.hide()
         } else {
-            binding.emptyLayout.root.hide()
-            binding.successLayout.root.show()
+            binding.layoutEmpty.root.hide()
+            binding.layoutSuccess.root.show()
             journey?.let { bindData(it) }
         }
     }
 
     private fun bindData(journey: CurrentJourneyResponse) {
-        with(binding.successLayout) {
-            tripNameTv.text = journey.trip.name
-            tripUserNameTv.text = "(by ${journey.user.name})"
-            tripDurationTv.text = "Duration: ${journey.trip.duration.toString()}"
-            tripLengthTv.text = "Length: ${journey.trip.distance}"
-            tripCategoryTv.text = "Category: ${journey.trip.description}"
+        with(binding.layoutSuccess) {
+            titleTripTv.text = journey.trip.name
+            durationTv.text = calculateTime(journey.trip.duration)
+            distanceTv.text = "${journey.trip.distance}km"
+            descriptionTripTv.text = journey.trip.description
+            userNameTv.text = "${journey.user.name} ${journey.user.surname}"
+            createdAtTv.text = journey.trip.created_at.formatDate().toString()
+        }
+        context?.let {
+            GlideLoader.loadImage(it, binding.layoutSuccess.tripIv, journey.trip.image_url)
+        }
+    }
+
+    private fun initRecyclerView() {
+        adapter = PlaceAdapter()
+        val llm = LinearLayoutManager(activity?.baseContext)
+        llm.orientation = RecyclerView.VERTICAL
+        binding.layoutSuccess.recyclerView.adapter = adapter
+        binding.layoutSuccess.recyclerView.layoutManager = llm
+    }
+
+    private fun String.formatDate() = this.split("T")[0]
+
+    private fun calculateTime(minTime: Int): String {
+        return if (minTime >= 60) {
+            if ((minTime % 60) != 0)
+                "${minTime / 60}h ${minTime % 60}m"
+            else
+                "${minTime / 60}h "
+        } else {
+            "${minTime % 60}m"
         }
     }
 }

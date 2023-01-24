@@ -96,12 +96,12 @@
                 tools:text="My first trip" />
 
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/trip_btn"
+                android:id="@+id/btn_trip"
                 style="@style/DefaultButtonStyle"
                 android:layout_width="48dp"
                 android:layout_height="48dp"
                 android:layout_marginEnd="@dimen/half_second_margin"
-                android:background="@drawable/trip_item_btn_shape"
+                android:background="@drawable/bg_trip_item_btn"
                 android:enabled="true"
                 app:icon="@drawable/ic_right_arrow"
                 app:iconGravity="textTop"
