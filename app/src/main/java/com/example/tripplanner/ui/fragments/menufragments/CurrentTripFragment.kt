@@ -1,4 +1,4 @@
-package com.example.tripplanner.views.fragments.menufragments
+package com.example.tripplanner.ui.fragments.menufragments
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -10,8 +10,6 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.tripplanner.adapters.PlaceAdapter
-import com.example.tripplanner.adapters.TripsAdapter
-import com.example.tripplanner.constants.Constants
 import com.example.tripplanner.databinding.FragmentCurrentTripBinding
 import com.example.tripplanner.extensions.hide
 import com.example.tripplanner.extensions.show
@@ -23,9 +21,6 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import timber.log.Timber
-import java.time.LocalDate
-import java.time.LocalDateTime
-import java.time.format.DateTimeFormatter
 
 @AndroidEntryPoint
 class CurrentTripFragment : Fragment() {
@@ -58,15 +53,21 @@ class CurrentTripFragment : Fragment() {
                     is Resource.Success -> {
                         Timber.d("***Success: ${it.data}")
                         setLayout(it.data)
+                        binding.progressBar.hide()
                         adapter?.apply {
                             addData(it.data.trip.trip_place_infos)
                         }
                     }
                     is Resource.Progress -> {
+                        binding.progressBar.show()
                         Timber.d("***Progress")
                     }
                     is Resource.Error -> {
                         Timber.d("***Error: ${it.errorData}")
+                    }
+                    is Resource.Empty -> {
+                        setLayout(null)
+                        binding.progressBar.hide()
                     }
                 }
             }
@@ -93,7 +94,7 @@ class CurrentTripFragment : Fragment() {
             distanceTv.text = "${journey.trip.distance}km"
             descriptionTripTv.text = journey.trip.description
             userNameTv.text = "${journey.user.name} ${journey.user.surname}"
-            createdAtTv.text = journey.trip.created_at.formatDate().toString()
+            createdAtTv.text = journey.trip.created_at.formatDate()
         }
         context?.let {
             GlideLoader.loadImage(it, binding.layoutSuccess.tripIv, journey.trip.image_url)

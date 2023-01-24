@@ -17,7 +17,7 @@
         android:theme="@style/Theme.TripPlanner"
         tools:targetApi="31">
         <activity
-            android:name=".views.activities.UserActivity"
+            android:name=".ui.activities.UserActivity"
             android:exported="false" />
 
         <meta-data
@@ -25,14 +25,14 @@
             android:value="AIzaSyBailrLvT_qzcaBKKwHfbY8O9KRm6f85aw" />
 
         <activity
-            android:name=".views.activities.MenuActivity"
+            android:name=".ui.activities.MenuActivity"
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".views.activities.StartActivity"
+            android:name=".ui.activities.StartActivity"
             android:exported="false" />
         <activity
-            android:name=".views.activities.SplashActivity"
+            android:name=".ui.activities.SplashActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

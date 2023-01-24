@@ -1,4 +1,4 @@
-package com.example.tripplanner.views.fragments.menufragments
+package com.example.tripplanner.ui.fragments.menufragments
 
 import android.content.Intent
 import android.os.Bundle
@@ -9,8 +9,8 @@ import androidx.fragment.app.Fragment
 import com.example.tripplanner.constants.Constants
 import com.example.tripplanner.databinding.FragmentSettingsBinding
 import com.example.tripplanner.sharedpreferences.EncryptedSharedPreferences
-import com.example.tripplanner.views.activities.SplashActivity
-import com.example.tripplanner.views.activities.UserActivity
+import com.example.tripplanner.ui.activities.SplashActivity
+import com.example.tripplanner.ui.activities.UserActivity
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 

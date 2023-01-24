@@ -1,4 +1,4 @@
-package com.example.tripplanner.views.custom_views
+package com.example.tripplanner.ui.custom_views
 
 import android.content.Context
 import android.util.AttributeSet

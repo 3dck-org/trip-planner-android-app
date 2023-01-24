@@ -7,22 +7,22 @@
 
     <fragment
         android:id="@+id/tripsFragment"
-        android:name="com.example.tripplanner.views.fragments.menufragments.TripsFragment"
+        android:name="com.example.tripplanner.ui.fragments.menufragments.TripsFragment"
         android:label="fragment_trips"
         tools:layout="@layout/fragment_trips" />
     <fragment
         android:id="@+id/historyTripsFragment"
-        android:name="com.example.tripplanner.views.fragments.menufragments.CurrentTripFragment"
+        android:name="com.example.tripplanner.ui.fragments.menufragments.CurrentTripFragment"
         android:label="fragment_history_trips"
         tools:layout="@layout/fragment_current_trip" />
     <fragment
         android:id="@+id/mapFragment"
-        android:name="com.example.tripplanner.views.fragments.menufragments.TripMapFragment"
+        android:name="com.example.tripplanner.ui.fragments.menufragments.TripMapFragment"
         android:label="fragment_map"
         tools:layout="@layout/fragment_map" />
     <fragment
         android:id="@+id/settingsFragment"
-        android:name="com.example.tripplanner.views.fragments.menufragments.SettingsFragment"
+        android:name="com.example.tripplanner.ui.fragments.menufragments.SettingsFragment"
         android:label="fragment_settings"
         tools:layout="@layout/fragment_settings" />
 </navigation>

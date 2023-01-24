@@ -1,4 +1,4 @@
-package com.example.tripplanner.views.fragments
+package com.example.tripplanner.ui.fragments
 
 import android.os.Bundle
 import android.view.LayoutInflater

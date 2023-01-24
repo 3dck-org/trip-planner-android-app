@@ -3,9 +3,7 @@ package com.example.tripplanner.extensions
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import android.widget.ImageView
 import android.widget.ProgressBar
-import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.util.PatternsCompat
 import com.example.tripplanner.constants.Constants.passwordPattern
 import com.google.android.material.textfield.TextInputLayout

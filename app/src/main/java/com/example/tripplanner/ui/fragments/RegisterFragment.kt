@@ -1,4 +1,4 @@
-package com.example.tripplanner.views.fragments
+package com.example.tripplanner.ui.fragments
 
 import android.content.Intent
 import android.os.Bundle
@@ -18,7 +18,7 @@ import com.example.tripplanner.models.Resource
 import com.example.tripplanner.repositories.BaseRepository
 import com.example.tripplanner.sharedpreferences.EncryptedSharedPreferences
 import com.example.tripplanner.viewmodels.RegistrationViewModel
-import com.example.tripplanner.views.activities.MenuActivity
+import com.example.tripplanner.ui.activities.MenuActivity
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
 import javax.inject.Inject

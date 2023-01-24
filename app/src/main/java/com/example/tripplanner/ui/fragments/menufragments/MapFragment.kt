@@ -1,4 +1,4 @@
-package com.example.tripplanner.views.fragments.menufragments
+package com.example.tripplanner.ui.fragments.menufragments
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

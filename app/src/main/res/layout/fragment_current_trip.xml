@@ -3,15 +3,23 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".views.fragments.menufragments.CurrentTripFragment">
+    tools:context=".ui.fragments.menufragments.CurrentTripFragment">
 
     <include
         android:id="@+id/layout_empty"
-        layout="@layout/layout_current_trip_empty" />
+        layout="@layout/layout_current_trip_empty"
+        android:visibility="gone"/>
 
     <include
         android:id="@+id/layout_success"
         layout="@layout/layout_current_trip_success"
         android:visibility="gone"
         />
+
+    <ProgressBar
+        android:id="@+id/progress_bar"
+        android:layout_width="@dimen/sixth_margin"
+        android:layout_height="@dimen/sixth_margin"
+        android:layout_gravity="center"
+        android:theme="@style/ProgressBarTheme" />
 </FrameLayout>

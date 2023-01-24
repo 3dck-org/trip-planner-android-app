@@ -36,6 +36,9 @@ open class BaseRepository {
                     if (body != null) {
                         emit(Resource.Success(body))
                     } else {
+                        if(resp.code() == 200){
+                            emit(Resource.Empty())
+                        }
                         if (resp.code() == 401) {
                             callOrError(funs)
                         } else {

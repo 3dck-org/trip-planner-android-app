@@ -139,7 +139,7 @@
             app:layout_constraintEnd_toEndOf="@id/duration_iv"
             app:layout_constraintStart_toStartOf="@id/duration_iv"
             app:layout_constraintTop_toBottomOf="@id/duration_iv"
-            tools:text=" 1 h 34m" />
+            tools:text="1 h 34m" />
 
         <TextView
             android:id="@+id/description_trip_tv"
@@ -180,9 +180,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/line_2_v"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:strokeColor="@color/base_color_3"
-            android:layout_marginBottom="96dp"
             app:strokeWidth="1dp">
 
             <androidx.recyclerview.widget.RecyclerView
@@ -194,11 +192,25 @@
                 app:layout_constraintStart_toStartOf="parent"
                 tools:layout_editor_absoluteX="0dp"
                 tools:listitem="@layout/item_places"
-                tools:visibility="visible"
-                />
-
-
+                tools:visibility="visible" />
         </com.google.android.material.card.MaterialCardView>
 
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_end"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:layout_marginBottom="96dp"
+            android:background="@drawable/bg_end_trip_btn"
+            android:fontFamily="@font/baloo_bold"
+            android:text="End trip"
+            android:textColor="@color/white"
+            android:textAllCaps="true"
+            android:textSize="16sp"
+            android:layout_marginHorizontal="16dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/places_rv"
+            app:layout_constraintStart_toStartOf="@id/places_rv"
+            app:layout_constraintTop_toBottomOf="@id/places_rv" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

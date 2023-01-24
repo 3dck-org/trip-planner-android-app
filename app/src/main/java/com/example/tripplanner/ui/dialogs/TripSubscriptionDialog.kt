@@ -1,4 +1,4 @@
-package com.example.tripplanner.views.dialogs
+package com.example.tripplanner.ui.dialogs
 
 import android.app.AlertDialog
 import android.content.DialogInterface

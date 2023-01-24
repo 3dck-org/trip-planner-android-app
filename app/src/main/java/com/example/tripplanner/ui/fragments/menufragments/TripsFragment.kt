@@ -1,4 +1,4 @@
-package com.example.tripplanner.views.fragments.menufragments
+package com.example.tripplanner.ui.fragments.menufragments
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -17,7 +17,7 @@ import com.example.tripplanner.models.Resource
 import com.example.tripplanner.models.Trips
 import com.example.tripplanner.sharedpreferences.EncryptedSharedPreferences
 import com.example.tripplanner.viewmodels.TripsViewModel
-import com.example.tripplanner.views.dialogs.TripSubscriptionDialog
+import com.example.tripplanner.ui.dialogs.TripSubscriptionDialog
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -40,12 +40,16 @@ class TripsFragment : Fragment() {
         }
     }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        initViewBinding()
+        initRecyclerView()
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        initViewBinding()
-        initRecyclerView()
         collectForTrips()
         collectForJourneys()
         getJourneys()

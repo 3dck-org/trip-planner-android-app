@@ -1,4 +1,4 @@
-package com.example.tripplanner.views.activities
+package com.example.tripplanner.ui.activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
