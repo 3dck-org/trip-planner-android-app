@@ -109,6 +109,7 @@ class RegisterFragment : Fragment() {
                     is Resource.Success -> {
                         Timber.d("Success")
                         sharedPref.addPreference(Constants.TOKEN, it.data.access_token)
+                        sharedPref.addPreference(Constants.REFRESH_TOKEN, it.data.refresh_token)
                         BaseRepository.addToken(it.data.access_token)
                         val intent = Intent(activity, MenuActivity::class.java)
                         startActivity(intent)

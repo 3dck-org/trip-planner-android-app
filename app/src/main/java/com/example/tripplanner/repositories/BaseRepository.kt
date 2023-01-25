@@ -1,15 +1,30 @@
 package com.example.tripplanner.repositories
 
-import com.example.tripplanner.models.Error
-import com.example.tripplanner.models.ErrorData
-import com.example.tripplanner.models.Resource
+import com.example.tripplanner.TripPlannerAPI
+import com.example.tripplanner.constants.Constants
+import com.example.tripplanner.models.*
+import com.example.tripplanner.sharedpreferences.EncryptedSharedPreferences
 import com.google.gson.Gson
 import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.flow
 import retrofit2.Response
+import javax.inject.Inject
 
 open class BaseRepository {
+
+    @Inject
+    lateinit var tripApi: TripPlannerAPI
+
+    @Inject
+    lateinit var sharedPref: EncryptedSharedPreferences
+
+    private val _response =
+        MutableStateFlow<Resource<OauthResponse>>(Resource.Progress<OauthResponse>())
+    val response: StateFlow<Resource<OauthResponse>>
+        get() = _response
 
     companion object {
         val mapOfHeaders = mutableMapOf(
@@ -36,25 +51,53 @@ open class BaseRepository {
                     if (body != null) {
                         emit(Resource.Success(body))
                     } else {
-                        if(resp.code() == 200){
-                            emit(Resource.Empty())
-                        }
-                        if (resp.code() == 401) {
-                            callOrError(funs)
-                        } else {
-                            resp.errorBody()?.let {
-                                emit(
-                                    Resource.Error(
-                                        Gson().fromJson(
-                                            it.string(),
-                                            ErrorData::class.java
+                        when (resp.code()) {
+                            401 -> {
+                                sharedPref.sharedPreferences.all.let {
+                                    flow {
+                                        val ouath = tripApi.getRefreshTokenAsync(
+                                            LoginRequest(
+                                                client_secret = Constants.SECRET,
+                                                client_id = Constants.CLIENT_ID,
+                                                refresh_token = it[Constants.REFRESH_TOKEN] as String,
+                                                grant_type = "refresh_token",
+                                                email = null,
+                                                password = null
+                                            )
+                                        )
+                                        emit(ouath)
+                                    }.collect { newToken ->
+                                        with(sharedPref) {
+                                            addPreference(
+                                                Constants.REFRESH_TOKEN,
+                                                newToken.refresh_token
+                                            )
+                                            addPreference(
+                                                Constants.TOKEN,
+                                                newToken.access_token
+                                            )
+                                        }
+                                        addToken(newToken.access_token)
+                                    }
+                                }
+                            }
+                            200 -> {
+                                emit(Resource.Empty())
+                            }
+                            else -> {
+                                resp.errorBody()?.let {
+                                    emit(
+                                        Resource.Error(
+                                            Gson().fromJson(
+                                                it.string(),
+                                                ErrorData::class.java
+                                            )
                                         )
                                     )
-                                )
+                                }
                             }
                         }
                     }
-
                 }
             }
         } catch (e: Exception) {

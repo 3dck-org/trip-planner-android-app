@@ -20,6 +20,7 @@ import com.example.tripplanner.viewmodels.TripsViewModel
 import com.example.tripplanner.ui.dialogs.TripSubscriptionDialog
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import timber.log.Timber
 import javax.inject.Inject
@@ -44,15 +45,16 @@ class TripsFragment : Fragment() {
         super.onCreate(savedInstanceState)
         initViewBinding()
         initRecyclerView()
+        collectForTrips()
+        collectForJourneys()
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        collectForTrips()
-        collectForJourneys()
         getJourneys()
+        Timber.d("**** ${sharedPref.sharedPreferences.all}")
         refreshOnDragUp()
         return binding.root
     }
@@ -62,7 +64,7 @@ class TripsFragment : Fragment() {
     private fun getJourneys() = tripsViewModel.getJourneys()
 
     private fun collectForTrips() {
-        lifecycleScope.launchWhenResumed {
+        lifecycleScope.launch {
             tripsViewModel.response.collect {
                 withContext(Dispatchers.Main) {
                     binding.swipeContainer.isRefreshing = false
@@ -85,7 +87,7 @@ class TripsFragment : Fragment() {
     }
 
     private fun collectForJourneys() {
-        lifecycleScope.launchWhenResumed {
+        lifecycleScope.launch {
             tripsViewModel.responseJourney.collect {
                 when (it) {
                     is Resource.Error -> {

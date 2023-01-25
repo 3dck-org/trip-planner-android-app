@@ -11,5 +11,5 @@ class UserDetailsRepository @Inject constructor(private val api: TripPlannerAPI)
     IUserDetailsRepository, BaseRepository() {
 
     override suspend fun getUserDetails(): Flow<Resource<UserDetails>> =
-        callOrError(api.getUsersDetails(mapOfHeaders))
+        callOrError(api.getUsersDetailsAsync(mapOfHeaders))
 }

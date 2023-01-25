@@ -2,16 +2,20 @@ package com.example.tripplanner
 
 import com.example.tripplanner.models.*
 import kotlinx.coroutines.Deferred
+import kotlinx.coroutines.flow.Flow
 import retrofit2.Response
 import retrofit2.http.*
 
 interface TripPlannerAPI {
 
     @POST("api/v1/users")
-    fun registerAsync(@Body registationRequest: RegistrationRequest): Deferred<Response<OauthResponse>>
+    fun registerAsync(@Body registrationRequest: RegistrationRequest): Deferred<Response<OauthResponse>>
 
     @POST("oauth/token")
-    fun loginAsync(@Body registationRequest: LoginRequest): Deferred<Response<OauthResponse>>
+    fun loginAsync(@Body registrationRequest: LoginRequest): Deferred<Response<OauthResponse>>
+
+    @POST("oauth/token")
+    suspend fun getRefreshTokenAsync(@Body registrationRequest: LoginRequest): OauthResponse
 
     @GET("api/v1/trips")
     fun getTripsAsync(@HeaderMap mapOfHeaders: Map<String, String>): Deferred<Response<TripsResponse>>
@@ -26,7 +30,7 @@ interface TripPlannerAPI {
     ): Deferred<Response<SubscribeOnTripResponse>>
 
     @GET("api/v1/current_user")
-    fun getUsersDetails(@HeaderMap mapOfHeaders: Map<String, String>): Deferred<Response<UserDetails>>
+    fun getUsersDetailsAsync(@HeaderMap mapOfHeaders: Map<String, String>): Deferred<Response<UserDetails>>
 
     @GET("api/v1/current_journey")
     fun getCurrentJourneyAsync(@HeaderMap mapOfHeaders: Map<String, String>): Deferred<Response<CurrentJourneyResponse>>
