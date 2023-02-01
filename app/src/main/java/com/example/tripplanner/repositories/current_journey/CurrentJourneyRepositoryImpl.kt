@@ -20,4 +20,7 @@ class CurrentJourneyRepositoryImpl @Inject constructor(private val api: TripPlan
     override suspend fun modifyLike(tripId: Int, trip: TripLikeRequest): Flow<Resource<TripsResponseItem>> =
         callOrError(api.modifyLikeAsync(mapOfHeaders, tripId, trip))
 
+    override suspend fun unsubscribeOnTrip(subscribeOnTripRequest: UnsubscribeOnTripRequest, journeyId: Int)
+            : Flow<Resource<SubscribeOnTripResponse>> =
+        callOrError(api.unsubscribeOnTripAsync(mapOfHeaders, subscribeOnTripRequest, journeyId = journeyId))
 }

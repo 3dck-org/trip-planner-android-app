@@ -11,13 +11,11 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.tripplanner.R
-import com.example.tripplanner.adapters.PlaceAdapter
+import com.example.tripplanner.ui.adapters.PlaceAdapter
 import com.example.tripplanner.databinding.FragmentTripBinding
 import com.example.tripplanner.domain.Resource
 import com.example.tripplanner.domain.TripByIdResponse
-import com.example.tripplanner.extensions.hide
-import com.example.tripplanner.extensions.makeVisible
-import com.example.tripplanner.extensions.show
+import com.example.tripplanner.extensions.*
 import com.example.tripplanner.ui.activities.MenuActivity
 import com.example.tripplanner.utils.GlideLoader
 import com.example.tripplanner.view_models.TripViewModel
@@ -45,6 +43,7 @@ class TripFragment : Fragment() {
         collectTripById()
         collectLikes()
         collectCurrentTrip()
+        collectSubscriptionResponse()
     }
 
     override fun onCreateView(
@@ -111,25 +110,62 @@ class TripFragment : Fragment() {
         }
     }
 
+    private fun collectSubscriptionResponse() {
+        lifecycleScope.launchWhenResumed {
+            tripViewModel.responseSubscribeOnTrip.collect {
+                when (it) {
+                    is Resource.Success -> {
+                        Timber.d("Success: ${it.data}")
+                        with(viewBinding.layoutTrip) {
+                            layoutNoteStart.root.makeGone()
+                            layoutFailedStart.root.makeGone()
+                            btnAction.makeGone()
+                            layoutSuccessStart.root.makeVisible()
+                        }
+                    }
+                    is Resource.Error -> {
+                        Timber.d("Error: ${it.errorData}")
+                        with(viewBinding.layoutTrip) {
+                            layoutNoteStart.root.makeGone()
+                            layoutSuccessStart.root.makeGone()
+                            btnAction.makeGone()
+                            layoutFailedStart.root.makeVisible()
+                        }
+                    }
+                    is Resource.Progress -> {
+                        Timber.d("Progress: ${it.data}")
+                    }
+                }
+            }
+        }
+    }
+
     private fun collectCurrentTrip() {
         lifecycleScope.launch {
             tripViewModel.responseCurrentTrip.collect {
                 when (it) {
-                    is Resource.Progress -> {
+                    is Resource.Success -> {
+                        Timber.d("Success: ${it.data}")
+                        viewBinding.layoutTrip.btnAction.makeInvisible()
+                        viewBinding.layoutTrip.layoutSuccessStart.apply {
+                            root.makeVisible()
+                            tvState.text = "Information"
+                            tvStateDescription.text = "End previous trip to start a new one"
+                        }
+                        viewBinding.layoutTrip.layoutNoteStart.root.makeGone()
+                    }
+                    is Resource.Empty -> {
                         Timber.d("Empty")
+                        viewBinding.layoutTrip.btnAction.apply {
+                            makeVisible()
+                            text = "Start"
+                        }
+                    }
+                    is Resource.Progress -> {
+                        Timber.d("Progress")
                     }
                     is Resource.Error -> {
                         Timber.d("Error ${it.errorData}")
-                    }
-                    else -> {
-                        with(viewBinding.layoutTrip.btnAction) {
-                            makeVisible()
-                            text = if (tripViewModel.isActiveTrip) {
-                                "End"
-                            } else {
-                                "Start"
-                            }
-                        }
                     }
                 }
             }
@@ -156,10 +192,13 @@ class TripFragment : Fragment() {
             tripLikeBtn.setOnClickListener {
                 tripViewModel.modifyFavoriteTrip(trip.tripModelWithChangedLike(tripViewModel.isLiked))
             }
-            setLikeState(trip.favorite.toBoolean())
+            btnAction.setOnClickListener {
+                tripViewModel.subscribeOnTrip(trip.id)
+            }
             fabBack.setOnClickListener {
                 findNavController().navigate(R.id.tripsListFragment)
             }
+            setLikeState(trip.favorite.toBoolean())
         }
         context?.let {
             GlideLoader.loadImage(it, viewBinding.layoutTrip.tripIv, trip.image_url)
@@ -181,18 +220,19 @@ class TripFragment : Fragment() {
     private fun String.formatDate() = this.split("T")[0]
 
     private fun calculateTime(minTime: Int): String {
-        return if (minTime >= 60) {
-            if ((minTime % 60) != 0)
-                "${minTime / 60}h ${minTime % 60}m"
+        return if (minTime >= 3600) {
+            if ((minTime % 3600) != 0)
+                "${minTime / 3600}h ${minTime % 3600}m"
             else
-                "${minTime / 60}h "
+                "${minTime / 3600}h "
         } else {
-            "${minTime % 60}m"
+            "${minTime % 3600}m"
         }
     }
 
     private fun initRecyclerView() {
         adapter = PlaceAdapter()
+        adapter?.setAdapterType(false)
         val llm = LinearLayoutManager(activity?.baseContext)
         llm.orientation = RecyclerView.VERTICAL
         viewBinding.layoutTrip.recyclerView.adapter = adapter

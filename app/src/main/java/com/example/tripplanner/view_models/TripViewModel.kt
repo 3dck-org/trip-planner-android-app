@@ -9,6 +9,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
+import java.time.LocalDateTime
 import javax.inject.Inject
 
 @HiltViewModel
@@ -29,6 +30,11 @@ class TripViewModel @Inject constructor(private val tripRepository: TripChosenRe
         MutableStateFlow<Resource<CurrentJourneyResponse>>(Resource.Progress())
     val responseCurrentTrip: StateFlow<Resource<CurrentJourneyResponse>>
         get() = _responseCurrentTrip
+
+    private val _responseSubscribeOnTrip =
+        MutableStateFlow<Resource<SubscribeOnTripResponse>>(Resource.Progress())
+    val responseSubscribeOnTrip: StateFlow<Resource<SubscribeOnTripResponse>>
+        get() = _responseSubscribeOnTrip
 
     var isActiveTrip = false
     var tripId = 0
@@ -57,6 +63,19 @@ class TripViewModel @Inject constructor(private val tripRepository: TripChosenRe
             (it.data.trip_id == tripId)
         } else {
             false
+        }
+    }
+
+    fun subscribeOnTrip(tripId: Int) {
+        viewModelScope.launch(Dispatchers.IO) {
+            tripRepository.subscribeOnTrip(
+                SubscribeOnTripRequest(
+                    trip_id = tripId,
+                    start_at = LocalDateTime.now().toString()
+                )
+            ).collect {
+                _responseSubscribeOnTrip.emit(it)
+            }
         }
     }
 

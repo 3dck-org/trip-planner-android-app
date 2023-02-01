@@ -24,20 +24,14 @@ import timber.log.Timber
 import java.time.LocalDateTime
 
 @AndroidEntryPoint
-class TripSubscriptionDialog(private val func: () -> Unit) : DialogFragment() {
-
-    var currentTrip: Trips? = null
-
-    private val tripViewModel: TripListViewModel by viewModels()
-    private val likesSharedViewModel: LikesViewModel by viewModels()
+class TripSubscriptionDialog(private val closeAction: () -> Unit) : DialogFragment() {
 
     private lateinit var binding: DialogTripSubscriptionBinding
+    private var builder : AlertDialog.Builder? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         initViewBinding()
-        collectLikeResponse()
-        collectSubscriptionResponse()
     }
 
     override fun onCreateView(
@@ -45,11 +39,10 @@ class TripSubscriptionDialog(private val func: () -> Unit) : DialogFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val builder = AlertDialog.Builder(context, R.style.CustomAlertDialog)
+        builder = AlertDialog.Builder(context, R.style.CustomAlertDialog)
         setCorners()
-        Timber.d("***1 ${currentTrip?.trip}")
-        currentTrip?.let { bind(it.trip) }
-        builder.setView(binding.root)
+        builder?.setView(binding.root)
+        setButton()
         return binding.root
     }
 
@@ -57,91 +50,24 @@ class TripSubscriptionDialog(private val func: () -> Unit) : DialogFragment() {
         dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
     }
 
-    private fun bind(trip: TripsResponseItem) {
-        with(binding) {
-            tripNameTv.text = "Trip: ${trip.name}"
-            tripDescriptionTv.text = "Description: ${trip.description}"
-            tripDurationTv.text = "Duration: ${trip.duration} min"
-            tripLengthTv.text = "Length: ${trip.distance} m"
-            tripLikeBtn.changeIconTint(trip.isFavourite)
-            signInBtn.setOnClickListener {
-                tripViewModel.subscribeOnTrip(
-                    trip.id,
-                    LocalDateTime.now().toString()
-                )
-            }
-            tripLikeBtn.setOnClickListener {
-                currentTrip?.let { curTrip ->
-                    likesSharedViewModel.modifyFavoriteTrip(
-                        curTrip.copy(
-                            trip = curTrip.trip.copy(
-                                isFavourite = !curTrip.trip.isFavourite
-                            )
-                        )
-                    )
-                }
-            }
+    private fun setButton(){
+        binding.signInBtn.setOnClickListener{
+            dismiss()
+            closeAction.invoke()
         }
-    }
-
-    private fun collectLikeResponse() {
-        lifecycleScope.launchWhenStarted {
-            likesSharedViewModel.responseFavourite.collect {
-                when (it) {
-                    is Resource.Error -> {
-                        Timber.d("Error: ${it.errorData}")
-                    }
-                    is Resource.Progress -> {
-                        Timber.d("Progress")
-                    }
-                    is Resource.Success -> {
-                        Timber.d("Success subs: ${it.data}")
-                        currentTrip = Trips(it.data)
-                        currentTrip?.let { it1 -> binding.tripLikeBtn.changeIconTint(it1.trip.isFavourite) }
-                        func.invoke()
-                    }
-                }
-            }
-        }
-    }
-
-    private fun collectSubscriptionResponse() {
-        lifecycleScope.launchWhenResumed {
-            tripViewModel.responseSubscribeOnTrip.collect {
-                when (it) {
-                    is Resource.Error -> {
-                        Timber.d("Error: ${it.errorData}")
-                    }
-                    is Resource.Progress -> {
-                        Timber.d("Progress: ${it.data}")
-                    }
-                    is Resource.Success -> {
-                        Timber.d("Success: ${it.data}")
-                        func.invoke()
-                    }
-                }
-            }
-        }
-    }
-
-    private fun MaterialButton.changeIconTint(isTripLiked: Boolean = false) {
-        if (isTripLiked)
-            this.setIconResource(R.drawable.ic_like_filled)
-        else
-            this.setIconResource(R.drawable.ic_like)
     }
 
     private fun initViewBinding() {
         binding = DialogTripSubscriptionBinding.inflate(LayoutInflater.from(context))
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-        currentTrip = null
-    }
-
     override fun onDismiss(dialog: DialogInterface) {
         super.onDismiss(dialog)
-        onDestroy()
+        closeAction.invoke()
+    }
+
+    override fun onDetach() {
+        super.onDetach()
+        dismiss()
     }
 }

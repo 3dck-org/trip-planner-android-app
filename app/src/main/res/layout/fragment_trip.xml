@@ -8,8 +8,7 @@
     <include
         android:id="@+id/layout_trip"
         layout="@layout/layout_current_trip_success"
-        android:visibility="gone"
-        />
+        android:visibility="gone"/>
 
     <ProgressBar
         android:id="@+id/progress_bar"

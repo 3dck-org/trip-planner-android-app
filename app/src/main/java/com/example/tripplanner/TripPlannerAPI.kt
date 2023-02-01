@@ -28,6 +28,13 @@ interface TripPlannerAPI {
         SubscribeOnTripRequest
     ): Deferred<Response<SubscribeOnTripResponse>>
 
+    @PUT("api/v1/journeys/{id}")
+    fun unsubscribeOnTripAsync(
+        @HeaderMap mapOfHeaders: Map<String, String>,
+        @Body subscribeOnTripRequest: UnsubscribeOnTripRequest,
+        @Path("id") journeyId: Int
+    ): Deferred<Response<SubscribeOnTripResponse>>
+
     @GET("api/v1/current_user")
     fun getUsersDetailsAsync(@HeaderMap mapOfHeaders: Map<String, String>): Deferred<Response<UserDetails>>
 

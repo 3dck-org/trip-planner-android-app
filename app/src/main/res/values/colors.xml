@@ -15,6 +15,8 @@
     <color name="like_color">#A3233D</color>
     <color name="base_color_3">#1e2761</color>
     <color name="base_color_3_disabled">#3C499C</color>
+    <color name="base_color_success">#36B37E</color>
+    <color name="base_color_failed">#FF5630</color>
     <color name="disabled_button">#676A7C</color>
     <color name="grey_settings_background">#DFDFDF</color>
     <color name="yellow">#FFDA52</color>

@@ -9,6 +9,8 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
+import timber.log.Timber
+import java.time.LocalDateTime
 import javax.inject.Inject
 
 @HiltViewModel
@@ -25,13 +27,33 @@ class CurrentJourneyViewModel @Inject constructor(val repository: CurrentJourney
     val responseFavourite: StateFlow<Resource<TripsResponseItem>>
         get() = _responseFavourite
 
+    private val _responseUnsubscribeOnTrip =
+        MutableStateFlow<Resource<SubscribeOnTripResponse>>(Resource.Progress())
+    val responseUnsubscribeOnTrip: StateFlow<Resource<SubscribeOnTripResponse>>
+        get() = _responseUnsubscribeOnTrip
+
     var isLiked = false
 
     fun getCurrentJourney() {
-        viewModelScope.launch {
+        viewModelScope.launch(Dispatchers.IO) {
             repository.getCurrentJourney().collect {
+                if (it is Resource.Success) {
+                    Timber.d("********!@ ${it.data.trip.favorite.toBoolean()}")
+                    isLiked = it.data.trip.favorite.toBoolean()
+                }
                 _response.emit(it)
-                if (it is Resource.Success) isLiked = it.data.trip.favorite.toBoolean()
+            }
+        }
+    }
+
+    fun unsubscribeOnTrip(journeyId: Int) {
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.unsubscribeOnTrip(
+                UnsubscribeOnTripRequest(
+                    end_at = LocalDateTime.now().toString()
+                ), journeyId
+            ).collect {
+                _responseUnsubscribeOnTrip.emit(it)
             }
         }
     }
@@ -40,8 +62,8 @@ class CurrentJourneyViewModel @Inject constructor(val repository: CurrentJourney
         viewModelScope.launch(Dispatchers.IO) {
             repository.modifyFavoriteTrip(trip)
                 .collect {
-                    _responseFavourite.emit(it)
                     if (it is Resource.Success) isLiked = it.data.isFavourite
+                    _responseFavourite.emit(it)
                 }
         }
     }

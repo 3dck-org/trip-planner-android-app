@@ -13,7 +13,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.tripplanner.R
-import com.example.tripplanner.adapters.TripsAdapter
+import com.example.tripplanner.ui.adapters.TripsAdapter
 import com.example.tripplanner.databinding.FragmentTripsListBinding
 import com.example.tripplanner.extensions.hide
 import com.example.tripplanner.extensions.show
@@ -132,9 +132,4 @@ class TripsListFragment : Fragment() {
     private fun showSubscriptionOption(trip: Trips) {
         findNavController().navigate(R.id.tripFragment, bundleOf("tripId" to trip.trip.id))
     }
-}
-
-private fun TripSubscriptionDialog.setTrip(trip: Trips): TripSubscriptionDialog {
-    this.currentTrip = trip
-    return this
 }

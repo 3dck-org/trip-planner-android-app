@@ -1,4 +1,4 @@
-package com.example.tripplanner.adapters
+package com.example.tripplanner.ui.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -36,7 +36,7 @@ class TripsAdapter(
     override fun getItemCount(): Int = listOfTrips.size
 
     override fun onBindViewHolder(
-        holder: TripsAdapter.TripsViewHolder,
+        holder: TripsViewHolder,
         position: Int
     ) {
         provideDataBinding(holder.binding.root)
