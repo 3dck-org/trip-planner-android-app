@@ -11,6 +11,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.flow
 import retrofit2.Response
+import timber.log.Timber
 import javax.inject.Inject
 
 open class BaseRepository {
@@ -104,14 +105,8 @@ open class BaseRepository {
             emit(
                 Resource.Error(
                     ErrorData(
-                        Error(
-                            1,
-                            e.message.toString(),
-                            e.localizedMessage ?: "",
-                            "unknown",
-                            "unknown",
-                        ),
-                        listOf()
+                        303,
+                        listOf("Unknown exception")
                     )
                 )
             )

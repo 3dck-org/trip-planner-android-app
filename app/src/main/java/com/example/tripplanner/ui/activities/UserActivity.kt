@@ -40,7 +40,7 @@ class UserActivity : AppCompatActivity() {
                         binding.progressBar.makeVisible()
                     }
                     is Resource.Error -> {
-                        Timber.d(it.errorData.error?.message)
+                        Timber.d("Error: ${it.errorData.error_message}")
                     }
                 }
             }
