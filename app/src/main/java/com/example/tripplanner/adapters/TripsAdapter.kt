@@ -12,8 +12,8 @@ import com.example.tripplanner.R
 import com.example.tripplanner.databinding.ItemTripBinding
 import com.example.tripplanner.extensions.makeGone
 import com.example.tripplanner.extensions.makeVisible
-import com.example.tripplanner.models.Trips
-import com.example.tripplanner.models.TripsResponseItem
+import com.example.tripplanner.domain.Trips
+import com.example.tripplanner.domain.TripsResponseItem
 import timber.log.Timber
 
 class TripsAdapter(

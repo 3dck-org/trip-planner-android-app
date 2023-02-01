@@ -14,10 +14,10 @@ import com.example.tripplanner.databinding.FragmentRegisterBinding
 import com.example.tripplanner.extensions.emailLoginValidation
 import com.example.tripplanner.extensions.fieldIsNotEmptyValidation
 import com.example.tripplanner.extensions.passwordValidation
-import com.example.tripplanner.models.Resource
+import com.example.tripplanner.domain.Resource
 import com.example.tripplanner.repositories.BaseRepository
-import com.example.tripplanner.sharedpreferences.EncryptedSharedPreferences
-import com.example.tripplanner.viewmodels.RegistrationViewModel
+import com.example.tripplanner.utils.sharedpreferences.EncryptedSharedPreferences
+import com.example.tripplanner.view_models.RegistrationViewModel
 import com.example.tripplanner.ui.activities.MenuActivity
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber

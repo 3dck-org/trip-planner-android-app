@@ -1,10 +1,10 @@
 package com.example.tripplanner.repositories.likes
 
-import com.example.tripplanner.models.Resource
-import com.example.tripplanner.models.Trips
-import com.example.tripplanner.models.TripsResponseItem
+import com.example.tripplanner.domain.Resource
+import com.example.tripplanner.domain.Trips
+import com.example.tripplanner.domain.TripsResponseItem
 import kotlinx.coroutines.flow.Flow
 
 interface IPutLikeRepository {
-    suspend fun modifyFavoriteTrip(tripId: Int, trip: Trips): Flow<Resource<TripsResponseItem>>
+    suspend fun modifyFavoriteTrip(trip: Trips): Flow<Resource<TripsResponseItem>>
 }

@@ -7,9 +7,9 @@ import androidx.lifecycle.lifecycleScope
 import com.example.tripplanner.databinding.ActivityUserBinding
 import com.example.tripplanner.extensions.makeGone
 import com.example.tripplanner.extensions.makeVisible
-import com.example.tripplanner.models.Resource
-import com.example.tripplanner.models.UserDetails
-import com.example.tripplanner.viewmodels.UserDetailsViewModel
+import com.example.tripplanner.domain.Resource
+import com.example.tripplanner.domain.UserDetails
+import com.example.tripplanner.view_models.UserDetailsViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -40,7 +40,7 @@ class UserActivity : AppCompatActivity() {
                         binding.progressBar.makeVisible()
                     }
                     is Resource.Error -> {
-                        Timber.d(it.errorData.error.message)
+                        Timber.d(it.errorData.error?.message)
                     }
                 }
             }

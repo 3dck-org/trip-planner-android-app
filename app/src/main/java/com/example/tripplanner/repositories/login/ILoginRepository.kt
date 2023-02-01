@@ -1,8 +1,8 @@
 package com.example.tripplanner.repositories.login
 
-import com.example.tripplanner.models.LoginRequest
-import com.example.tripplanner.models.OauthResponse
-import com.example.tripplanner.models.Resource
+import com.example.tripplanner.domain.LoginRequest
+import com.example.tripplanner.domain.OauthResponse
+import com.example.tripplanner.domain.Resource
 import kotlinx.coroutines.flow.Flow
 
 interface ILoginRepository {

@@ -13,11 +13,11 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.example.tripplanner.R
 import com.example.tripplanner.databinding.DialogTripSubscriptionBinding
-import com.example.tripplanner.models.Resource
-import com.example.tripplanner.models.Trips
-import com.example.tripplanner.models.TripsResponseItem
-import com.example.tripplanner.viewmodels.LikesViewModel
-import com.example.tripplanner.viewmodels.TripsViewModel
+import com.example.tripplanner.domain.Resource
+import com.example.tripplanner.domain.Trips
+import com.example.tripplanner.domain.TripsResponseItem
+import com.example.tripplanner.view_models.LikesViewModel
+import com.example.tripplanner.view_models.TripListViewModel
 import com.google.android.material.button.MaterialButton
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
@@ -28,7 +28,7 @@ class TripSubscriptionDialog(private val func: () -> Unit) : DialogFragment() {
 
     var currentTrip: Trips? = null
 
-    private val tripViewModel: TripsViewModel by viewModels()
+    private val tripViewModel: TripListViewModel by viewModels()
     private val likesSharedViewModel: LikesViewModel by viewModels()
 
     private lateinit var binding: DialogTripSubscriptionBinding

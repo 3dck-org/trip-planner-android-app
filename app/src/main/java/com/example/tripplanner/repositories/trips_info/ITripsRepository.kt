@@ -1,6 +1,6 @@
 package com.example.tripplanner.repositories.trips_info
 
-import com.example.tripplanner.models.*
+import com.example.tripplanner.domain.*
 import kotlinx.coroutines.flow.Flow
 
 interface ITripsRepository {

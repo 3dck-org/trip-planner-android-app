@@ -1,8 +1,8 @@
 package com.example.tripplanner.repositories.registration
 
-import com.example.tripplanner.models.OauthResponse
-import com.example.tripplanner.models.RegistrationRequest
-import com.example.tripplanner.models.Resource
+import com.example.tripplanner.domain.OauthResponse
+import com.example.tripplanner.domain.RegistrationRequest
+import com.example.tripplanner.domain.Resource
 import kotlinx.coroutines.flow.Flow
 
 interface IRegistrationRepository {

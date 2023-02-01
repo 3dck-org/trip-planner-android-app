@@ -1,5 +1,6 @@
 package com.example.tripplanner.ui.activities
 
+import android.app.Fragment
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
@@ -7,7 +8,7 @@ import androidx.appcompat.app.AppCompatDelegate
 import com.example.tripplanner.constants.Constants
 import com.example.tripplanner.databinding.ActivitySplashBinding
 import com.example.tripplanner.repositories.BaseRepository
-import com.example.tripplanner.sharedpreferences.EncryptedSharedPreferences
+import com.example.tripplanner.utils.sharedpreferences.EncryptedSharedPreferences
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 

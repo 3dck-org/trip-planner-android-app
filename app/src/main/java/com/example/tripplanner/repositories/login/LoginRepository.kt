@@ -1,9 +1,9 @@
 package com.example.tripplanner.repositories.login
 
 import com.example.tripplanner.TripPlannerAPI
-import com.example.tripplanner.models.LoginRequest
-import com.example.tripplanner.models.OauthResponse
-import com.example.tripplanner.models.Resource
+import com.example.tripplanner.domain.LoginRequest
+import com.example.tripplanner.domain.OauthResponse
+import com.example.tripplanner.domain.Resource
 import com.example.tripplanner.repositories.BaseRepository
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject

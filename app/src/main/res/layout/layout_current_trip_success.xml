@@ -10,16 +10,50 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
+
         <ImageView
             android:id="@+id/trip_iv"
             android:layout_width="match_parent"
             android:layout_height="300dp"
-            android:background="@color/white"
+            android:layout_centerInParent="true"
             android:elevation="6dp"
             android:maxHeight="300dp"
+            android:src="@color/white"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/trip_like_btn"
+            style="@style/DefaultButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="32dp"
+            android:background="@drawable/bg_trip_item_btn"
+            android:src="@drawable/ic_like_filled"
+            app:tint = "@color/like_color"
+            android:scaleType="center"
+            android:tint="@color/like_color"
+            app:fabSize="mini"
+            app:fabCustomSize="42dp"
+            app:layout_constraintBottom_toBottomOf="@id/trip_iv"
+            app:layout_constraintEnd_toEndOf="@id/trip_iv" />
+
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab_back"
+            style="@style/DefaultButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:background="@drawable/bg_trip_item_btn"
+            android:contentDescription="TODO"
+            android:src="@drawable/ic_arrow_back"
+            app:tint = "@color/white"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:maxImageSize="24dp"
+            app:fabSize="mini"/>
 
 
         <TextView
@@ -196,18 +230,20 @@
         </com.google.android.material.card.MaterialCardView>
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/btn_end"
+            android:id="@+id/btn_action"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
             android:layout_marginTop="32dp"
             android:layout_marginBottom="96dp"
             android:background="@drawable/bg_end_trip_btn"
             android:fontFamily="@font/baloo_bold"
-            android:text="End trip"
-            android:textColor="@color/white"
+            tools:text="End trip"
             android:textAllCaps="true"
+            android:textColor="@color/white"
             android:textSize="16sp"
-            android:layout_marginHorizontal="16dp"
+            android:visibility="invisible"
+            tools:visibility="visible"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@id/places_rv"
             app:layout_constraintStart_toStartOf="@id/places_rv"

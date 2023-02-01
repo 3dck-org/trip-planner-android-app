@@ -75,6 +75,10 @@ fun View.makeVisible() {
     this.visibility = View.VISIBLE
 }
 
+fun View.makeInvisible() {
+    this.visibility = View.INVISIBLE
+}
+
 fun ProgressBar.hide() {
     this.visibility = View.GONE
 }

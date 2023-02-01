@@ -1,7 +1,7 @@
 package com.example.tripplanner.repositories.trips_info
 
 import com.example.tripplanner.TripPlannerAPI
-import com.example.tripplanner.models.*
+import com.example.tripplanner.domain.*
 import com.example.tripplanner.repositories.BaseRepository
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject

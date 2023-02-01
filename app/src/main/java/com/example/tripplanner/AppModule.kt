@@ -2,7 +2,7 @@ package com.example.tripplanner
 
 import android.content.Context
 import com.example.tripplanner.constants.Constants.BASE_URL
-import com.example.tripplanner.sharedpreferences.EncryptedSharedPreferences
+import com.example.tripplanner.utils.sharedpreferences.EncryptedSharedPreferences
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import dagger.Module
 import dagger.Provides

@@ -4,7 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.tripplanner.databinding.ItemPlacesBinding
-import com.example.tripplanner.models.TripPlaceInfo
+import com.example.tripplanner.domain.TripPlaceInfo
 
 class PlaceAdapter : RecyclerView.Adapter<PlaceAdapter.PlaceViewHolder>() {
 

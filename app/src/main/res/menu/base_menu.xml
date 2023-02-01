@@ -2,7 +2,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/tripsFragment"
+        android:id="@+id/tripsListFragment"
         android:icon="@drawable/ic_offered_trips"
         android:title="" />
     <item
@@ -17,5 +17,4 @@
         android:id="@+id/settingsFragment"
         android:icon="@drawable/ic_menu_settings"
         android:title="" />
-
 </menu>

@@ -2,8 +2,8 @@ package com.example.tripplanner.repositories
 
 import com.example.tripplanner.TripPlannerAPI
 import com.example.tripplanner.constants.Constants
-import com.example.tripplanner.models.*
-import com.example.tripplanner.sharedpreferences.EncryptedSharedPreferences
+import com.example.tripplanner.domain.*
+import com.example.tripplanner.utils.sharedpreferences.EncryptedSharedPreferences
 import com.google.gson.Gson
 import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.flow.Flow

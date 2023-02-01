@@ -1,8 +1,7 @@
 package com.example.tripplanner
 
-import com.example.tripplanner.models.*
+import com.example.tripplanner.domain.*
 import kotlinx.coroutines.Deferred
-import kotlinx.coroutines.flow.Flow
 import retrofit2.Response
 import retrofit2.http.*
 
@@ -35,10 +34,20 @@ interface TripPlannerAPI {
     @GET("api/v1/current_journey")
     fun getCurrentJourneyAsync(@HeaderMap mapOfHeaders: Map<String, String>): Deferred<Response<CurrentJourneyResponse>>
 
+    @GET("api/v1/trips/{id}")
+    fun getTripByIdAsync(@HeaderMap mapOfHeaders: Map<String, String>, @Path("id") tripId: Int) : Deferred<Response<TripByIdResponse>>
+
     @PUT("/api/v1/trips/{id}")
     fun modifyTripToFavouritesAsync(
         @HeaderMap mapOfHeaders: Map<String, String>,
         @Path("id") tripId: Int,
         @Body trip: Trips
     ): Deferred<Response<TripsResponseItem>>
+
+    @PUT("/api/v1/trips/{id}")
+    fun modifyLikeAsync(
+        @HeaderMap mapOfHeaders: Map<String, String>,
+        @Path("id") tripId: Int,
+        @Body isLiked: TripLikeRequest
+    ) : Deferred<Response<TripsResponseItem>>
 }

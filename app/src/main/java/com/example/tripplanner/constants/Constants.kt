@@ -18,7 +18,4 @@ object Constants {
     const val TOKEN = "TOKEN"
     const val REFRESH_TOKEN = "REFRESH_TOKEN"
     const val KID_CHOICE_PROFILE_UUID_KEY = "KID_CHOISE_PROFILE_UUID_KEY"
-
-    //DATE
-    const val dateFormat : String = "yyyy-MM-dd HH:mm:ss"
 }
