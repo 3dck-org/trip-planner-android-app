@@ -12,6 +12,9 @@ class CurrentJourneyRepositoryImpl @Inject constructor(private val api: TripPlan
     override suspend fun getCurrentJourney(): Flow<Resource<CurrentJourneyResponse>> =
         callOrError(api.getCurrentJourneyAsync(mapOfHeaders))
 
+    override suspend fun updateStatus(statusRequest: StatusRequest): Flow<Resource<StatusResponse>> =
+        callOrError(api.updateStatusAsync(mapOfHeaders, statusRequest))
+
     override suspend fun modifyFavoriteTrip(
         trip: Trips
     ): Flow<Resource<TripsResponseItem>> =

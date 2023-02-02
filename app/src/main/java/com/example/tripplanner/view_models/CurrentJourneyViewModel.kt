@@ -32,7 +32,20 @@ class CurrentJourneyViewModel @Inject constructor(val repository: CurrentJourney
     val responseUnsubscribeOnTrip: StateFlow<Resource<SubscribeOnTripResponse>>
         get() = _responseUnsubscribeOnTrip
 
+    private val _responseStatus =
+        MutableStateFlow<Resource<StatusResponse>>(Resource.Progress())
+    val responseStatus: StateFlow<Resource<StatusResponse>>
+        get() = _responseStatus
+
     var isLiked = false
+
+    fun updateStatus(statusRequest: StatusRequest){
+        viewModelScope.launch {
+            repository.updateStatus(statusRequest).collect{
+                _responseStatus.emit(it)
+            }
+        }
+    }
 
     fun getCurrentJourney() {
         viewModelScope.launch(Dispatchers.IO) {

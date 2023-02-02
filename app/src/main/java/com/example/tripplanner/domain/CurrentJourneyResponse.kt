@@ -11,7 +11,8 @@ data class CurrentJourneyResponse(
     val trip_id: Int,
     val updated_at: String,
     val user: UserDetails,
-    val user_id: Int
+    val user_id: Int,
+    val journey_place_infos: List<JourneyPlaceInfo>
 ){
     fun mapCurJourneyToTrips(isLiked: Boolean) = Trips(TripsResponseItem(
         created_at = trip.created_at,

@@ -11,43 +11,47 @@
         android:layout_width="48dp"
         android:layout_height="48dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:background="@drawable/bg_trip_item_btn"
+        android:background="@drawable/bg_trip_button_selector"
         android:enabled="true"
-        app:icon="@drawable/ic_started_trip"
-        app:iconGravity="textTop"
         android:fontFamily="@font/baloo_bold"
+        app:iconGravity="textTop"
         app:iconPadding="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/tv_place_name"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:ellipsize="end"
         android:fontFamily="@font/baloo_semibold"
-        android:maxWidth="250dp"
-        android:maxLines="2"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:maxLines="1"
+        android:layout_marginEnd="16dp"
         android:textColor="@color/base_color_3"
         android:textSize="16sp"
+        android:layout_marginTop="12dp"
         app:layout_constraintStart_toEndOf="@id/btn_trip"
-        app:layout_constraintTop_toTopOf="@id/btn_trip"
-        tools:text="Frederyk Chopin Museum" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Frederyk Chopin Museum aaaaaaaaaaa" />
 
     <TextView
         android:id="@+id/tv_place_address"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:fontFamily="@font/baloo_semibold"
         android:includeFontPadding="false"
+        android:ellipsize="end"
+        android:maxLines="2"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginEnd="24dp"
         android:textColor="@color/base_color_3"
         android:textSize="14sp"
         app:layout_constraintStart_toEndOf="@id/btn_trip"
         app:layout_constraintTop_toBottomOf="@id/tv_place_name"
-        android:maxWidth="250dp"
         tools:text="Adress" />
 
     <View

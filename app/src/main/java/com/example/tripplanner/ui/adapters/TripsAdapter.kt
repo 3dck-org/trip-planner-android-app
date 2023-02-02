@@ -14,9 +14,11 @@ import com.example.tripplanner.extensions.makeGone
 import com.example.tripplanner.extensions.makeVisible
 import com.example.tripplanner.domain.Trips
 import com.example.tripplanner.domain.TripsResponseItem
+import com.example.tripplanner.utils.Converter
 import timber.log.Timber
 
 class TripsAdapter(
+    private val navigateToCurrentFragment: () -> Unit,
     private val showSubscriptionOption: (trip: Trips) -> Unit
 ) : RecyclerView.Adapter<TripsAdapter.TripsViewHolder>() {
 
@@ -81,16 +83,16 @@ class TripsAdapter(
             with(binding) {
                 bindLikedTrips(trip)
                 tripTitleTv.text = trip.name
-                tripDurationTv.text = "Duration: ${trip.duration} mins"
-                tripLengthTv.text = "Length: ${trip.distance}km"
-                tripCategoryTv.text = "Category: ${trip.description}"
+                tripDurationTv.text = "Duration: ${Converter.convertDuration(trip.duration)}"
+                tripLengthTv.text = "Distance: ${Converter.convertDistance(trip.distance.toFloat())}"
+                tripCategoryTv.text = "Description: ${trip.description}"
                 if (trip.id != activeTripId) {
                     tripItemCv.strokeWidth = 0
                     changeItemTripBtn(true)
                     selectTripsOnClick(trip, select)
                 } else {
-                    tripItemCv.setOnClickListener {}
-                    btnTrip.setOnClickListener {}
+                    tripItemCv.setOnClickListener { navigateToCurrentFragment.invoke() }
+                    btnTrip.setOnClickListener { navigateToCurrentFragment.invoke()}
                     tripItemCv.strokeWidth = 2
                     changeItemTripBtn()
                     tripItemCv.strokeColor =

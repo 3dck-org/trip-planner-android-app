@@ -19,13 +19,21 @@ import com.example.tripplanner.extensions.hide
 import com.example.tripplanner.extensions.show
 import com.example.tripplanner.domain.CurrentJourneyResponse
 import com.example.tripplanner.domain.Resource
+import com.example.tripplanner.domain.StatusRequest
+import com.example.tripplanner.domain.TripPlaceInfoWithStatus
 import com.example.tripplanner.extensions.makeGone
 import com.example.tripplanner.extensions.makeVisible
+import com.example.tripplanner.ui.activities.MenuActivity
+import com.example.tripplanner.ui.adapters.PlaceCurrentTripAdapter
 import com.example.tripplanner.ui.dialogs.TripSubscriptionDialog
+import com.example.tripplanner.utils.Converter
 import com.example.tripplanner.utils.GlideLoader
 import com.example.tripplanner.view_models.CurrentJourneyViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import timber.log.Timber
 
 @AndroidEntryPoint
@@ -33,7 +41,8 @@ class CurrentTripFragment : Fragment() {
 
     private lateinit var binding: FragmentCurrentTripBinding
     private val viewModel: CurrentJourneyViewModel by viewModels()
-    private var adapter: PlaceAdapter? = null
+    private var adapter: PlaceCurrentTripAdapter? = null
+    private val menuActivityInstance by lazy { activity as MenuActivity }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,6 +51,7 @@ class CurrentTripFragment : Fragment() {
         collectCurrentJourney()
         collectFavChangeResponse()
         collectUnsubscribeResponse()
+        collectStatusResponse()
     }
 
     private fun showDialog() {
@@ -60,11 +70,18 @@ class CurrentTripFragment : Fragment() {
         return binding.root
     }
 
+    override fun onResume() {
+        super.onResume()
+        menuActivityInstance.showMenu()
+    }
+
     private fun initBinding() {
         binding = FragmentCurrentTripBinding.inflate(layoutInflater)
     }
 
     private fun getCurrentJourney() = viewModel.getCurrentJourney()
+
+    private fun updateStatus(statusRequest: StatusRequest) = viewModel.updateStatus(statusRequest)
 
     private fun collectFavChangeResponse() {
         lifecycleScope.launch {
@@ -114,18 +131,30 @@ class CurrentTripFragment : Fragment() {
         }
     }
 
+    private fun collectStatusResponse(){
+        lifecycleScope.launch {
+            viewModel.responseStatus.collect{
+                when(it){
+                    is Resource.Success->{ getCurrentJourney() }
+                    else ->{ Timber.d("$it") }
+                }
+            }
+        }
+    }
+
     private fun collectCurrentJourney() {
         lifecycleScope.launch {
             viewModel.response.collect {
                 when (it) {
                     is Resource.Success -> {
                         Timber.d("***Success: ${it.data}")
-                        setLayout(it.data)
-                        Timber.d("******1244 ${viewModel.isLiked}")
-                        setLikeState()
-                        binding.progressBar.hide()
-                        adapter?.apply {
-                            addData(it.data.trip.trip_place_infos)
+                        withContext(Dispatchers.Main) {
+                            setLayout(it.data)
+                            setLikeState()
+                            binding.progressBar.hide()
+                            adapter?.addData(
+                                it.data.journey_place_infos
+                            )
                         }
                     }
                     is Resource.Progress -> {
@@ -160,11 +189,12 @@ class CurrentTripFragment : Fragment() {
     private fun bindData(journey: CurrentJourneyResponse) {
         with(binding.layoutSuccess) {
             titleTripTv.text = journey.trip.name
-            durationTv.text = calculateTime(journey.trip.duration)
-            distanceTv.text = "${journey.trip.distance}km"
+            durationTv.text = Converter.convertDuration(journey.trip.duration)
+            distanceTv.text = Converter.convertDistance(journey.trip.distance.toFloat())
             descriptionTripTv.text = journey.trip.description
             userNameTv.text = "${journey.user.name} ${journey.user.surname}"
             createdAtTv.text = journey.trip.created_at.formatDate()
+            recyclerView.isNestedScrollingEnabled = false
             setLikeState()
             fabBack.makeGone()
             btnAction.apply {
@@ -181,7 +211,8 @@ class CurrentTripFragment : Fragment() {
                     )
                 )
             }
-            layoutNoteStart.tvStateDescription.text = "Hey, there you can end your current trip to start a new one. Good luck"
+            layoutNoteStart.tvStateDescription.text =
+                "Hey, there you can end your current trip to start a new one. Good luck"
         }
         context?.let {
             GlideLoader.loadImage(it, binding.layoutSuccess.tripIv, journey.trip.image_url)
@@ -198,7 +229,7 @@ class CurrentTripFragment : Fragment() {
     }
 
     private fun initRecyclerView() {
-        adapter = PlaceAdapter()
+        adapter = PlaceCurrentTripAdapter(::updateStatus)
         val llm = LinearLayoutManager(activity?.baseContext)
         llm.orientation = RecyclerView.VERTICAL
         binding.layoutSuccess.recyclerView.adapter = adapter
@@ -206,15 +237,4 @@ class CurrentTripFragment : Fragment() {
     }
 
     private fun String.formatDate() = this.split("T")[0]
-
-    private fun calculateTime(minTime: Int): String {
-        return if (minTime >= 60) {
-            if ((minTime % 60) != 0)
-                "${minTime / 60}h ${minTime % 60}m"
-            else
-                "${minTime / 60}h "
-        } else {
-            "${minTime % 60}m"
-        }
-    }
 }

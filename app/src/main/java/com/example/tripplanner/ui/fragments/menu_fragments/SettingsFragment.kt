@@ -42,6 +42,7 @@ class SettingsFragment : Fragment() {
     private fun logoutSettingClick() {
         sharedPref.apply {
             remove(Constants.TOKEN)
+            remove(Constants.TOKEN)
             remove(Constants.REFRESH_TOKEN)
         }
         startActivity(Intent(activity, SplashActivity::class.java))

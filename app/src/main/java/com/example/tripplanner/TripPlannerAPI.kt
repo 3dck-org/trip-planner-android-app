@@ -2,6 +2,7 @@ package com.example.tripplanner
 
 import com.example.tripplanner.domain.*
 import kotlinx.coroutines.Deferred
+import okhttp3.ResponseBody
 import retrofit2.Response
 import retrofit2.http.*
 
@@ -57,4 +58,10 @@ interface TripPlannerAPI {
         @Path("id") tripId: Int,
         @Body isLiked: TripLikeRequest
     ) : Deferred<Response<TripsResponseItem>>
+
+    @PUT("/api/v1/update_place_status")
+    fun updateStatusAsync(
+        @HeaderMap mapOfHeaders: Map<String, String>,
+        @Body requestBody: StatusRequest
+        ) : Deferred<Response<StatusResponse>>
 }

@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.setFragmentResult
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -118,7 +119,9 @@ class TripsListFragment : Fragment() {
     }
 
     private fun initRecyclerView() {
-        offeredTripsAdapter = TripsAdapter(::showSubscriptionOption)
+        offeredTripsAdapter = TripsAdapter(
+            {},
+            ::showSubscriptionOption)
         val llm = LinearLayoutManager(activity?.baseContext)
         llm.orientation = RecyclerView.VERTICAL
         binding.recyclerView.adapter = offeredTripsAdapter

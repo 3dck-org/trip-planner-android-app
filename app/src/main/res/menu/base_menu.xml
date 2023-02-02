@@ -12,7 +12,7 @@
     <item
         android:id="@+id/historyTripsFragment"
         android:icon="@drawable/ic_menu_current_trip"
-        android:title="" />
+        android:title=""/>
     <item
         android:id="@+id/settingsFragment"
         android:icon="@drawable/ic_menu_settings"

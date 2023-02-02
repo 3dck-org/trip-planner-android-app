@@ -17,6 +17,7 @@ import com.example.tripplanner.domain.Resource
 import com.example.tripplanner.domain.TripByIdResponse
 import com.example.tripplanner.extensions.*
 import com.example.tripplanner.ui.activities.MenuActivity
+import com.example.tripplanner.utils.Converter
 import com.example.tripplanner.utils.GlideLoader
 import com.example.tripplanner.view_models.TripViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -184,11 +185,12 @@ class TripFragment : Fragment() {
         with(viewBinding.layoutTrip) {
             root.show()
             titleTripTv.text = trip.name
-            durationTv.text = calculateTime(trip.duration)
-            distanceTv.text = "${trip.distance}km"
+            durationTv.text = Converter.convertDuration(trip.duration)
+            distanceTv.text = Converter.convertDistance(trip.distance.toFloat())
             descriptionTripTv.text = trip.description
             createdAtTv.text = trip.created_at.formatDate()
             userNameTv.text = trip.user.name
+            recyclerView.isNestedScrollingEnabled = false
             tripLikeBtn.setOnClickListener {
                 tripViewModel.modifyFavoriteTrip(trip.tripModelWithChangedLike(tripViewModel.isLiked))
             }
@@ -219,20 +221,8 @@ class TripFragment : Fragment() {
 
     private fun String.formatDate() = this.split("T")[0]
 
-    private fun calculateTime(minTime: Int): String {
-        return if (minTime >= 3600) {
-            if ((minTime % 3600) != 0)
-                "${minTime / 3600}h ${minTime % 3600}m"
-            else
-                "${minTime / 3600}h "
-        } else {
-            "${minTime % 3600}m"
-        }
-    }
-
     private fun initRecyclerView() {
         adapter = PlaceAdapter()
-        adapter?.setAdapterType(false)
         val llm = LinearLayoutManager(activity?.baseContext)
         llm.orientation = RecyclerView.VERTICAL
         viewBinding.layoutTrip.recyclerView.adapter = adapter

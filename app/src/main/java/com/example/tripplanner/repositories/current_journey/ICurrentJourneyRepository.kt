@@ -9,4 +9,5 @@ interface ICurrentJourneyRepository {
     suspend fun modifyLike(tripId: Int, trip: TripLikeRequest): Flow<Resource<TripsResponseItem>>
     suspend fun unsubscribeOnTrip(subscribeOnTripRequest: UnsubscribeOnTripRequest, journeyId: Int):
             Flow<Resource<SubscribeOnTripResponse>>
+    suspend fun updateStatus(statusRequest: StatusRequest): Flow<Resource<StatusResponse>>
 }
