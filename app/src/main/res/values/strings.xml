@@ -27,4 +27,7 @@
     <string name="note_trip_text">Hey, to start your journey just click the button, and journey automatically will be started</string>
     <string name="error_trip_text">Ohhhh…we are sorry, but something went wrong</string>
     <string name="information_text">Information</string>
+    <string name="dialog_permission_title">Permission</string>
+    <string name="dialog_permission_default_message">Please, allow this application to use location permission</string>
+    <string name="dialog_permission_button_positive">OK</string>
 </resources>

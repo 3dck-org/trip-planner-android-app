@@ -1,10 +1,12 @@
-package com.example.currencyexchangeapp.utils.permission
+package com.example.tripplanner.utils.permission
 
 import android.app.AlertDialog
 import android.content.pm.PackageManager
 import androidx.activity.result.contract.ActivityResultContracts.RequestMultiplePermissions
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import com.example.currencyexchangeapp.utils.permission.Permission
+import com.example.tripplanner.R
 import java.lang.ref.WeakReference
 
 class PermissionManager private constructor(private val fragment: WeakReference<Fragment>) {
@@ -50,12 +52,12 @@ class PermissionManager private constructor(private val fragment: WeakReference<
 
     private fun displayRationale(fragment: Fragment) {
         AlertDialog.Builder(fragment.requireContext())
-//            .setTitle(fragment.getString(R.string.dialog_permission_title))
-//            .setMessage(rationale ?: fragment.getString(R.string.dialog_permission_default_message))
-//            .setCancelable(false)
-//            .setPositiveButton(fragment.getString(R.string.dialog_permission_button_positive)) { _, _ ->
-//                requestPermissions()
-//            }
+            .setTitle(fragment.getString(R.string.dialog_permission_title))
+            .setMessage(rationale ?: fragment.getString(R.string.dialog_permission_default_message))
+            .setCancelable(false)
+            .setPositiveButton(fragment.getString(R.string.dialog_permission_button_positive)) { _, _ ->
+                requestPermissions()
+            }
             .show()
     }
 
