@@ -35,6 +35,7 @@ class SplashActivity : AppCompatActivity() {
         if (token.isNotEmpty()) {
             BaseRepository.addToken(token)
             val intent = Intent(this, MenuActivity::class.java)
+                .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
             startActivity(intent)
         } else {
             val intent = Intent(this, StartActivity::class.java)

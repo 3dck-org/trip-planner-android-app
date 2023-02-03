@@ -23,9 +23,7 @@ class MenuActivity : AppCompatActivity() {
         setContentView(binding.root)
         setupNavigationBottomBar()
     }
-
-    override fun onBackPressed() {}
-
+    
     private fun initBinding() {
         binding = ActivityMenuBinding.inflate(layoutInflater)
     }

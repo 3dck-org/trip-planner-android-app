@@ -120,7 +120,10 @@ class TripsListFragment : Fragment() {
 
     private fun initRecyclerView() {
         offeredTripsAdapter = TripsAdapter(
-            {},
+            { findNavController().apply {
+                popBackStack()
+                navigate(R.id.historyTripsFragment)
+            } },
             ::showSubscriptionOption)
         val llm = LinearLayoutManager(activity?.baseContext)
         llm.orientation = RecyclerView.VERTICAL

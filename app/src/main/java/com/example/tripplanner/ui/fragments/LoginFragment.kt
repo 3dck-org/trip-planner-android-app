@@ -96,7 +96,7 @@ class LoginFragment : Fragment() {
                             addPreference(Constants.REFRESH_TOKEN, it.data.refresh_token)
                         }
                         BaseRepository.addToken(it.data.access_token)
-                        startActivity(Intent(activity, MenuActivity::class.java))
+                        startActivity(Intent(activity, MenuActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK))
                     }
                 }
             }

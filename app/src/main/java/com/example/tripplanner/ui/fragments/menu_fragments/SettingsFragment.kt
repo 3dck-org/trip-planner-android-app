@@ -45,7 +45,7 @@ class SettingsFragment : Fragment() {
             remove(Constants.TOKEN)
             remove(Constants.REFRESH_TOKEN)
         }
-        startActivity(Intent(activity, SplashActivity::class.java))
+        startActivity(Intent(activity, SplashActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK))
     }
 
     private fun accountDetailsSettingClick(){

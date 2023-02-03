@@ -112,6 +112,7 @@ class RegisterFragment : Fragment() {
                         sharedPref.addPreference(Constants.REFRESH_TOKEN, it.data.refresh_token)
                         BaseRepository.addToken(it.data.access_token)
                         val intent = Intent(activity, MenuActivity::class.java)
+                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
                         startActivity(intent)
                     }
                 }
