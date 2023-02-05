@@ -24,7 +24,7 @@
     <string name="empty_current_trip_title">Currently you don\'t have active trip</string>
     <string name="current_trip_title">Trip details</string>
     <string name="success_trip_text">Surprise, surprise. You started your first trip. If you want to pick another one, please, end the current trip.</string>
-    <string name="note_trip_text">Hey, to start your journey just click the button, and journey automatically will be started</string>
+    <string name="note_trip_text">Hey, to start your journey just click the button, and journey will be started automatically</string>
     <string name="error_trip_text">Ohhhh…we are sorry, but something went wrong</string>
     <string name="information_text">Information</string>
     <string name="dialog_permission_title">Permission</string>

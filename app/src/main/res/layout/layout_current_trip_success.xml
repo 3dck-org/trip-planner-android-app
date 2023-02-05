@@ -2,6 +2,7 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/scroll"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fillViewport="true">
@@ -10,6 +11,20 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab_back"
+            style="@style/DefaultButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:background="@drawable/bg_trip_item_btn"
+            android:contentDescription="TODO"
+            android:src="@drawable/ic_arrow_back"
+            app:tint = "@color/white"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:maxImageSize="24dp"
+            app:fabSize="mini"/>
 
         <ImageView
             android:id="@+id/trip_iv"
@@ -38,23 +53,6 @@
             app:fabCustomSize="42dp"
             app:layout_constraintBottom_toBottomOf="@id/trip_iv"
             app:layout_constraintEnd_toEndOf="@id/trip_iv" />
-
-
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/fab_back"
-            style="@style/DefaultButtonStyle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="16dp"
-            android:background="@drawable/bg_trip_item_btn"
-            android:contentDescription="TODO"
-            android:src="@drawable/ic_arrow_back"
-            app:tint = "@color/white"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:maxImageSize="24dp"
-            app:fabSize="mini"/>
-
 
         <TextView
             android:id="@+id/title_trip_tv"

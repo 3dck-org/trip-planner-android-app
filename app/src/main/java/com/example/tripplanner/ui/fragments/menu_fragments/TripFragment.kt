@@ -189,7 +189,7 @@ class TripFragment : Fragment() {
             distanceTv.text = Converter.convertDistance(trip.distance.toFloat())
             descriptionTripTv.text = trip.description
             createdAtTv.text = trip.created_at.formatDate()
-            userNameTv.text = trip.user.name
+            userNameTv.text = "${trip.user.name} ${trip.user.surname}"
             recyclerView.isNestedScrollingEnabled = false
             tripLikeBtn.setOnClickListener {
                 tripViewModel.modifyFavoriteTrip(trip.tripModelWithChangedLike(tripViewModel.isLiked))

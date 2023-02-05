@@ -11,6 +11,7 @@ class SettingsItemView(context: Context, attrs: AttributeSet) : ConstraintLayout
 
     var optionViewBinding: ItemSettingsViewBinding
     private var currText: String? = null
+    private var isButtonEnabled: Boolean = false
 
     init {
         val attributes = context
@@ -18,7 +19,9 @@ class SettingsItemView(context: Context, attrs: AttributeSet) : ConstraintLayout
             .obtainStyledAttributes(attrs, R.styleable.SettingsItemView, 0, 0)
         optionViewBinding = ItemSettingsViewBinding.inflate(LayoutInflater.from(context), this, true)
         currText = attributes.getString(R.styleable.SettingsItemView_si_text)
+        isButtonEnabled = attributes.getBoolean(R.styleable.SettingsItemView_enabled,false)
         if (currText != null)
             optionViewBinding.optionMaterialButton.text = currText
+        optionViewBinding.optionMaterialButton.isEnabled = isButtonEnabled
     }
 }

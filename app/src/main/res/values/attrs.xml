@@ -2,5 +2,6 @@
 <resources>
     <declare-styleable name="SettingsItemView">
         <attr name="si_text" format="string" />
+        <attr name="enabled" format="boolean" />
     </declare-styleable>
 </resources>
