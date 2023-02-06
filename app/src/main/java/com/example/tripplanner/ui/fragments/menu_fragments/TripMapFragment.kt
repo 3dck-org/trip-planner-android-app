@@ -1,7 +1,9 @@
 package com.example.tripplanner.ui.fragments.menu_fragments
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.content.Intent
+import android.graphics.Color
 import android.net.Uri
 import android.os.Bundle
 import android.provider.Settings
@@ -16,6 +18,7 @@ import com.example.tripplanner.R
 import com.example.tripplanner.databinding.FragmentTripBinding
 import com.example.tripplanner.databinding.FragmentTripMapBinding
 import com.example.tripplanner.domain.Resource
+import com.example.tripplanner.domain.google_maps.DirectionResponses
 import com.example.tripplanner.extensions.makeGone
 import com.example.tripplanner.extensions.makeVisible
 import com.example.tripplanner.ui.activities.MenuActivity
@@ -28,8 +31,15 @@ import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
+import com.google.android.gms.maps.model.PolylineOptions
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
+import retrofit2.Call
+import retrofit2.Response
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
+import retrofit2.http.GET
+import retrofit2.http.Query
 import timber.log.Timber
 
 @AndroidEntryPoint
@@ -89,6 +99,9 @@ class TripMapFragment : Fragment() {
                                     journey.place.point.y.toDouble()
                                 )
                                 callback = OnMapReadyCallback { googleMap ->
+                                    googleMap.uiSettings.setAllGesturesEnabled(true)
+                                    googleMap.uiSettings.isMapToolbarEnabled = true
+                                    googleMap.uiSettings.isCompassEnabled = true
                                     addMarkerToMap(googleMap, latLng, journey.place.name)
                                     googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15f))
                                     googleMap.isMyLocationEnabled = true
@@ -142,4 +155,31 @@ class TripMapFragment : Fragment() {
         startActivity(intent)
     }
 
+
+    private fun drawPolyline(response: Response<DirectionResponses>) {
+        val shape = response.body()?.routes?.get(0)?.overviewPolyline?.points
+        val polyline = PolylineOptions()
+//            .addAll(PolyUtil.decode(shape))
+            .width(8f)
+            .color(Color.RED)
+//        map.addPolyline(polyline)
+    }
+
+    private interface ApiServices {
+        @GET("maps/api/directions/json")
+        fun getDirection(@Query("origin") origin: String,
+                         @Query("destination") destination: String,
+                         @Query("key") apiKey: String): Call<DirectionResponses>
+    }
+
+    private object RetrofitClient {
+        fun apiServices(context: Context): ApiServices {
+            val retrofit = Retrofit.Builder()
+                .addConverterFactory(GsonConverterFactory.create())
+                .baseUrl("https://maps.googleapis.com")
+                .build()
+
+            return retrofit.create<ApiServices>(ApiServices::class.java)
+        }
+    }
 }

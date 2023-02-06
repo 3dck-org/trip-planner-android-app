@@ -55,4 +55,8 @@
     <style name="CustomAlertDialog" parent="Theme.AppCompat.Light.Dialog.Alert">
         <item name="android:windowBackground">@drawable/trip_dialog</item>
     </style>
+
+    <style name="DefaultTextAppearanceToolbar" parent="@style/TextAppearance.MaterialComponents.Headline6">
+        <item name="android:fontFamily">@font/baloo_bold</item>
+    </style>
 </resources>
