@@ -11,7 +11,6 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.flow
 import retrofit2.Response
-import timber.log.Timber
 import javax.inject.Inject
 
 open class BaseRepository {
@@ -79,6 +78,7 @@ open class BaseRepository {
                                             )
                                         }
                                         addToken(newToken.access_token)
+                                        callOrError(funs)
                                     }
                                 }
                             }

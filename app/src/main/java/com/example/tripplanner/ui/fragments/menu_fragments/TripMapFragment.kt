@@ -16,8 +16,6 @@ import com.example.currencyexchangeapp.utils.permission.Permission
 import com.example.tripplanner.R
 import com.example.tripplanner.databinding.FragmentTripMapBinding
 import com.example.tripplanner.domain.Resource
-import com.example.tripplanner.extensions.makeGone
-import com.example.tripplanner.extensions.makeVisible
 import com.example.tripplanner.ui.activities.MenuActivity
 import com.example.tripplanner.ui.dialogs.DialogImpl
 import com.example.tripplanner.utils.permission.PermissionManager
@@ -50,6 +48,7 @@ class TripMapFragment : Fragment() {
         super.onCreate(savedInstanceState)
         askForPermission()
         initViewBinding()
+        initFabBackButton()
         collectJourneyResponse()
     }
 
@@ -60,6 +59,12 @@ class TripMapFragment : Fragment() {
     ): View? {
         menuActivityInstance.hideMenu()
         return binding.root
+    }
+
+    private fun initFabBackButton(){
+        binding.fabBack.setOnClickListener {
+            activity?.onBackPressed()
+        }
     }
 
     private fun addMarkerToMap(
