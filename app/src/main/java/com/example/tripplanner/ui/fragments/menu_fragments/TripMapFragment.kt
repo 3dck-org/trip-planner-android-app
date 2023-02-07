@@ -3,7 +3,6 @@ package com.example.tripplanner.ui.fragments.menu_fragments
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
-import android.graphics.Color
 import android.net.Uri
 import android.os.Bundle
 import android.provider.Settings
@@ -15,13 +14,12 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.example.currencyexchangeapp.utils.permission.Permission
 import com.example.tripplanner.R
-import com.example.tripplanner.databinding.FragmentTripBinding
 import com.example.tripplanner.databinding.FragmentTripMapBinding
 import com.example.tripplanner.domain.Resource
-import com.example.tripplanner.domain.google_maps.DirectionResponses
 import com.example.tripplanner.extensions.makeGone
 import com.example.tripplanner.extensions.makeVisible
 import com.example.tripplanner.ui.activities.MenuActivity
+import com.example.tripplanner.ui.dialogs.DialogImpl
 import com.example.tripplanner.utils.permission.PermissionManager
 import com.example.tripplanner.view_models.CurrentJourneyViewModel
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -31,15 +29,8 @@ import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
-import com.google.android.gms.maps.model.PolylineOptions
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
-import retrofit2.Call
-import retrofit2.Response
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
-import retrofit2.http.GET
-import retrofit2.http.Query
 import timber.log.Timber
 
 @AndroidEntryPoint
@@ -49,9 +40,9 @@ class TripMapFragment : Fragment() {
     val viewModel: CurrentJourneyViewModel by viewModels()
     private var callback: OnMapReadyCallback? = null
     private val permissionManager = PermissionManager.from(this)
-    private lateinit var binding : FragmentTripMapBinding
+    private lateinit var binding: FragmentTripMapBinding
 
-    private fun initViewBinding(){
+    private fun initViewBinding() {
         binding = FragmentTripMapBinding.inflate(layoutInflater)
     }
 
@@ -88,12 +79,7 @@ class TripMapFragment : Fragment() {
                         it.data.journey_place_infos.find { it.status == "active" }.let { journey ->
                             if (journey != null) {
                                 Timber.d("*******@*$!**")
-                                binding.layoutEmpty.root.makeGone()
-                                with(binding.layoutSuccess){
-                                    root.makeVisible()
-                                    tvState.text = "Fine"
-                                    tvStateDescription.text = "Click on your place and use additional buttons to navigate to your place.\nTo get back please, click \"back\""
-                                }
+                                showDialogByType(State.SUCCESS)
                                 val latLng = LatLng(
                                     journey.place.point.x.toDouble(),
                                     journey.place.point.y.toDouble()
@@ -103,16 +89,16 @@ class TripMapFragment : Fragment() {
                                     googleMap.uiSettings.isMapToolbarEnabled = true
                                     googleMap.uiSettings.isCompassEnabled = true
                                     addMarkerToMap(googleMap, latLng, journey.place.name)
-                                    googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15f))
+                                    googleMap.moveCamera(
+                                        CameraUpdateFactory.newLatLngZoom(
+                                            latLng,
+                                            15f
+                                        )
+                                    )
                                     googleMap.isMyLocationEnabled = true
                                 }
                             } else {
-                                binding.layoutSuccess.root.makeGone()
-                                with(binding.layoutEmpty){
-                                    root.makeVisible()
-                                    tvState.text = "Pick a place"
-                                    tvStateDescription.text = "Actually you did not pick any place to visit. Please go back to your journey and pick one"
-                                }
+                                showDialogByType(State.EMPTY_PLACE)
                                 callback = OnMapReadyCallback { googleMap ->
                                     googleMap.isMyLocationEnabled = true
                                 }
@@ -122,14 +108,10 @@ class TripMapFragment : Fragment() {
                             callback?.let { c -> mapFragment?.getMapAsync(c) }
                         }
                     }
-                    else -> {
-                        binding.layoutSuccess.root.makeGone()
-                        with(binding.layoutEmpty){
-                            root.makeVisible()
-                            tvState.text = "Empty -_-"
-                            tvStateDescription.text = "Actually you did not pick any trip. Please start your first journey! "
-                        }
+                    is Resource.Empty -> {
+                        showDialogByType(State.EMPTY_JOURNEY)
                     }
+                    else ->{ Timber.d(" Other answer") }
                 }
             }
         }
@@ -155,31 +137,47 @@ class TripMapFragment : Fragment() {
         startActivity(intent)
     }
 
-
-    private fun drawPolyline(response: Response<DirectionResponses>) {
-        val shape = response.body()?.routes?.get(0)?.overviewPolyline?.points
-        val polyline = PolylineOptions()
-//            .addAll(PolyUtil.decode(shape))
-            .width(8f)
-            .color(Color.RED)
-//        map.addPolyline(polyline)
-    }
-
-    private interface ApiServices {
-        @GET("maps/api/directions/json")
-        fun getDirection(@Query("origin") origin: String,
-                         @Query("destination") destination: String,
-                         @Query("key") apiKey: String): Call<DirectionResponses>
-    }
-
-    private object RetrofitClient {
-        fun apiServices(context: Context): ApiServices {
-            val retrofit = Retrofit.Builder()
-                .addConverterFactory(GsonConverterFactory.create())
-                .baseUrl("https://maps.googleapis.com")
-                .build()
-
-            return retrofit.create<ApiServices>(ApiServices::class.java)
+    private fun showDialogByType(state: State) {
+        var dialogInformation: DialogImpl.DialogInformation? = null
+        context?.let { fragmentContext ->
+            when (state) {
+                State.SUCCESS -> {
+                    dialogInformation = DialogImpl.DialogInformation(
+                        "Cool",
+                        "Click on your place and use additional buttons to navigate to your place.\n" +
+                                "To get back please, click \"back\"",
+                        "Okay"
+                    )
+                }
+                State.EMPTY_JOURNEY -> {
+                    dialogInformation = DialogImpl.DialogInformation(
+                        "Start a journey",
+                        "Actually you did not pick any trip. Please start your first journey!",
+                        "Ok"
+                    )
+                }
+                State.EMPTY_PLACE -> {
+                    dialogInformation = DialogImpl.DialogInformation(
+                        "Pick a place",
+                        "Actually you did not pick any place to visit. Please go back to your journey and pick one",
+                        "Ok"
+                    )
+                }
+            }
+            dialogInformation?.let { showDialog(fragmentContext, it) }
         }
+    }
+
+    private fun showDialog(context: Context, dialogInformation: DialogImpl.DialogInformation) {
+        DialogImpl.showDialog(
+            context,
+            dialogInformation
+        )
+    }
+
+    private enum class State {
+        SUCCESS,
+        EMPTY_PLACE,
+        EMPTY_JOURNEY
     }
 }

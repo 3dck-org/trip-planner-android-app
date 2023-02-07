@@ -22,6 +22,7 @@ class MenuActivity : AppCompatActivity() {
         initBinding()
         setContentView(binding.root)
         setupNavigationBottomBar()
+        setupToolbar()
     }
     
     private fun initBinding() {
@@ -32,6 +33,10 @@ class MenuActivity : AppCompatActivity() {
         val navigationController = findNavController(R.id.fragment)
         binding.bottomNavigation.itemIconTintList = null
         binding.bottomNavigation.setupWithNavController(navigationController)
+    }
+
+    private fun setupToolbar(){
+        setSupportActionBar(binding.toolbar)
     }
 
     fun hideMenu(){
