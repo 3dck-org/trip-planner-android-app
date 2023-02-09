@@ -1,6 +1,6 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Theme.TripPlanner" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+    <style name="Theme.TripPlanner" parent="Theme.MaterialComponents.Light.NoActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/base_color_3</item>
         <item name="colorPrimaryVariant">@color/base_color_3</item>
@@ -14,7 +14,7 @@
         <!-- Customize your theme here. -->
     </style>
 
-    <style name="Theme.TripPlanner.Night" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+    <style name="Theme.TripPlanner.Night" parent="Theme.MaterialComponents.Light.DarkActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/base_color_2</item>
         <item name="colorPrimaryVariant">@color/base_color_2</item>
