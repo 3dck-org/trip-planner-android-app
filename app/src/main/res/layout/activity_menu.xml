@@ -3,8 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:background="@color/white"
     android:layout_height="match_parent"
+    android:background="@color/white"
     tools:context=".ui.activities.MenuActivity">
 
     <com.google.android.material.appbar.AppBarLayout
@@ -12,24 +12,23 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintTop_toTopOf="parent"
-        >
+        app:layout_constraintTop_toTopOf="parent">
+
         <com.google.android.material.appbar.MaterialToolbar
             android:id="@+id/toolbar"
+            style="@style/Widget.MaterialComponents.Toolbar.Primary"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            app:title="TripPlanner"
             android:isScrollContainer="true"
             app:layout_scrollFlags="scroll|enterAlways"
-            app:titleTextAppearance="@style/DefaultTextAppearanceToolbar"
-            style="@style/Widget.MaterialComponents.Toolbar.Primary">
+            app:title="TripPlanner"
+            app:titleTextAppearance="@style/DefaultTextAppearanceToolbar">
 
             <ImageView
                 android:layout_width="30dp"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_rocket"
                 android:rotation="30"
-                />
+                android:src="@drawable/ic_rocket" />
         </com.google.android.material.appbar.MaterialToolbar>
     </com.google.android.material.appbar.AppBarLayout>
 
@@ -48,15 +47,15 @@
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_navigation"
+        style="@style/MenuTheme"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:background="@drawable/bg_bottom_navigation"
         android:clipChildren="false"
+        app:itemIconSize="20dp"
         app:itemIconTint="@color/white"
         app:itemTextColor="@color/white"
         app:labelVisibilityMode="labeled"
-        style="@style/MenuTheme"
-        app:itemIconSize="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

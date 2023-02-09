@@ -1,5 +1,6 @@
 package com.example.tripplanner.utils.recievers
 
+import android.annotation.SuppressLint
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
@@ -9,6 +10,7 @@ import android.widget.Toast
 
 class Receiver : BroadcastReceiver() {
 
+    @SuppressLint("SuspiciousIndentation")
     override fun onReceive(context: Context?, intent: Intent?) {
         val cm = context?.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
         val activeNetwork: NetworkInfo? = cm.activeNetworkInfo

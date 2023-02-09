@@ -10,38 +10,25 @@
         android:id="@+id/app_toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/white"
-        android:elevation="20dp"
-        app:elevation="20dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        android:orientation="vertical"
         app:layout_constraintTop_toTopOf="parent">
 
-        <androidx.appcompat.widget.Toolbar
+        <com.google.android.material.appbar.MaterialToolbar
             android:id="@+id/toolbar"
+            style="@style/Widget.MaterialComponents.Toolbar.Primary"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:elevation="20dp"
-            app:elevation="20dp"
-            android:background="@color/base_color_3">
+            android:layout_height="?attr/actionBarSize"
+            android:isScrollContainer="true"
+            app:layout_scrollFlags="scroll|enterAlways"
+            app:title="TripPlanner"
+            app:titleTextAppearance="@style/DefaultTextAppearanceToolbar">
 
-        <ImageView
-            android:layout_width="32dp"
-            android:layout_height="32dp"
-            android:src="@drawable/ic_godlen_city"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/trip_planner"
-            android:textColor="@color/white"
-            android:textStyle="bold"
-            android:textSize="16sp"
-            android:layout_gravity="center"
-            android:fontFamily="@font/baloo_bold"
-            />
-
-        </androidx.appcompat.widget.Toolbar>
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="wrap_content"
+                android:rotation="30"
+                android:src="@drawable/ic_rocket" />
+        </com.google.android.material.appbar.MaterialToolbar>
     </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.fragment.app.FragmentContainerView

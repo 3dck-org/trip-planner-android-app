@@ -56,7 +56,7 @@ class TripMapFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         menuActivityInstance.hideMenu()
         return binding.root
     }
