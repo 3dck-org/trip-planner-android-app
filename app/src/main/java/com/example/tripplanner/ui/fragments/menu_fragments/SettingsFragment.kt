@@ -6,8 +6,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
+import com.example.tripplanner.R
 import com.example.tripplanner.constants.Constants
 import com.example.tripplanner.databinding.FragmentSettingsBinding
+import com.example.tripplanner.ui.activities.MenuActivity
 import com.example.tripplanner.utils.sharedpreferences.EncryptedSharedPreferences
 import com.example.tripplanner.ui.activities.SplashActivity
 import com.example.tripplanner.ui.activities.UserActivity
@@ -20,12 +23,14 @@ class SettingsFragment : Fragment() {
     @Inject
     lateinit var sharedPref: EncryptedSharedPreferences
     private lateinit var binding: FragmentSettingsBinding
+    private val menuActivityInstance by lazy { activity as MenuActivity }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         initBinding()
+        menuActivityInstance.showMenu()
         handleSettingsClick()
         return binding.root
     }
@@ -49,6 +54,6 @@ class SettingsFragment : Fragment() {
     }
 
     private fun accountDetailsSettingClick(){
-        startActivity(Intent(activity, UserActivity::class.java))
+        findNavController().navigate(R.id.userDetailsFragment)
     }
 }

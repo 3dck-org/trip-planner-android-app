@@ -11,7 +11,7 @@
         android:layout_width="@dimen/eights_margin"
         android:layout_height="@dimen/eights_margin"
         android:theme="@style/ProgressBarTheme"
-        android:visibility="gone"
+        android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -76,12 +76,30 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/first_margin"
-        android:enabled="false"
-        android:fontFamily="@font/baloo_regular"
+        android:enabled="true"
+        android:fontFamily="@font/baloo_bold"
         android:minHeight="64dp"
         android:text="@string/change_password_btn"
-        android:visibility="gone"
-        app:layout_constraintTop_toBottomOf="@id/email_tv"
-        tools:visibility="visible" />
+        app:layout_constraintTop_toBottomOf="@id/email_tv" />
 
+    <include
+        android:id="@+id/layout_change_password"
+        layout="@layout/layout_change_password"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/email_tv" />
+
+    <include
+        android:id="@+id/layout_success"
+        layout="@layout/layout_success_start"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/layout_change_password" />
 </androidx.constraintlayout.widget.ConstraintLayout>

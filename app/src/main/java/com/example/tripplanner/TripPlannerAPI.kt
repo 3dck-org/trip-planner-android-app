@@ -1,6 +1,7 @@
 package com.example.tripplanner
 
 import com.example.tripplanner.domain.*
+import com.example.tripplanner.repositories.BaseRepository.Companion.mapOfHeaders
 import kotlinx.coroutines.Deferred
 import okhttp3.ResponseBody
 import retrofit2.Response
@@ -64,4 +65,10 @@ interface TripPlannerAPI {
         @HeaderMap mapOfHeaders: Map<String, String>,
         @Body requestBody: StatusRequest
         ) : Deferred<Response<StatusResponse>>
+
+    @POST("/api/v1/change_password")
+    fun changePasswordAsync(
+        @HeaderMap mapOfHeaders: Map<String, String>,
+        @Body requestBody: PasswordRequest
+    ) : Deferred<Response<PasswordResponse>>
 }
