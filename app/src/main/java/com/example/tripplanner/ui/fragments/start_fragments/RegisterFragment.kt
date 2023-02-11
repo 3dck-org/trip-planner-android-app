@@ -1,4 +1,4 @@
-package com.example.tripplanner.ui.fragments
+package com.example.tripplanner.ui.fragments.start_fragments
 
 import android.content.Intent
 import android.os.Bundle

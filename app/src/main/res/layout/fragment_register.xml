@@ -9,7 +9,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        tools:context=".ui.fragments.RegisterFragment">
+        tools:context=".ui.fragments.start_fragments.RegisterFragment">
 
         <TextView
             android:id="@+id/title_tv"

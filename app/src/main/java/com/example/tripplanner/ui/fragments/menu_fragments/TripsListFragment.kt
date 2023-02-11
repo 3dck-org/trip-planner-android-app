@@ -1,9 +1,7 @@
 package com.example.tripplanner.ui.fragments.menu_fragments
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.setFragmentResult
@@ -38,7 +36,6 @@ class TripsListFragment : Fragment() {
     private lateinit var binding: FragmentTripsListBinding
     private var offeredTripsAdapter: TripsAdapter? = null
     private val tripListViewModel: TripListViewModel by viewModels()
-    private var activeJourneyId: Int = -1
 
     @Inject
     lateinit var sharedPref: EncryptedSharedPreferences
@@ -54,7 +51,7 @@ class TripsListFragment : Fragment() {
         initViewBinding()
         initRecyclerView()
         collectForTrips()
-        collectForJourneys()
+        refreshOnDragUp()
     }
 
     override fun onCreateView(
@@ -62,7 +59,6 @@ class TripsListFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         getJourneys()
-        refreshOnDragUp()
         return binding.root
     }
 
@@ -70,8 +66,6 @@ class TripsListFragment : Fragment() {
         super.onResume()
         menuActivityInstance.showMenu()
     }
-
-    private fun getTrips() = tripListViewModel.getTrips()
 
     private fun getJourneys() = tripListViewModel.getJourneys()
 
@@ -91,27 +85,7 @@ class TripsListFragment : Fragment() {
                     is Resource.Success -> {
                         Timber.d("Success: ${it.data}")
                         binding.progressBar.hide()
-                        offeredTripsAdapter?.addDataToAdapter(it.data, activeJourneyId)
-                    }
-                }
-            }
-        }
-    }
-
-    private fun collectForJourneys() {
-        lifecycleScope.launch {
-            tripListViewModel.responseJourney.collect {
-                when (it) {
-                    is Resource.Error -> {
-                        Timber.d("Error: ${it.errorData}")
-                    }
-                    is Resource.Progress -> {
-                        binding.progressBar.show()
-                    }
-                    is Resource.Success -> {
-                        activeJourneyId =
-                            it.data.find { journey -> journey.completed != "true" }?.trip_id ?: -1
-                        getTrips()
+                        offeredTripsAdapter?.addDataToAdapter(it.data, tripListViewModel.currentTripId)
                     }
                 }
             }

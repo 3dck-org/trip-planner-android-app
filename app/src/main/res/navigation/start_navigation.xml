@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/startFragment"
-        android:name="com.example.tripplanner.ui.fragments.StartFragment"
+        android:name="com.example.tripplanner.ui.fragments.start_fragments.StartFragment"
         android:label="fragment_start"
         tools:layout="@layout/fragment_start">
         <action
@@ -19,12 +19,12 @@
     </fragment>
     <fragment
         android:id="@+id/loginFragment"
-        android:name="com.example.tripplanner.ui.fragments.LoginFragment"
+        android:name="com.example.tripplanner.ui.fragments.start_fragments.LoginFragment"
         android:label="fragment_login"
         tools:layout="@layout/fragment_login" />
     <fragment
         android:id="@+id/registerFragment"
-        android:name="com.example.tripplanner.ui.fragments.RegisterFragment"
+        android:name="com.example.tripplanner.ui.fragments.start_fragments.RegisterFragment"
         android:label="fragment_register"
         tools:layout="@layout/fragment_register" />
 </navigation>

@@ -13,7 +13,6 @@ import com.example.tripplanner.databinding.FragmentSettingsBinding
 import com.example.tripplanner.ui.activities.MenuActivity
 import com.example.tripplanner.utils.sharedpreferences.EncryptedSharedPreferences
 import com.example.tripplanner.ui.activities.SplashActivity
-import com.example.tripplanner.ui.activities.UserActivity
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
