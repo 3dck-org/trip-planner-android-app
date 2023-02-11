@@ -11,12 +11,14 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.tripplanner.databinding.FragmentFilterTripsListBinding
+import com.example.tripplanner.db.entities.CategoryEntity
 import com.example.tripplanner.domain.Resource
 import com.example.tripplanner.ui.activities.MenuActivity
 import com.example.tripplanner.ui.adapters.CategoriesFilterAdapter
 import com.example.tripplanner.ui.adapters.CityFilterAdapter
 import com.example.tripplanner.view_models.FilterTripsListViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
@@ -42,7 +44,15 @@ class FilterTripsListFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         getFilters()
+        initClearBtn()
         return viewBinding.root
+    }
+
+    private fun initClearBtn(){
+        viewBinding.btnClear.setOnClickListener {
+            filtersViewModel.clearDatabase()
+            getFilters()
+        }
     }
 
     private fun getFilters() {
@@ -54,8 +64,12 @@ class FilterTripsListFragment : Fragment() {
             filtersViewModel.response.collect {
                 when (it) {
                     is Resource.Success -> {
-                        cityAdapter?.addData(it.data.cities)
-                        categoryAdapter?.addData(it.data.categories)
+                            cityAdapter?.addData(it.data.cities)
+                        lifecycleScope.launch(Dispatchers.IO) {
+                            filtersViewModel.getCategoryFilterFromDB().let { dbCategories ->
+                                categoryAdapter?.addData(it.data.categories, dbCategories)
+                            }
+                        }
                     }
                     else -> {}
                 }
@@ -73,8 +87,18 @@ class FilterTripsListFragment : Fragment() {
         viewBinding.rvCitiesFilters.layoutManager = llm
     }
 
+    private fun addCategoryToDB(categoryEntity: CategoryEntity) {
+        lifecycleScope.launch(Dispatchers.IO) {
+            filtersViewModel.addCategoryFilterToDB(categoryEntity)
+        }}
+
+    private fun removeCategoryToDB(categoryName: String) {
+        lifecycleScope.launch(Dispatchers.IO) {
+            filtersViewModel.removeCategoryFilterToDB(categoryName)
+        }}
+
     private fun initCategoriesRecyclerView() {
-        categoryAdapter = CategoriesFilterAdapter()
+        categoryAdapter = CategoriesFilterAdapter(::addCategoryToDB, ::removeCategoryToDB)
         val llm = LinearLayoutManager(activity?.baseContext)
         llm.orientation = RecyclerView.VERTICAL
         viewBinding.rvCategoryFilters.adapter = categoryAdapter

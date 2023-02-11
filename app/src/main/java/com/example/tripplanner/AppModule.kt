@@ -1,7 +1,10 @@
 package com.example.tripplanner
 
 import android.content.Context
+import androidx.room.Room
 import com.example.tripplanner.constants.Constants.BASE_URL
+import com.example.tripplanner.db.FilterDatabase
+import com.example.tripplanner.db.dao.IDao
 import com.example.tripplanner.utils.sharedpreferences.EncryptedSharedPreferences
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import dagger.Module
@@ -40,7 +43,6 @@ object AppModule {
     @Singleton
     @Provides
     fun provideApi(): TripPlannerAPI =
-//        SafeMock()
         Retrofit.Builder()
             .baseUrl(BASE_URL)
             .client(provideToHttpClient(provideLoggingInterceptor()))
@@ -53,5 +55,13 @@ object AppModule {
     @Provides
     fun provideSharedPref(@ApplicationContext appContext: Context): EncryptedSharedPreferences {
         return EncryptedSharedPreferences(appContext)
+    }
+
+    @Singleton
+    @Provides
+    fun provideFiltersDB(@ApplicationContext appContext: Context): IDao {
+        return Room
+            .databaseBuilder(appContext, FilterDatabase::class.java, FilterDatabase.DB_NAME)
+            .fallbackToDestructiveMigration().build().dao()
     }
 }
