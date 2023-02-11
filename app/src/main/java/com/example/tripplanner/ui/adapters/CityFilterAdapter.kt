@@ -7,7 +7,8 @@ import com.example.tripplanner.databinding.ItemCityFiltersBinding
 import com.example.tripplanner.db.entities.CityEntity
 
 class CityFilterAdapter(
-    val updateDatabase: (city: CityEntity) -> Unit
+    val updateDatabase: (city: CityEntity) -> Unit,
+    val clear: () -> Unit,
 ) : RecyclerView.Adapter<CityFilterAdapter.CityFilterViewHolder>() {
 
     lateinit var itemBinding: ItemCityFiltersBinding
@@ -33,14 +34,26 @@ class CityFilterAdapter(
     }
 
     private fun initViewBinding(parent: ViewGroup) {
-        itemBinding = ItemCityFiltersBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        itemBinding =
+            ItemCityFiltersBinding.inflate(LayoutInflater.from(parent.context), parent, false)
     }
 
     inner class CityFilterViewHolder(val itemViewBinding: ItemCityFiltersBinding) :
         RecyclerView.ViewHolder(itemBinding.root) {
 
-            fun initViewHolder(city: CityEntity){
-                itemViewBinding.tvCityName.text = city.city
+        fun initViewHolder(city: CityEntity) {
+            itemViewBinding.tvCityName.text = city.city
+            itemViewBinding.rbCity.isChecked = city.city_is_picked
+            if (itemViewBinding.rbCity.isChecked) {
+                itemViewBinding.rbCity.setOnClickListener {
+                    clear.invoke()
+                }
+            } else {
+                itemViewBinding.rbCity.setOnClickListener {
+                    clear.invoke()
+                    updateDatabase.invoke(city.copy(city_is_picked = true))
+                }
             }
+        }
     }
 }

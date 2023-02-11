@@ -20,12 +20,12 @@
         tools:text="Warsaw"/>
 
     <RadioButton
+        android:id="@+id/rb_city"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginEnd="16dp"
         android:layout_marginVertical="12dp"
-        style="@style/CustomRadioTheme"
         android:buttonTint="@color/base_color_3"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"

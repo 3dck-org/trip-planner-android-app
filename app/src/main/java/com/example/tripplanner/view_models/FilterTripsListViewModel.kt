@@ -50,4 +50,8 @@ class FilterTripsListViewModel @Inject constructor() : ViewModel() {
     private fun clearAllCities() {
         dao.clearAllCities()
     }
+
+    fun clearCity() {
+        dao.clearAllCities()
+    }
 }

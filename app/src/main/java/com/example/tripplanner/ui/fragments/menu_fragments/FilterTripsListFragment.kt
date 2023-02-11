@@ -1,10 +1,10 @@
 package com.example.tripplanner.ui.fragments.menu_fragments
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -19,9 +19,8 @@ import com.example.tripplanner.ui.adapters.CityFilterAdapter
 import com.example.tripplanner.view_models.FilterTripsListViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
-import timber.log.Timber
+import kotlinx.coroutines.withContext
 
 @AndroidEntryPoint
 class FilterTripsListFragment : Fragment() {
@@ -69,7 +68,7 @@ class FilterTripsListFragment : Fragment() {
     }
 
     private fun initCitiesRecyclerView() {
-        cityAdapter = CityFilterAdapter(::updateCityDB)
+        cityAdapter = CityFilterAdapter(::updateCityDB, ::clear)
         val llm = LinearLayoutManager(activity?.baseContext)
         llm.orientation = RecyclerView.VERTICAL
         viewBinding.rvCitiesFilters.adapter = cityAdapter
@@ -88,9 +87,15 @@ class FilterTripsListFragment : Fragment() {
         viewBinding.rvCategoryFilters.layoutManager = llm
     }
 
+    private fun clear() {
+        lifecycleScope.launch(Dispatchers.IO){
+            filtersViewModel.clearCity()
+        }
+    }
+
     private fun updateCategoryDB(categoryEntity: CategoryEntity) {
         lifecycleScope.launch(Dispatchers.IO) {
-            filtersViewModel.updateCategoryFilterToDB(categoryEntity)
+                filtersViewModel.updateCategoryFilterToDB(categoryEntity)
         }}
 
     private fun updateCityDB(city: CityEntity) {
