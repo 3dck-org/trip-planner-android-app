@@ -1,9 +1,7 @@
 package com.example.tripplanner
 
 import com.example.tripplanner.domain.*
-import com.example.tripplanner.repositories.BaseRepository.Companion.mapOfHeaders
 import kotlinx.coroutines.Deferred
-import okhttp3.ResponseBody
 import retrofit2.Response
 import retrofit2.http.*
 
@@ -19,7 +17,16 @@ interface TripPlannerAPI {
     suspend fun getRefreshTokenAsync(@Body registrationRequest: LoginRequest): OauthResponse
 
     @GET("api/v1/trips")
-    fun getTripsAsync(@HeaderMap mapOfHeaders: Map<String, String>): Deferred<Response<TripsResponse>>
+    fun getTripsAsync(
+        @HeaderMap mapOfHeaders: Map<String, String>
+    ): Deferred<Response<TripsResponse>>
+
+    @GET("api/v1/trips")
+    fun getTrips(
+        @HeaderMap mapOfHeaders: Map<String, String>,
+        @Query("city") city: String? = null,
+        @Query("category_names") category: String? = null
+    ): Deferred<Response<TripsResponse>>
 
     @GET("api/v1/journeys")
     fun getUsersTripsAsync(@HeaderMap mapOfHeaders: Map<String, String>): Deferred<Response<JourneysResponse>>
@@ -44,7 +51,10 @@ interface TripPlannerAPI {
     fun getCurrentJourneyAsync(@HeaderMap mapOfHeaders: Map<String, String>): Deferred<Response<CurrentJourneyResponse>>
 
     @GET("api/v1/trips/{id}")
-    fun getTripByIdAsync(@HeaderMap mapOfHeaders: Map<String, String>, @Path("id") tripId: Int) : Deferred<Response<TripByIdResponse>>
+    fun getTripByIdAsync(
+        @HeaderMap mapOfHeaders: Map<String, String>,
+        @Path("id") tripId: Int
+    ): Deferred<Response<TripByIdResponse>>
 
     @PUT("/api/v1/trips/{id}")
     fun modifyTripToFavouritesAsync(
@@ -58,22 +68,22 @@ interface TripPlannerAPI {
         @HeaderMap mapOfHeaders: Map<String, String>,
         @Path("id") tripId: Int,
         @Body isLiked: TripLikeRequest
-    ) : Deferred<Response<TripsResponseItem>>
+    ): Deferred<Response<TripsResponseItem>>
 
     @PUT("/api/v1/update_place_status")
     fun updateStatusAsync(
         @HeaderMap mapOfHeaders: Map<String, String>,
         @Body requestBody: StatusRequest
-        ) : Deferred<Response<StatusResponse>>
+    ): Deferred<Response<StatusResponse>>
 
     @POST("/api/v1/change_password")
     fun changePasswordAsync(
         @HeaderMap mapOfHeaders: Map<String, String>,
         @Body requestBody: PasswordRequest
-    ) : Deferred<Response<PasswordResponse>>
+    ): Deferred<Response<PasswordResponse>>
 
     @GET("/api/v1/filter_data")
     fun getFiltersAsync(
         @HeaderMap mapOfHeaders: Map<String, String>
-    ) : Deferred<Response<FiltersResponse>>
+    ): Deferred<Response<FiltersResponse>>
 }

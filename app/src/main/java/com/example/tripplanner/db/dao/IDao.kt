@@ -19,6 +19,12 @@ interface IDao {
     @Query("SELECT * FROM CategoryEntity")
     fun getCategoryEntity(): Flow<List<CategoryEntity>>
 
+    @Query("SELECT * FROM CityEntity")
+    fun getCitiesEntity2(): List<CityEntity>
+
+    @Query("SELECT * FROM CategoryEntity")
+    fun getCategoryEntity2(): List<CategoryEntity>
+
     //updates
     @Update
     fun updateCategories(category: CategoryEntity)

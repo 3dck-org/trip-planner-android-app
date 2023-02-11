@@ -5,6 +5,7 @@ import kotlinx.coroutines.flow.Flow
 
 interface ITripsRepository {
     suspend fun getTrips(): Flow<Resource<TripsResponse>>
+    suspend fun getTrips(city: String?=null, categories : String?=null): Flow<Resource<TripsResponse>>
     suspend fun getCurrentJourney() : Flow<Resource<CurrentJourneyResponse>>
     suspend fun getFilters() : Flow<Resource<FiltersResponse>>
 }

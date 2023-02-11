@@ -32,9 +32,24 @@ class TripListViewModel @Inject constructor(
     val response: StateFlow<Resource<TripsResponse>>
         get() = _responseTrips
 
+    private fun getDBResponse(): TripRequest {
+        var s = ""
+        dao.getCategoryEntity2().filter { it.isPicked }.map { it.name }.forEachIndexed{
+            index, f ->
+            s += if(index == f.length){
+                f
+            }else{
+                "$f,"
+            }
+        }
+        val city = dao.getCitiesEntity2().find { it.city_is_picked }?.city
+        return TripRequest(category_names = if(s=="")null else s, city)
+    }
+
     private fun getTrips(idTrip: Int = -1) {
         viewModelScope.launch(Dispatchers.IO) {
-            tripsRepository.getTrips().collect {
+            val a = getDBResponse()
+            tripsRepository.getTrips(a.city, a.category_names).collect {
                 if (it is Resource.Success) {
                     it.data.apply {
                         sortBy { trip -> trip.isFavourite }
