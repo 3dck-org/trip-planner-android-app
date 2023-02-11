@@ -19,6 +19,7 @@ class MenuActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         initBinding()
         setContentView(binding.root)
+        setSupportActionBar(binding.toolbar)
         setupNavigationBottomBar()
     }
     

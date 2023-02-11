@@ -192,7 +192,7 @@ class CurrentTripFragment : Fragment() {
             durationTv.text = Converter.convertDuration(journey.trip.duration)
             distanceTv.text = Converter.convertDistance(journey.trip.distance.toFloat())
             descriptionTripTv.text = journey.trip.description
-            userNameTv.text = "${journey.user.name} ${journey.user.surname}"
+            userNameTv.text = "${journey.trip.user.name} ${journey.trip.user.surname}"
             createdAtTv.text = journey.trip.created_at.formatDate()
             recyclerView.isNestedScrollingEnabled = false
             setLikeState()

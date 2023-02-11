@@ -71,4 +71,9 @@ interface TripPlannerAPI {
         @HeaderMap mapOfHeaders: Map<String, String>,
         @Body requestBody: PasswordRequest
     ) : Deferred<Response<PasswordResponse>>
+
+    @GET("/api/v1/filter_data")
+    fun getFiltersAsync(
+        @HeaderMap mapOfHeaders: Map<String, String>
+    ) : Deferred<Response<FiltersResponse>>
 }

@@ -3,9 +3,12 @@ package com.example.tripplanner.ui.fragments.menu_fragments
 import android.os.Bundle
 import android.view.*
 import androidx.core.os.bundleOf
+import androidx.core.view.MenuHost
+import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.setFragmentResult
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
@@ -32,17 +35,28 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class TripsListFragment : Fragment() {
 
+    @Inject
+    lateinit var sharedPref: EncryptedSharedPreferences
+
     private val menuActivityInstance by lazy { activity as MenuActivity }
     private lateinit var binding: FragmentTripsListBinding
     private var offeredTripsAdapter: TripsAdapter? = null
     private val tripListViewModel: TripListViewModel by viewModels()
 
-    @Inject
-    lateinit var sharedPref: EncryptedSharedPreferences
+    private val menuProvider = object : MenuProvider {
 
-    private fun refreshOnDragUp() {
-        binding.swipeContainer.setOnRefreshListener {
-            getJourneys()
+        override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
+            menuInflater.inflate(R.menu.filter_menu, menu)
+        }
+
+        override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
+            return when(menuItem.itemId){
+                R.id.searchItem ->{
+                    showFilters()
+                    true
+                }
+                else -> true
+            }
         }
     }
 
@@ -59,12 +73,36 @@ class TripsListFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         getJourneys()
+        addMenuProvider()
         return binding.root
     }
 
     override fun onResume() {
         super.onResume()
         menuActivityInstance.showMenu()
+    }
+
+    override fun onStop() {
+        super.onStop()
+        removeMenuProvider()
+    }
+
+    private fun menuHost(): MenuHost{
+        return requireActivity()
+    }
+
+    private fun addMenuProvider(){
+        menuHost().addMenuProvider(menuProvider, viewLifecycleOwner, Lifecycle.State.CREATED)
+    }
+
+    private fun removeMenuProvider(){
+        menuHost().removeMenuProvider(menuProvider)
+    }
+
+    private fun refreshOnDragUp() {
+        binding.swipeContainer.setOnRefreshListener {
+            getJourneys()
+        }
     }
 
     private fun getJourneys() = tripListViewModel.getJourneys()
@@ -108,5 +146,9 @@ class TripsListFragment : Fragment() {
 
     private fun showSubscriptionOption(trip: Trips) {
         findNavController().navigate(R.id.tripFragment, bundleOf("tripId" to trip.trip.id))
+    }
+
+    private fun showFilters() {
+        findNavController().navigate(R.id.filterFragment)
     }
 }

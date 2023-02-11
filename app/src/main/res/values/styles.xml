@@ -59,4 +59,10 @@
     <style name="DefaultTextAppearanceToolbar" parent="@style/TextAppearance.MaterialComponents.Headline6">
         <item name="android:fontFamily">@font/baloo_bold</item>
     </style>
+
+    <style name="CustomRadioTheme" parent="Widget.AppCompat.CompoundButton.RadioButton">
+        <item name="android:colorControlNormal">@color/base_color_3</item>
+        <item name="android:colorControlActivated">@color/base_color_3</item>
+        <item name="android:colorControlHighlight">@color/base_color_3</item>
+    </style>
 </resources>

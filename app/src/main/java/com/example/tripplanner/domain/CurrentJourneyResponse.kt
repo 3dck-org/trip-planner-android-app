@@ -10,7 +10,6 @@ data class CurrentJourneyResponse(
     val trip: Trip,
     val trip_id: Int,
     val updated_at: String,
-    val user: UserDetails,
     val user_id: Int,
     val journey_place_infos: List<JourneyPlaceInfo>
 ){

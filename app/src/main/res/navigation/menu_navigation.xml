@@ -35,5 +35,9 @@
         android:name="com.example.tripplanner.ui.fragments.menu_fragments.UserDetailsFragment"
         android:label="user_details"
         tools:layout="@layout/fragment_user_details"/>
-
+    <fragment
+        android:id="@+id/filterFragment"
+        android:name="com.example.tripplanner.ui.fragments.menu_fragments.FilterTripsListFragment"
+        android:label="fragment_filter"
+        tools:layout="@layout/fragment_filter_trips_list"/>
 </navigation>

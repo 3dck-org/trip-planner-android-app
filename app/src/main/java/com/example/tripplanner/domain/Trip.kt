@@ -11,5 +11,6 @@ data class Trip(
     val name: String,
     val updated_at: String,
     val user_id: String,
+    val user: UserDetails,
     val trip_place_infos: List<TripPlaceInfo>
 )
