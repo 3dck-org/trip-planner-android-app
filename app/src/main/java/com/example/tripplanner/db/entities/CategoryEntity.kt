@@ -10,5 +10,7 @@ data class CategoryEntity(
     @ColumnInfo(name = "code")
     val code: String,
     @ColumnInfo(name = "name")
-    val name: String
+    val name: String,
+    @ColumnInfo(name = "isPicked")
+    val isPicked: Boolean = false
 )

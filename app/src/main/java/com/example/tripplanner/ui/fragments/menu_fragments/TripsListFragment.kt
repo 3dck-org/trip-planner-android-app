@@ -73,6 +73,7 @@ class TripsListFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         getJourneys()
+        tripListViewModel.updateDB()
         addMenuProvider()
         return binding.root
     }

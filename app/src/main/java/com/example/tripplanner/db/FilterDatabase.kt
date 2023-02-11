@@ -6,7 +6,7 @@ import com.example.tripplanner.db.dao.IDao
 import com.example.tripplanner.db.entities.CategoryEntity
 import com.example.tripplanner.db.entities.CityEntity
 
-@Database(entities = [CategoryEntity::class, CityEntity::class], version = 2)
+@Database(entities = [CategoryEntity::class, CityEntity::class], version = 6)
 abstract class FilterDatabase : RoomDatabase(){
 
     abstract fun dao(): IDao

@@ -4,33 +4,39 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
+import androidx.room.Update
 import com.example.tripplanner.db.entities.CategoryEntity
 import com.example.tripplanner.db.entities.CityEntity
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface IDao {
 
+    //getters
     @Query("SELECT * FROM CityEntity")
-    fun getCitiesEntity(): List<CityEntity>
+    fun getCitiesEntity(): Flow<List<CityEntity>>
 
     @Query("SELECT * FROM CategoryEntity")
-    fun getCategoryEntity(): List<CategoryEntity>
+    fun getCategoryEntity(): Flow<List<CategoryEntity>>
 
-    @Query("DELETE FROM CityEntity WHERE city_name = :city ")
-    fun removeFromCitiesEntity(city: String)
+    //updates
+    @Update
+    fun updateCategories(category: CategoryEntity)
 
-    @Query("DELETE FROM CategoryEntity WHERE name = :name")
-    fun removeFromCategoryEntity(name: String)
+    @Update
+    fun updateCity(city: CityEntity)
 
-    @Query("DELETE FROM CityEntity")
-    fun clearCitiesEntity()
+    //clean
+    @Query("UPDATE CategoryEntity SET isPicked=0")
+    fun clearAllCategories()
 
-    @Query("DELETE FROM CategoryEntity")
-    fun clearCategoryEntity()
+    @Query("UPDATE CityEntity SET city_is_picked=0")
+    fun clearAllCities()
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertCities(city: CityEntity)
+    //insertions
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    fun insertAllCategories(categoryList: List<CategoryEntity>)
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertCategories(category: CategoryEntity)
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    fun insertAllCities(categoryList: List<CityEntity>)
 }

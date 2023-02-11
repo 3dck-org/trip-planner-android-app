@@ -7,13 +7,11 @@ import com.example.tripplanner.databinding.ItemCategoryFiltersBinding
 import com.example.tripplanner.db.entities.CategoryEntity
 
 class CategoriesFilterAdapter(
-    val addToDatabase: (category: CategoryEntity) -> Unit,
-    val removeFromDatabase: (name: String) -> Unit
+    val updateDatabase: (category: CategoryEntity) -> Unit
 ) : RecyclerView.Adapter<CategoriesFilterAdapter.CategoriesViewHolder>() {
 
     lateinit var itemBinding: ItemCategoryFiltersBinding
     private val categoryFilterList: MutableList<CategoryEntity> = mutableListOf()
-    val checkedFilterList: MutableList<String> = mutableListOf()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CategoriesViewHolder {
         initViewBinding(parent)
@@ -26,14 +24,10 @@ class CategoriesFilterAdapter(
 
     override fun getItemCount(): Int = categoryFilterList.size
 
-    fun addData(categories: List<CategoryEntity>, checkedList: List<CategoryEntity>) {
+    fun addData(categories: List<CategoryEntity>) {
         this.categoryFilterList.apply {
             clear()
             addAll(categories)
-        }
-        this.checkedFilterList.apply {
-            clear()
-            addAll(checkedList.map { it.name })
         }
         notifyDataSetChanged()
     }
@@ -49,15 +43,15 @@ class CategoriesFilterAdapter(
         fun initViewHolder(category: CategoryEntity) {
             with(itemViewBinding) {
                 tvCategoryName.text = category.name
-                cbCategory.isChecked = category.name in checkedFilterList
+                cbCategory.isChecked = category.isPicked
                 cbCategory.apply {
-                    if (isChecked) {
-                        setOnClickListener { removeFromDatabase.invoke(category.name)
-                        checkedFilterList.remove(category.name)
+                    if (category.isPicked) {
+                        setOnClickListener {
+                            updateDatabase.invoke(category.copy(isPicked = false))
                         }
                     } else {
-                        setOnClickListener { addToDatabase.invoke(category)
-                            checkedFilterList.add(category.name)
+                        setOnClickListener {
+                            updateDatabase.invoke(category.copy(isPicked = true))
                         }
                     }
                 }

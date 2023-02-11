@@ -4,12 +4,14 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.tripplanner.databinding.ItemCityFiltersBinding
-import timber.log.Timber
+import com.example.tripplanner.db.entities.CityEntity
 
-class CityFilterAdapter : RecyclerView.Adapter<CityFilterAdapter.CityFilterViewHolder>() {
+class CityFilterAdapter(
+    val updateDatabase: (city: CityEntity) -> Unit
+) : RecyclerView.Adapter<CityFilterAdapter.CityFilterViewHolder>() {
 
     lateinit var itemBinding: ItemCityFiltersBinding
-    private val cityFilterList: MutableList<String> = mutableListOf()
+    private val cityFilterList: MutableList<CityEntity> = mutableListOf()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CityFilterViewHolder {
         initViewBinding(parent)
@@ -22,10 +24,9 @@ class CityFilterAdapter : RecyclerView.Adapter<CityFilterAdapter.CityFilterViewH
 
     override fun getItemCount(): Int = cityFilterList.size
 
-    fun addData(cities: List<String>) {
+    fun addData(cities: List<CityEntity>) {
         this.cityFilterList.apply {
             clear()
-            Timber.d(" ****** ${cities}")
             addAll(cities)
         }
         notifyDataSetChanged()
@@ -38,8 +39,8 @@ class CityFilterAdapter : RecyclerView.Adapter<CityFilterAdapter.CityFilterViewH
     inner class CityFilterViewHolder(val itemViewBinding: ItemCityFiltersBinding) :
         RecyclerView.ViewHolder(itemBinding.root) {
 
-            fun initViewHolder(city: String){
-                itemViewBinding.tvCityName.text = city
+            fun initViewHolder(city: CityEntity){
+                itemViewBinding.tvCityName.text = city.city
             }
     }
 }
