@@ -9,6 +9,7 @@ import android.provider.Settings
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.RelativeLayout
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
@@ -31,6 +32,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import timber.log.Timber
 
+
 @AndroidEntryPoint
 class TripMapFragment : Fragment() {
 
@@ -49,6 +51,7 @@ class TripMapFragment : Fragment() {
         askForPermission()
         initViewBinding()
         initFabBackButton()
+        resizeToolbar()
         collectJourneyResponse()
     }
 
@@ -73,6 +76,16 @@ class TripMapFragment : Fragment() {
         title: String
     ): Marker? {
         return googleMap.addMarker(MarkerOptions().position(sydney2).title(title))
+    }
+
+    private fun resizeToolbar(){
+        val toolbar = (binding.root.rootView.findViewById<View>("1".toInt())
+            .parent as View).findViewById<View>("4".toInt())
+        val rlp = toolbar.layoutParams as RelativeLayout.LayoutParams
+        rlp.addRule(RelativeLayout.ALIGN_PARENT_TOP, 0)
+        rlp.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM, RelativeLayout.TRUE)
+        rlp.width
+        rlp.setMargins(0, 0, 30, 300)
     }
 
     @SuppressLint("MissingPermission")

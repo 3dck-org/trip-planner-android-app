@@ -37,6 +37,8 @@ class MenuActivity : AppCompatActivity() {
         binding.bottomNavigation.hide()
     }
 
+    fun bottonNavigationBar() = binding.bottomNavigation
+
     fun showMenu() {
         binding.bottomNavigation.show()
     }

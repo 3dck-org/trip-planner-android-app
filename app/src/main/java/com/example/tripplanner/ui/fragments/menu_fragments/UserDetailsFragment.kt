@@ -43,6 +43,7 @@ class UserDetailsFragment : Fragment() {
         openChangePasswordLayout()
         activateConfirmationButtonOnFocus()
         viewModel.getUserDetails()
+        initBackButton()
         return viewBinding.root
     }
 
@@ -54,6 +55,12 @@ class UserDetailsFragment : Fragment() {
         viewBinding.changePasswordBtn.setOnClickListener {
             it.makeGone()
             viewBinding.layoutChangePassword.root.makeVisible()
+        }
+    }
+
+    private fun initBackButton(){
+        viewBinding.fabBack.setOnClickListener {
+            activity?.onBackPressed()
         }
     }
 

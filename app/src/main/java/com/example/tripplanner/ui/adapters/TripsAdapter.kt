@@ -97,10 +97,7 @@ class TripsAdapter(
                     changeItemTripBtn()
                     tripItemCv.strokeColor =
                         ContextCompat.getColor(binding.root.context, R.color.base_color_3)
-                    tripItemCv.isFocusable = false
-                    tripItemCv.isClickable = false
-                    btnTrip.isClickable = false
-                    btnTrip.isFocusable = false
+
                 }
             }
             getImageFromURL(trip.image_url)

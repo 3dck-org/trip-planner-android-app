@@ -6,91 +6,91 @@
     android:layout_height="match_parent"
     android:fillViewport="true">
 
-<androidx.constraintlayout.widget.ConstraintLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:background="@color/grey_settings_background"
-    tools:context=".ui.fragments.menu_fragments.FilterTripsListFragment">
-
-    <com.google.android.material.card.MaterialCardView
-        android:id="@+id/cv_filters"
-        android:layout_width="0dp"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="8dp"
-        android:layout_marginHorizontal="8dp"
-        app:cardCornerRadius="16dp"
-        app:cardElevation="16dp">
+        android:background="@color/grey_settings_background"
+        tools:context=".ui.fragments.menu_fragments.FilterTripsListFragment">
 
-        <TextView
-            android:id="@+id/tv_filters_title"
-            android:layout_width="wrap_content"
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cv_filters"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginHorizontal="8dp"
+            android:layout_marginTop="8dp"
+            app:cardCornerRadius="16dp"
+            app:cardElevation="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:id="@+id/tv_filters_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginVertical="8dp"
+                android:layout_marginStart="16dp"
+                android:fontFamily="@font/baloo_bold"
+                android:text="Trip filters"
+                android:textColor="@color/base_color_3"
+                android:textSize="24sp" />
+
+            <Button
+                android:id="@+id/btn_clear"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:minWidth="128dp"
+                android:layout_gravity="end"
+                android:layout_marginVertical="16dp"
+                android:layout_marginEnd="16dp"
+                android:fontFamily="@font/baloo_bold"
+                android:minHeight="48dp"
+                android:text="Clear" />
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cv_city_filter"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="8dp"
             android:layout_marginVertical="8dp"
-            android:layout_marginStart="16dp"
-            android:textSize="24sp"
-            android:textColor="@color/base_color_3"
-            android:text="Trip filters"
-            android:layout_gravity="center_vertical"
-            android:fontFamily="@font/baloo_bold"/>
+            app:cardCornerRadius="16dp"
+            app:cardElevation="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/cv_filters"
+            >
 
-        <Button
-            android:id="@+id/btn_clear"
-            android:layout_width="wrap_content"
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_cities_filters"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                tools:listitem="@layout/item_city_filters"
+                tools:visibility="visible" />
+        </com.google.android.material.card.MaterialCardView>
+
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cv_category_filters"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="Clear"
-            android:minHeight="48dp"
-            android:fontFamily="@font/baloo_bold"
-            android:layout_gravity="end"
-            android:layout_marginVertical="16dp"
-            android:layout_marginEnd="16dp"
-            />
-    </com.google.android.material.card.MaterialCardView>
+            android:layout_marginHorizontal="8dp"
+            android:layout_marginTop="8dp"
+            app:cardCornerRadius="16dp"
+            app:cardElevation="16dp"
+            android:layout_marginBottom="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/cv_city_filter">
 
-
-    <com.google.android.material.card.MaterialCardView
-        android:id="@+id/cv_category_filters"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/cv_filters"
-        android:layout_marginTop="8dp"
-        android:layout_marginHorizontal="8dp"
-        app:cardCornerRadius="16dp"
-        app:cardElevation="16dp">
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_category_filters"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            tools:listitem="@layout/item_category_filters"
-            tools:visibility="visible"/>
-    </com.google.android.material.card.MaterialCardView>
-
-
-    <com.google.android.material.card.MaterialCardView
-        android:id="@+id/cv_city_filter"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/cv_category_filters"
-        android:layout_marginVertical="8dp"
-        android:layout_marginHorizontal="8dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:cardCornerRadius="16dp"
-        app:cardElevation="16dp">
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_cities_filters"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            tools:listitem="@layout/item_city_filters"
-            tools:visibility="visible"/>
-    </com.google.android.material.card.MaterialCardView>
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_category_filters"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                tools:listitem="@layout/item_category_filters"
+                tools:visibility="visible" />
+        </com.google.android.material.card.MaterialCardView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

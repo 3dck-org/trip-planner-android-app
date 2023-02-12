@@ -9,7 +9,12 @@
         android:id="@+id/tripsListFragment"
         android:name="com.example.tripplanner.ui.fragments.menu_fragments.TripsListFragment"
         android:label="fragment_trips_list"
-        tools:layout="@layout/fragment_trips_list" />
+        tools:layout="@layout/fragment_trips_list" >
+        <action
+            android:id="@+id/action_tripsListFragment_to_historyTripsFragment"
+            app:destination="@id/historyTripsFragment" />
+    </fragment>
+
     <fragment
         android:id="@+id/historyTripsFragment"
         android:name="com.example.tripplanner.ui.fragments.menu_fragments.CurrentTripFragment"

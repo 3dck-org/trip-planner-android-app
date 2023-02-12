@@ -6,12 +6,15 @@ import androidx.core.os.bundleOf
 import androidx.core.view.MenuHost
 import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.findFragment
 import androidx.fragment.app.setFragmentResult
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.navOptions
+import androidx.navigation.ui.NavigationUI
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.tripplanner.R
@@ -133,7 +136,7 @@ class TripsListFragment : Fragment() {
 
     private fun initRecyclerView() {
         offeredTripsAdapter = TripsAdapter(
-            {},
+            ::navigateToCurrentJourneyFragment,
             ::showSubscriptionOption)
         val llm = LinearLayoutManager(activity?.baseContext)
         llm.orientation = RecyclerView.VERTICAL
@@ -147,6 +150,10 @@ class TripsListFragment : Fragment() {
 
     private fun showSubscriptionOption(trip: Trips) {
         findNavController().navigate(R.id.tripFragment, bundleOf("tripId" to trip.trip.id))
+    }
+
+    private fun navigateToCurrentJourneyFragment(){
+        NavigationUI.onNavDestinationSelected(menuActivityInstance.bottonNavigationBar().menu.findItem(R.id.historyTripsFragment),findNavController())
     }
 
     private fun showFilters() {
