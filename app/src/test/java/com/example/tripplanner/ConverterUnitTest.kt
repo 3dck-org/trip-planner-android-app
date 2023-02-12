@@ -11,7 +11,7 @@ class ConverterUnitTest {
     fun test_convert_duration(){
         assertEquals(converterObj.convertDistance(10000f), "10km")
         assertEquals(converterObj.convertDistance(920f), "920m")
-        assertEquals(converterObj.convertDistance(1100f), "1km 100m")
+        assertEquals(converterObj.convertDistance(1100f), "1.100km")
     }
 
     @Test

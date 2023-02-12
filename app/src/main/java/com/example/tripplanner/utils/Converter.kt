@@ -5,7 +5,7 @@ object Converter {
     fun convertDistance(distance: Float): String {
         val kilometers = distance.toInt() / 1000
         val meters = distance.toInt() % 1000
-        return if(kilometers!=0&&meters!=0) {"${distance.toInt() / 1000}km ${distance.toInt() % 1000}m"}else{
+        return if(kilometers!=0&&meters!=0) {"${distance.toInt() / 1000}.${distance.toInt() % 1000}km"}else{
             if(kilometers!=0){ "${distance.toInt() / 1000}km"} else { "${distance.toInt() % 1000}m" }
         }
     }
