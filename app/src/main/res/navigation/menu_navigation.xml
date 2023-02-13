@@ -45,4 +45,8 @@
         android:name="com.example.tripplanner.ui.fragments.menu_fragments.FilterTripsListFragment"
         android:label="fragment_filter"
         tools:layout="@layout/fragment_filter_trips_list"/>
+    <fragment
+        android:id="@+id/aboutUsFragment"
+        android:name="com.example.tripplanner.ui.fragments.menu_fragments.AboutUsFragment"
+        android:label="AboutUsFragment" />
 </navigation>

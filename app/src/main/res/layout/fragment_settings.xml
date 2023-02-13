@@ -23,6 +23,20 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/third_margin"
+        android:fontFamily="@font/baloo_bold"
+        android:text="Settings"
+        android:visibility="visible"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
         android:id="@+id/theme_setting_description_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -87,8 +101,20 @@
         android:layout_marginTop="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/libraries_setting"
+        app:layout_constraintTop_toBottomOf="@id/tv_title"
         app:si_text="Account details" />
+
+    <com.example.tripplanner.ui.custom_views.SettingsItemView
+        android:id="@+id/accont_aboutus_setting"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/second_margin"
+        android:clickable="true"
+        app:enabled="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/accont_details_setting"
+        app:si_text="About us" />
 
     <com.example.tripplanner.ui.custom_views.SettingsItemView
         android:id="@+id/logout_setting"
@@ -99,6 +125,6 @@
         app:enabled="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/accont_details_setting"
+        app:layout_constraintTop_toBottomOf="@id/accont_aboutus_setting"
         app:si_text="Logout" />
 </androidx.constraintlayout.widget.ConstraintLayout>

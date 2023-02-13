@@ -38,6 +38,7 @@ class SettingsFragment : Fragment() {
     private fun handleSettingsClick(){
         binding.logoutSetting.optionViewBinding.optionMaterialButton.setOnClickListener { logoutSettingClick() }
         binding.accontDetailsSetting.optionViewBinding.optionMaterialButton.setOnClickListener { accountDetailsSettingClick() }
+        binding.accontAboutusSetting.optionViewBinding.optionMaterialButton.setOnClickListener { accountAboutusSettingClick() }
     }
 
     private fun initBinding() {
@@ -55,5 +56,9 @@ class SettingsFragment : Fragment() {
 
     private fun accountDetailsSettingClick(){
         findNavController().navigate(R.id.userDetailsFragment)
+    }
+
+    private fun accountAboutusSettingClick(){
+        findNavController().navigate(R.id.aboutUsFragment)
     }
 }
