@@ -86,6 +86,8 @@ class LoginFragment : Fragment() {
                 when (it) {
                     is Resource.Error -> {
                         Timber.d("Error: ${it.errorData}")
+                        binding.emailLayout.error = "Please, check provided email"
+                        binding.passwordLayout.error = "Please, check provided password"
                     }
                     is Resource.Progress -> {
                         Timber.d("Progress")

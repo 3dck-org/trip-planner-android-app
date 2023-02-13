@@ -87,8 +87,8 @@ class TripsListFragment : Fragment() {
         menuActivityInstance.showMenu()
     }
 
-    override fun onStop() {
-        super.onStop()
+    override fun onDestroy() {
+        super.onDestroy()
         removeMenuProvider()
     }
 
