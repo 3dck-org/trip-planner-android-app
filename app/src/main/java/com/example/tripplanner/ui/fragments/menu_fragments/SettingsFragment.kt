@@ -29,6 +29,7 @@ class SettingsFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         initBinding()
+        menuActivityInstance.expandToolbar()
         menuActivityInstance.showMenu()
         handleSettingsClick()
         return binding.root

@@ -57,7 +57,7 @@
         android:id="@+id/planet_iv"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginBottom="64dp"
+        android:layout_marginBottom="128dp"
         android:contentDescription="background image"
         android:src="@drawable/ic_space_way_2"
         app:layout_constraintBottom_toBottomOf="parent"

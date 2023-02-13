@@ -147,13 +147,13 @@ class TripFragment : Fragment() {
                 when (it) {
                     is Resource.Success -> {
                         Timber.d("Success: ${it.data}")
-                        viewBinding.layoutTrip.btnAction.makeInvisible()
-                        viewBinding.layoutTrip.layoutSuccessStart.apply {
+                        viewBinding.layoutTrip.btnAction.makeGone()
+                        viewBinding.layoutTrip.layoutNoteStart.apply {
                             root.makeVisible()
                             tvState.text = "Information"
-                            tvStateDescription.text = "End previous trip to start a new one"
+                            tvStateDescription.text = "Hey, to start a new trip, please, end the current journey"
                         }
-                        viewBinding.layoutTrip.layoutNoteStart.root.makeGone()
+//                        viewBinding.layoutTrip.layoutNoteStart.root.makeGone()
                     }
                     is Resource.Empty -> {
                         Timber.d("Empty")

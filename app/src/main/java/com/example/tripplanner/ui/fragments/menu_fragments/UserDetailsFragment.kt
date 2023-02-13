@@ -30,6 +30,7 @@ class UserDetailsFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         initViewBinding()
+        menuActivityInstance.hideMenu()
         collectUserDetailsData()
         collectChangePasswordResponse()
     }
@@ -38,7 +39,6 @@ class UserDetailsFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        menuActivityInstance.hideMenu()
         setConfirmationButton()
         openChangePasswordLayout()
         activateConfirmationButtonOnFocus()
@@ -60,7 +60,7 @@ class UserDetailsFragment : Fragment() {
 
     private fun initBackButton(){
         viewBinding.fabBack.setOnClickListener {
-            activity?.onBackPressed()
+            menuActivityInstance.onBackPressed()
         }
     }
 

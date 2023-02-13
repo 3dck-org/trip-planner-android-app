@@ -83,6 +83,7 @@ class TripsListFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
+        menuActivityInstance.expandBottomNavigationBar()
         menuActivityInstance.showMenu()
     }
 

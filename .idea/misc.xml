@@ -57,6 +57,25 @@
       </map>
     </option>
   </component>
+  <component name="EntryPointsManager">
+    <entry_points version="2.0">
+      <entry_point TYPE="field" FQNAME="com.example.tripplanner.ui.fragments.menu_fragments.TripMapFragment binding" />
+      <entry_point TYPE="field" FQNAME="com.example.tripplanner.ui.fragments.menu_fragments.TripMapFragment callback" />
+      <entry_point TYPE="field" FQNAME="com.example.tripplanner.ui.fragments.menu_fragments.TripMapFragment menuActivityInstance$delegate" />
+      <entry_point TYPE="field" FQNAME="com.example.tripplanner.ui.fragments.menu_fragments.TripMapFragment permissionManager" />
+      <entry_point TYPE="field" FQNAME="com.example.tripplanner.ui.fragments.menu_fragments.TripMapFragment viewModel$delegate" />
+    </entry_points>
+    <pattern value="com.example.tripplanner.ui.fragments.menu_fragments.TripMapFragment" method="addMarkerToMap" />
+    <pattern value="com.example.tripplanner.ui.fragments.menu_fragments.TripMapFragment" method="askForPermission" />
+    <pattern value="com.example.tripplanner.ui.fragments.menu_fragments.TripMapFragment" method="collectJourneyResponse" />
+    <pattern value="com.example.tripplanner.ui.fragments.menu_fragments.TripMapFragment" method="initFabBackButton" />
+    <pattern value="com.example.tripplanner.ui.fragments.menu_fragments.TripMapFragment" method="initViewBinding" />
+    <pattern value="com.example.tripplanner.ui.fragments.menu_fragments.TripMapFragment" method="openSettings" />
+    <pattern value="com.example.tripplanner.ui.fragments.menu_fragments.TripMapFragment" method="resizeToolbar" />
+    <pattern value="com.example.tripplanner.ui.fragments.menu_fragments.TripMapFragment" method="showDialog" />
+    <pattern value="com.example.tripplanner.ui.fragments.menu_fragments.TripMapFragment" method="showDialogByType" />
+    <pattern value="com.example.tripplanner.ui.fragments.menu_fragments.TripMapFragment" />
+  </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>

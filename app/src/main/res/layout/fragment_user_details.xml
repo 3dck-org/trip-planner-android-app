@@ -38,14 +38,13 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/third_margin"
         android:fontFamily="@font/baloo_regular"
+        android:visibility="invisible"
         android:text="@string/moje_dane"
         android:textColor="@color/base_color_3"
         android:textSize="18sp"
-        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:visibility="visible" />
+        app:layout_constraintTop_toTopOf="parent"/>
 
     <TextView
         android:id="@+id/name_tv"
@@ -58,7 +57,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/title_tv"
-        tools:text="Pavel Zlacheuski" />
+        tools:text="" />
 
     <TextView
         android:id="@+id/login_tv"
@@ -71,20 +70,21 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/name_tv"
-        tools:text="(pablo2281337)" />
+        tools:text="" />
 
     <TextView
         android:id="@+id/email_tv"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/half_first_margin"
         android:fontFamily="@font/baloo_bold"
         android:textColor="@color/base_color_3"
         android:textSize="14sp"
+        android:textAlignment="center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/login_tv"
-        tools:text="zlochevsky000@gmail.com" />
+        tools:text="" />
 
     <Button
         android:id="@+id/change_password_btn"
@@ -94,6 +94,7 @@
         android:enabled="true"
         android:fontFamily="@font/baloo_bold"
         android:minHeight="64dp"
+        android:visibility="invisible"
         android:text="@string/change_password_btn"
         app:layout_constraintTop_toBottomOf="@id/email_tv" />
 
