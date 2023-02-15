@@ -19,6 +19,7 @@ import com.example.tripplanner.ui.adapters.CityFilterAdapter
 import com.example.tripplanner.view_models.FilterTripsListViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
@@ -100,7 +101,10 @@ class FilterTripsListFragment : Fragment() {
 
     private fun updateCityDB(city: CityEntity) {
         lifecycleScope.launch(Dispatchers.IO) {
+            async {
+            filtersViewModel.clearCity()
             filtersViewModel.updateCityFilterToDB(city)
+            }.await()
         }}
 
     private fun initViewBinding() {

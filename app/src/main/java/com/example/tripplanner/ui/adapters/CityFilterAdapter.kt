@@ -8,7 +8,7 @@ import com.example.tripplanner.db.entities.CityEntity
 
 class CityFilterAdapter(
     val updateDatabase: (city: CityEntity) -> Unit,
-    val clear: () -> Unit,
+    val clear: () -> Unit
 ) : RecyclerView.Adapter<CityFilterAdapter.CityFilterViewHolder>() {
 
     lateinit var itemBinding: ItemCityFiltersBinding
@@ -50,7 +50,6 @@ class CityFilterAdapter(
                 }
             } else {
                 itemViewBinding.rbCity.setOnClickListener {
-                    clear.invoke()
                     updateDatabase.invoke(city.copy(city_is_picked = true))
                 }
             }
