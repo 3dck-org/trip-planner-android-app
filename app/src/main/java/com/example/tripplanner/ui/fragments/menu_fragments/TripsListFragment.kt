@@ -24,6 +24,8 @@ import com.example.tripplanner.extensions.hide
 import com.example.tripplanner.extensions.show
 import com.example.tripplanner.domain.Resource
 import com.example.tripplanner.domain.Trips
+import com.example.tripplanner.extensions.makeGone
+import com.example.tripplanner.extensions.makeVisible
 import com.example.tripplanner.ui.activities.MenuActivity
 import com.example.tripplanner.utils.sharedpreferences.EncryptedSharedPreferences
 import com.example.tripplanner.view_models.TripListViewModel
@@ -128,6 +130,11 @@ class TripsListFragment : Fragment() {
                     is Resource.Success -> {
                         Timber.d("Success: ${it.data}")
                         binding.progressBar.hide()
+                        if(it.data.isEmpty()){
+                            binding.tvEmpty.makeVisible()
+                        }else{
+                            binding.tvEmpty.makeGone()
+                        }
                         offeredTripsAdapter?.addDataToAdapter(it.data, tripListViewModel.currentTripId)
                     }
                 }

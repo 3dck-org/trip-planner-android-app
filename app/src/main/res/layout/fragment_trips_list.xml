@@ -47,8 +47,22 @@
             app:layout_constraintStart_toStartOf="parent"
             tools:layout_editor_absoluteX="0dp"
             tools:listitem="@layout/item_trip"
-            tools:visibility="visible" />
+            tools:visibility="gone" />
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+    <TextView
+        android:id="@+id/tv_empty"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_marginTop="256dp"
+        android:layout_gravity="center_horizontal"
+        android:fontFamily="@font/baloo_bold"
+        android:textAlignment="center"
+        android:text="No trips\navaliable"
+        android:lineSpacingExtra="-8dp"
+        android:textColor="@color/base_color_3"
+        android:textSize="30sp" />
 
     <ProgressBar
         android:id="@+id/progress_bar"
