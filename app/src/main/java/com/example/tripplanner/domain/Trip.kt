@@ -6,6 +6,7 @@ data class Trip(
     val distance: String,
     val duration: Int,
     val favorite: String,
+    val average_rating: String,
     val id: Int,
     val image_url: String,
     val name: String,

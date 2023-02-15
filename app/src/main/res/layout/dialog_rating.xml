@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@drawable/trip_dialog"
+    android:elevation="4dp"
+    android:minWidth="300dp">
+
+    <TextView
+        android:id="@+id/trip_title_tv"
+        style="@style/TextViewTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/half_second_margin"
+        android:fontFamily="@font/baloo_bold"
+        android:text="Rate"
+        android:textColor="@color/base_color_3"
+        android:textSize="@dimen/half_third_margin"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/trip_name_tv"
+        style="@style/text_style"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/fourth_margin"
+        android:layout_marginStart="@dimen/second_margin"
+        android:layout_marginTop="@dimen/half_first_margin"
+        android:fontFamily="@font/baloo_medium"
+        android:text="Hey, do you want to rate your jorney?"
+        android:textAlignment="center"
+        android:textColor="@color/base_color_3"
+        android:textSize="@dimen/second_margin"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/trip_title_tv" />
+
+    <RatingBar
+        android:id="@+id/fea"
+        style="@style/RatingBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/first_margin"
+        android:isIndicator="false"
+        android:numStars="5"
+        android:progressTint="@color/base_color_3"
+        android:progressBackgroundTint="@null"
+        android:stepSize="1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/trip_name_tv" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.5" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_confirm"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/default_app_round_small_button"
+        android:backgroundTint="@color/white"
+        android:enabled="false"
+        android:fontFamily="@font/baloo_bold"
+        android:text="Okay"
+        android:textAlignment="center"
+        android:textColor="@drawable/bg_rate_dialog_btn"
+        android:textSize="14sp"
+        app:backgroundTint="@color/white"
+        app:elevation="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/guideline2"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/fea" />
+
+    <Button
+        android:id="@+id/btn_cancel"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/default_app_round_small_button_right"
+        android:backgroundTint="@color/white"
+        android:fontFamily="@font/baloo_bold"
+        android:text="Cancel"
+        android:textAlignment="center"
+        android:textColor="@color/base_color_3"
+        android:textSize="14sp"
+        app:backgroundTint="@color/white"
+        app:elevation="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@id/guideline2"
+        app:layout_constraintTop_toBottomOf="@id/fea" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

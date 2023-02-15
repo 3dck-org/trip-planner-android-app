@@ -86,4 +86,10 @@ interface TripPlannerAPI {
     fun getFiltersAsync(
         @HeaderMap mapOfHeaders: Map<String, String>
     ): Deferred<Response<FiltersResponse>>
+
+    @POST("/api/v1/ratings")
+    fun rateTrip(
+        @HeaderMap mapOfHeaders: Map<String, String>,
+        @Body requestBody: RatingRequest
+    ): Deferred<Response<RatingResponse>>
 }

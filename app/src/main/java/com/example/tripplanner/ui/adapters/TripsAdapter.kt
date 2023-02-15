@@ -54,7 +54,7 @@ class TripsAdapter(
                     it.id,
                     it.name,
                     it.updated_at,
-                    it.user_id
+                    it.user_id,
                 )
             )
             Timber.d("***2 $trip")

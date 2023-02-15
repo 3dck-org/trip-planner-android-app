@@ -5,6 +5,7 @@ data class CurrentJourneyResponse(
     val created_at: String,
     val distance: String,
     val end_at: String,
+    val average_rating: String,
     val id: Int,
     val start_at: String,
     val trip: Trip,
@@ -23,6 +24,5 @@ data class CurrentJourneyResponse(
         id = trip_id,
         name = trip.name,
         updated_at = trip.updated_at,
-        user_id = user_id.toString()
-    ))
+        user_id = user_id.toString()))
 }

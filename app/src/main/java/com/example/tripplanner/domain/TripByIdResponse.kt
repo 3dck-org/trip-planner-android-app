@@ -7,6 +7,7 @@ data class TripByIdResponse(
     val description: String,
     val distance: String,
     val duration: Int,
+    val average_rating: String,
     val image_url: String,
     val favorite: String,
     val created_at: String,

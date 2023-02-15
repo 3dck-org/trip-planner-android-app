@@ -36,7 +36,27 @@
             android:src="@color/white"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            android:contentDescription="TODO" />
+
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/trip_rate_btn"
+            style="@style/DefaultButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="32dp"
+            android:background="@drawable/bg_trip_item_btn"
+            android:visibility="gone"
+            android:src="@drawable/ic_grade"
+            android:tint="@color/yellow"
+            android:foregroundGravity="center"
+            app:fabCustomSize="42dp"
+            app:layout_constraintBottom_toTopOf="@id/trip_like_btn"
+            app:layout_constraintEnd_toEndOf="@id/trip_iv"
+            app:tint="@color/yellow"
+            tools:visibility="visible"/>
+
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/trip_like_btn"
@@ -148,6 +168,30 @@
             tools:text=" 18km 523 m" />
 
         <ImageView
+            android:id="@+id/rating_iv"
+            android:backgroundTint="@color/base_color_3"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_marginStart="48dp"
+            android:layout_marginTop="8dp"
+            android:src="@drawable/ic_grade_full"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/distance_iv" />
+
+        <TextView
+            android:id="@+id/rating_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:fontFamily="@font/baloo_semibold"
+            android:textColor="@color/base_color_3"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="@id/rating_iv"
+            app:layout_constraintStart_toEndOf="@id/rating_iv"
+            app:layout_constraintTop_toTopOf="@id/rating_iv"
+            tools:text=" 4.2/5" />
+
+        <ImageView
             android:id="@+id/duration_iv"
             android:layout_width="48dp"
             android:layout_height="48dp"
@@ -186,7 +230,7 @@
             android:textSize="20sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/distance_tv"
+            app:layout_constraintTop_toBottomOf="@id/rating_iv"
             tools:text="Each city has a place that is its showcase and a must-see on any trip. In Warsaw, it’s the Old Town, entered on the UNESCO World Heritage List – it’s where the city’s heart has been" />
 
         <View

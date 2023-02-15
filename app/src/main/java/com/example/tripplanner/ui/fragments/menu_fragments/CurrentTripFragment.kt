@@ -25,6 +25,7 @@ import com.example.tripplanner.extensions.makeGone
 import com.example.tripplanner.extensions.makeVisible
 import com.example.tripplanner.ui.activities.MenuActivity
 import com.example.tripplanner.ui.adapters.PlaceCurrentTripAdapter
+import com.example.tripplanner.ui.dialogs.RatingDialog
 import com.example.tripplanner.ui.dialogs.TripSubscriptionDialog
 import com.example.tripplanner.utils.Converter
 import com.example.tripplanner.utils.GlideLoader
@@ -47,6 +48,7 @@ class CurrentTripFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         initBinding()
+        binding.layoutSuccess.tripRateBtn.show()
         initRecyclerView()
         collectCurrentJourney()
         collectFavChangeResponse()
@@ -57,6 +59,14 @@ class CurrentTripFragment : Fragment() {
     private fun showDialog() {
         activity?.let {
             TripSubscriptionDialog { findNavController().navigate(R.id.tripsListFragment) }.show(
+                it.supportFragmentManager, "TAG"
+            )
+        }
+    }
+
+    private fun showRatingDialog(currentTripId: Int) {
+        activity?.let {
+            RatingDialog(currentTripId).show(
                 it.supportFragmentManager, "TAG"
             )
         }
@@ -186,6 +196,10 @@ class CurrentTripFragment : Fragment() {
         }
     }
 
+    private fun formatNumber(number: Float): Double {
+        return String.format("%.1f", number).toDouble()
+    }
+
     private fun bindData(journey: CurrentJourneyResponse) {
         with(binding.layoutSuccess) {
             titleTripTv.text = journey.trip.name
@@ -196,6 +210,7 @@ class CurrentTripFragment : Fragment() {
             createdAtTv.text = journey.trip.created_at.formatDate()
             recyclerView.isNestedScrollingEnabled = false
             setLikeState()
+            ratingTv.text = "${if(journey.average_rating=="null")0 else formatNumber(journey.trip.average_rating.toFloat())}/5"
             fabBack.makeGone()
             btnAction.apply {
                 makeVisible()
@@ -203,6 +218,9 @@ class CurrentTripFragment : Fragment() {
                 setOnClickListener {
                     viewModel.unsubscribeOnTrip(journeyId = journey.id)
                 }
+            }
+            tripRateBtn.setOnClickListener {
+                showRatingDialog(journey.trip_id)
             }
             tripLikeBtn.setOnClickListener {
                 viewModel.modifyFavoriteTrip(
