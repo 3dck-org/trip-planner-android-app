@@ -193,7 +193,7 @@ class TripFragment : Fragment() {
             distanceTv.text = Converter.convertDistance(trip.distance.toFloat())
             descriptionTripTv.text = trip.description
             createdAtTv.text = trip.created_at.formatDate()
-            ratingTv.text = "${if(trip.average_rating=="null")"0" else formatNumber(trip.average_rating.toFloat())}/5"
+            ratingTv.text = "${if(trip.average_rating.isNullOrEmpty())"0" else formatNumber(trip.average_rating.toFloat())}/5"
             userNameTv.text = "${trip.user.name} ${trip.user.surname}"
             recyclerView.isNestedScrollingEnabled = false
             tripLikeBtn.setOnClickListener {

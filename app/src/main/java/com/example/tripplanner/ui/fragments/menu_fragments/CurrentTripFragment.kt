@@ -210,7 +210,7 @@ class CurrentTripFragment : Fragment() {
             createdAtTv.text = journey.trip.created_at.formatDate()
             recyclerView.isNestedScrollingEnabled = false
             setLikeState()
-            ratingTv.text = "${if(journey.average_rating=="null")0 else formatNumber(journey.trip.average_rating.toFloat())}/5"
+            ratingTv.text = "${if(journey.trip.average_rating.isNullOrEmpty())"0" else formatNumber(journey.trip.average_rating.toFloat())}/5"
             fabBack.makeGone()
             btnAction.apply {
                 makeVisible()

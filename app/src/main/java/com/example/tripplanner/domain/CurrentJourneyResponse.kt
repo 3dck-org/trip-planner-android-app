@@ -5,7 +5,6 @@ data class CurrentJourneyResponse(
     val created_at: String,
     val distance: String,
     val end_at: String,
-    val average_rating: String,
     val id: Int,
     val start_at: String,
     val trip: Trip,

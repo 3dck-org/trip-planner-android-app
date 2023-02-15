@@ -43,7 +43,7 @@ class PlaceAdapter : RecyclerView.Adapter<PlaceAdapter.PlaceViewHolder>() {
         ) {
             with(itemViewBinding) {
                 tvPlaceAddress.text =
-                    "${place.place.address.street} ${place.place.address.buildingNumber}"
+                    place.place.address.street
                 tvPlaceName.text = place.place.name
                 btnTrip.apply {
                     icon = null

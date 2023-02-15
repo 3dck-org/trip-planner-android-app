@@ -46,7 +46,7 @@ class PlaceCurrentTripAdapter(val function: (statusRequest: StatusRequest) -> Un
         ) {
             with(itemViewBinding) {
                 tvPlaceAddress.text =
-                    "${placeInfo.place.address.street} ${placeInfo.place.address.buildingNumber}"
+                    placeInfo.place.address.street
                 tvPlaceName.text = placeInfo.place.name
                 with(btnTrip) {
                     when (placeInfo.status) {
