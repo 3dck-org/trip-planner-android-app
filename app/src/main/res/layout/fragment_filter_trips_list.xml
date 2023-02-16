@@ -40,11 +40,11 @@
                 android:id="@+id/btn_clear"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:minWidth="128dp"
                 android:layout_gravity="end"
                 android:layout_marginVertical="16dp"
                 android:layout_marginEnd="16dp"
                 android:fontFamily="@font/baloo_bold"
+                android:minWidth="128dp"
                 android:minHeight="48dp"
                 android:text="Clear" />
         </com.google.android.material.card.MaterialCardView>
@@ -59,17 +59,42 @@
             app:cardElevation="16dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/cv_filters"
-            >
+            app:layout_constraintTop_toBottomOf="@id/cv_filters">
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rv_cities_filters"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                tools:listitem="@layout/item_city_filters"
-                tools:visibility="visible" />
-        </com.google.android.material.card.MaterialCardView>
+                android:layout_height="match_parent"
+                android:orientation="vertical">
 
+                <SearchView
+                    android:id="@+id/sv_city"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:minHeight="64dp"
+                    android:textAlignment="center" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_cities_filters"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    tools:listitem="@layout/item_city_filters"
+                    tools:visibility="visible" />
+
+                <TextView
+                    android:id="@+id/tv_empty_1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="bottom|center_horizontal"
+                    android:layout_marginVertical="16dp"
+                    android:layout_gravity="center_horizontal"
+                    android:fontFamily="@font/baloo_bold"
+                    android:visibility="gone"
+                    android:text="No result"
+                    android:lineSpacingExtra="-8dp"
+                    android:textColor="@color/base_color_3"
+                    android:textSize="16sp" />
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
 
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/cv_category_filters"
@@ -79,18 +104,51 @@
             android:layout_marginTop="8dp"
             app:cardCornerRadius="16dp"
             app:cardElevation="16dp"
-            android:layout_marginBottom="8dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toBottomOf="@id/cv_city_filter">
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rv_category_filters"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                tools:listitem="@layout/item_category_filters"
-                tools:visibility="visible" />
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <SearchView
+                    android:id="@+id/sv_category"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:minHeight="64dp"
+                    android:textAlignment="center" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_category_filters"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    tools:listitem="@layout/item_category_filters"
+                    tools:visibility="visible" />
+
+
+                <TextView
+                    android:id="@+id/tv_empty_2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="bottom|center_horizontal"
+                    android:layout_marginVertical="16dp"
+                    android:layout_gravity="center_horizontal"
+                    android:fontFamily="@font/baloo_bold"
+                    android:visibility="gone"
+                    android:text="No result"
+                    android:lineSpacingExtra="-8dp"
+                    android:textColor="@color/base_color_3"
+                    android:textSize="16sp" />
+            </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_constraintTop_toBottomOf="@id/cv_category_filters"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginBottom="16dp"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.core.widget.NestedScrollView>

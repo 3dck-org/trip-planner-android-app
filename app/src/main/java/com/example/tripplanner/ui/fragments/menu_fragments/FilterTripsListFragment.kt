@@ -4,9 +4,12 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.SearchView.OnQueryTextListener
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.viewModelScope
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -35,9 +38,10 @@ class FilterTripsListFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         initViewBinding()
-        menuActivityInstance.hideMenu()
         initCitiesRecyclerView()
         initCategoriesRecyclerView()
+        getFilters()
+        menuActivityInstance.hideMenu()
     }
 
     override fun onCreateView(
@@ -45,8 +49,49 @@ class FilterTripsListFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         initClearBtn()
-        getFilters()
+        initCitiesSearchView()
+        initCategoriesSearchView()
         return viewBinding.root
+    }
+
+    private fun initCitiesSearchView(){
+        viewBinding.svCity.setOnQueryTextListener(object : OnQueryTextListener{
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                return false
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                lifecycleScope.launch(Dispatchers.IO) {
+                    filtersViewModel.getCityFilterByName(newText?:"").let {
+                        withContext(Dispatchers.Main) {
+                            viewBinding.tvEmpty1.isVisible=it.isEmpty()
+                            cityAdapter?.addData(it)
+                        }
+                    }
+                }
+                return true
+            }
+        })
+    }
+
+    private fun initCategoriesSearchView(){
+        viewBinding.svCategory.setOnQueryTextListener(object : OnQueryTextListener{
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                return false
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                lifecycleScope.launch(Dispatchers.IO) {
+                    filtersViewModel.getCategoryFilterByName(newText?:"").let {
+                        withContext(Dispatchers.Main) {
+                            viewBinding.tvEmpty2.isVisible=it.isEmpty()
+                            categoryAdapter?.addData(it)
+                        }
+                    }
+                }
+                return true
+            }
+        })
     }
 
     private fun initClearBtn(){
@@ -56,13 +101,17 @@ class FilterTripsListFragment : Fragment() {
     }
 
     private fun getFilters() {
-        lifecycleScope.launch {
+        lifecycleScope.launch(Dispatchers.Main) {
             filtersViewModel.getCategoryFilterFromDB().collect {
-                categoryAdapter?.addData(it)
+                if(viewBinding.svCategory.query.isNullOrBlank()) {
+                    viewBinding.tvEmpty2.isVisible=it.isEmpty()
+                    categoryAdapter?.addData(it)
+                }
             }
         }
-        lifecycleScope.launch{
+        lifecycleScope.launch(Dispatchers.Main){
             filtersViewModel.getCityFilterFromDB().collect{
+                viewBinding.tvEmpty1.isVisible=it.isEmpty()
                 cityAdapter?.addData(it)
             }
         }

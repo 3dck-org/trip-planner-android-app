@@ -31,6 +31,14 @@ class FilterTripsListViewModel @Inject constructor() : ViewModel() {
         return dao.getCategoryEntity()
     }
 
+    fun getCategoryFilterByName(searchQuery: String) : List<CategoryEntity> {
+        return dao.getCategoryEntityByName(searchQuery)
+    }
+
+    fun getCityFilterByName(searchQuery: String) : List<CityEntity> {
+        return dao.getCitiesEntityByName(searchQuery)
+    }
+
     fun getCityFilterFromDB() : Flow<List<CityEntity>> {
         return dao.getCitiesEntity()
     }

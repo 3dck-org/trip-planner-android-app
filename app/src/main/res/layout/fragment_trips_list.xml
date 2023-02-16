@@ -58,6 +58,7 @@
         android:layout_marginTop="256dp"
         android:layout_gravity="center_horizontal"
         android:fontFamily="@font/baloo_bold"
+        android:visibility="gone"
         android:textAlignment="center"
         android:text="No trips\navaliable"
         android:lineSpacingExtra="-8dp"

@@ -14,16 +14,22 @@ interface IDao {
 
     //getters
     @Query("SELECT * FROM CityEntity")
+    fun getCitiesEntity2(): List<CityEntity>
+
+    @Query("SELECT * FROM CategoryEntity")
+    fun getCategoryEntity2(): List<CategoryEntity>
+
+    @Query("SELECT * FROM CityEntity")
     fun getCitiesEntity(): Flow<List<CityEntity>>
 
     @Query("SELECT * FROM CategoryEntity")
     fun getCategoryEntity(): Flow<List<CategoryEntity>>
 
-    @Query("SELECT * FROM CityEntity")
-    fun getCitiesEntity2(): List<CityEntity>
+    @Query("SELECT * FROM CityEntity WHERE city LIKE '%'||:searchQuery||'%';")
+    fun getCitiesEntityByName(searchQuery: String): List<CityEntity>
 
-    @Query("SELECT * FROM CategoryEntity")
-    fun getCategoryEntity2(): List<CategoryEntity>
+    @Query("SELECT * FROM CategoryEntity WHERE name LIKE '%'||:searchQuery||'%';")
+    fun getCategoryEntityByName(searchQuery: String): List<CategoryEntity>
 
     //updates
     @Update
